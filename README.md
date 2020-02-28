@@ -20,3 +20,19 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+## Workspace Setup
+
+``` bash
+# preferable IDE - VS Code
+https://code.visualstudio.com/
+
+# install code linter
+https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint
+
+# install style linter
+https://marketplace.visualstudio.com/items?itemName=stylelint.vscode-stylelint
+
+# install code formatter
+https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode
+```
