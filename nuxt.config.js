@@ -84,5 +84,17 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
-  }
+  },
+  render: {
+    static: {
+      cacheControl: true,
+      maxAge: 60 * 60 * 24 * 7,
+      lastModified: true,
+      etag: true
+    }
+  },
+  serverMiddleware: [
+    { path: '/api/projects', handler: '~/api/projects.js' },
+    { path: '/api/project', handler: '~/api/project.js' }
+  ]
 }

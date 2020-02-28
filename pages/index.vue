@@ -1,75 +1,245 @@
 <template>
-  <v-layout column justify-center align-center>
-    <v-flex xs12 sm8 md6>
-      <div class="text-center">
-        <logo />
-        <vuetify-logo />
-      </div>
-      <v-card>
-        <v-card-title class="headline">
-          Welcome to the Vuetify + Nuxt.js template
-        </v-card-title>
-        <v-card-text>
-          <p>
-            Vuetify is a progressive Material Design component framework for
-            Vue.js. It was designed to empower developers to create amazing
-            applications.
-          </p>
-          <p>
-            For more information on Vuetify, check out the
-            <a href="https://vuetifyjs.com" target="_blank"> documentation </a>.
-          </p>
-          <p>
-            If you have questions, please join the official
-            <a href="https://chat.vuetifyjs.com/" target="_blank" title="chat">
-              discord </a
-            >.
-          </p>
-          <p>
-            Find a bug? Report it on the github
-            <a
-              href="https://github.com/vuetifyjs/vuetify/issues"
-              target="_blank"
-              title="contribute"
-            >
-              issue board </a
-            >.
-          </p>
-          <p>
-            Thank you for developing with Vuetify and I look forward to bringing
-            more exciting features in the future.
-          </p>
-          <div class="text-xs-right">
-            <em><small>&mdash; John Leider</small></em>
-          </div>
-          <hr class="my-3" />
-          <a href="https://nuxtjs.org/" target="_blank">
-            Nuxt Documentation
-          </a>
-          <br />
-          <a href="https://github.com/nuxt/nuxt.js" target="_blank">
-            Nuxt GitHub
-          </a>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer />
-          <v-btn color="primary" nuxt to="/inspire">
-            Continue
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
+  <div>
+    <GridBlock
+      v-for="section in canvasCollection"
+      :key="section.id"
+      :section="section"
+    />
+    <AddSection />
+  </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-import VuetifyLogo from '~/components/VuetifyLogo.vue'
+import GridBlock from '~/components/GridBlock.vue'
+import AddSection from '~/components/AddSection.vue'
 
 export default {
   components: {
-    Logo,
-    VuetifyLogo
+    GridBlock,
+    AddSection
+  },
+  data: () => {
+    return {
+      canvasCollection: [
+        {
+          id: 1,
+          columns: 4,
+          rows: 2,
+          zones: [
+            {
+              type: 'offer',
+              content: 'offer',
+              coords: {
+                start: {
+                  x: 1,
+                  y: 1
+                },
+                end: {
+                  x: 2,
+                  y: 2
+                }
+              }
+            },
+            {
+              type: 'imageMap',
+              content: 'imageMap',
+              coords: {
+                start: {
+                  x: 1,
+                  y: 2
+                },
+                end: {
+                  x: 2,
+                  y: 3
+                }
+              }
+            },
+            {
+              type: 'promo',
+              content: 'promo',
+              coords: {
+                start: {
+                  x: 2,
+                  y: 1
+                },
+                end: {
+                  x: 3,
+                  y: 3
+                }
+              }
+            },
+            {
+              type: 'video',
+              content: 'video',
+              coords: {
+                start: {
+                  x: 1,
+                  y: 3
+                },
+                end: {
+                  x: 3,
+                  y: 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          id: 2,
+          columns: 4,
+          rows: 3,
+          zones: [
+            {
+              type: 'promo',
+              content: 'promo',
+              coords: {
+                start: {
+                  x: 1,
+                  y: 1
+                },
+                end: {
+                  x: 4,
+                  y: 2
+                }
+              }
+            },
+            {
+              type: 'imageMap',
+              content: 'imageMap',
+              coords: {
+                start: {
+                  x: 1,
+                  y: 2
+                },
+                end: {
+                  x: 2,
+                  y: 5
+                }
+              }
+            },
+            {
+              type: 'banner',
+              content: 'banner',
+              coords: {
+                start: {
+                  x: 2,
+                  y: 2
+                },
+                end: {
+                  x: 3,
+                  y: 4
+                }
+              }
+            },
+            {
+              type: 'offer',
+              content: 'offer',
+              coords: {
+                start: {
+                  x: 2,
+                  y: 4
+                },
+                end: {
+                  x: 3,
+                  y: 5
+                }
+              }
+            },
+            {
+              type: 'imageMap',
+              content: 'imageMap',
+              coords: {
+                start: {
+                  x: 3,
+                  y: 2
+                },
+                end: {
+                  x: 4,
+                  y: 3
+                }
+              }
+            },
+            {
+              type: 'video',
+              content: 'video',
+              coords: {
+                start: {
+                  x: 3,
+                  y: 3
+                },
+                end: {
+                  x: 4,
+                  y: 5
+                }
+              }
+            }
+          ]
+        },
+        {
+          id: 3,
+          columns: 3,
+          rows: 2,
+          zones: [
+            {
+              type: 'imageMap',
+              content: 'imageMap',
+              coords: {
+                start: {
+                  x: 1,
+                  y: 1
+                },
+                end: {
+                  x: 2,
+                  y: 2
+                }
+              }
+            },
+            {
+              type: 'banner',
+              content: 'banner',
+              coords: {
+                start: {
+                  x: 2,
+                  y: 1
+                },
+                end: {
+                  x: 3,
+                  y: 2
+                }
+              }
+            },
+            {
+              type: 'video',
+              content: 'video',
+              coords: {
+                start: {
+                  x: 1,
+                  y: 2
+                },
+                end: {
+                  x: 3,
+                  y: 3
+                }
+              }
+            },
+            {
+              type: 'offer',
+              content: 'offer',
+              coords: {
+                start: {
+                  x: 1,
+                  y: 3
+                },
+                end: {
+                  x: 3,
+                  y: 4
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
   }
 }
 </script>
