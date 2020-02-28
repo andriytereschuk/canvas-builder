@@ -98,7 +98,7 @@ export default {
           to: '/'
         },
         {
-          icon: 'mdi-chart-bubble',
+          icon: 'mdi-wall',
           title: 'FlexBox',
           to: '/flex'
         }
