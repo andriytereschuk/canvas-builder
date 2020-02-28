@@ -86,6 +86,7 @@
 
 <script>
 export default {
+  middleware: 'redirect',
   data() {
     return {
       clipped: false,
