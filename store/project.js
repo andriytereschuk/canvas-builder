@@ -7,7 +7,7 @@ export const actions = {
     let project
 
     try {
-      project = await this.$axios.$get('/api/project', { id })
+      project = await this.$axios.$get(`/api/projects/${id}`)
     } catch (e) {}
 
     if (project) {
