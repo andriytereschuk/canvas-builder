@@ -93,8 +93,5 @@ export default {
       etag: true
     }
   },
-  serverMiddleware: [
-    { path: '/api/projects', handler: '~/api/projects.js' },
-    { path: '/api/project', handler: '~/api/project.js' }
-  ]
+  serverMiddleware: [{ path: '/api/projects', handler: '~/api/projects.js' }]
 }

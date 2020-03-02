@@ -8,6 +8,6 @@ export default (context) => {
   } = context
 
   if (path === '/') {
-    return redirect('/grid')
+    return redirect('/projects')
   }
 }

@@ -16,15 +16,14 @@ export const actions = {
 
 export const mutations = {
   add(state, projects) {
-    state.projects = state.projects.concat(projects)
+    state.projects = projects
   }
 }
 
 export const getters = {
   filtered(state) {
     const { projects } = state
-
-    return projects.sort((prev, next) => {
+    return [...projects].sort((prev, next) => {
       return new Date(prev.date) - new Date(next.date)
     })
   }
