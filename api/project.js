@@ -1,5 +1,5 @@
 export default async (req, res, next) => {
-  const response = await Promise.resolve('test')
+  const response = await Promise.resolve([])
 
   return response
 }
