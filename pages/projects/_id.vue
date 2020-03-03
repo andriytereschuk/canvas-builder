@@ -1,11 +1,23 @@
 <template>
-  <h1>Project # {{ id }}</h1>
+  <div>
+    <h1>Project # {{ id }}</h1>
+    <ComponentsMenu v-if="isComponentsMenuOpen" />
+  </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import ComponentsMenu from '../../components/ComponentsMenu'
 
 export default {
+  components: {
+    ComponentsMenu
+  },
+  data: () => {
+    return {
+      isComponentsMenuOpen: true
+    }
+  },
   computed: {
     id() {
       return this.$route.params.id
@@ -17,7 +29,11 @@ export default {
   methods: {
     ...mapActions({
       fetch: 'project/get'
-    })
+    }),
+    closeMenu() {
+      this.isComponentsMenuOpen = false
+      console.log('this.isComponentsMenuOpen>> ', this.isComponentsMenuOpen)
+    }
   }
 }
 </script>
