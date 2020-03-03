@@ -1,6 +1,7 @@
 export default (req, res) => {
   // get specific project
   if (req.url !== '/') {
+    // get id from str '/1583143260046'
     const id = parseInt(req.url.substring(1))
 
     return res.end(JSON.stringify({ id }))

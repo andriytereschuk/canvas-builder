@@ -3,7 +3,7 @@ import { componentEnum } from '~/config/component.config'
 export const componentMixin = {
   methods: {
     getComponentColor(type) {
-      return componentEnum[type].color
+      return (type && componentEnum[type].color) || '#263238'
     }
   }
 }

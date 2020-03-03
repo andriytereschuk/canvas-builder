@@ -4,56 +4,50 @@
       v-for="(zone, index) in section.zones"
       :key="index"
       :style="getCellStyle(zone)"
-      class="component"
+      class="position"
     >
-      <div class="content" :style="setBg(zone.type)">{{ zone.content }}</div>
+      <Item :zone="zone" />
     </div>
   </div>
 </template>
 
 <script>
-import { componentMixin } from '~/mixins/component.mixin'
+import { getFractions, isIE } from '~/utils/helpers'
+import Item from '~/components/Item'
 
 export default {
-  mixins: [componentMixin],
+  components: {
+    Item
+  },
   props: {
     section: {
       type: Object,
       required: true
     }
   },
-  computed: {
-    isIE() {
-      const agent = navigator.userAgent
-
-      return agent.includes('Trident') && agent.includes('rv:11')
-    }
-  },
+  computed: {},
   methods: {
-    setBg(type) {
-      const backgroundColor = this.getComponentColor(type)
-
-      return { backgroundColor }
-    },
     getContainerStyle(section) {
       const { rows, columns } = section
 
-      return {
-        display: ['-ms-grid', 'grid'],
-        'grid-rows': Array.from(new Array(rows))
-          .map(() => '1fr')
-          .join(' '),
-        'grid-columns': Array.from(new Array(columns))
-          .map(() => '1fr')
-          .join(' ')
-      }
+      return isIE()
+        ? {
+            display: ['-ms-grid'],
+            'grid-rows': getFractions(rows),
+            'grid-columns': getFractions(columns)
+          }
+        : {
+            display: ['grid'],
+            'grid-template-rows': getFractions(rows),
+            'grid-template-columns': getFractions(columns)
+          }
     },
     getCellStyle(zone) {
       const {
         coords: { start, end }
       } = zone
 
-      return this.isIE
+      return isIE()
         ? {
             'grid-row': start.x,
             'grid-row-span': end.x - start.x,
@@ -76,17 +70,8 @@ export default {
   }
 }
 
-.component {
+.position {
   box-sizing: border-box;
   padding: 2px;
-}
-
-.content {
-  height: 100%;
-  min-height: 50px;
-  border: 1px dashed #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 </style>
