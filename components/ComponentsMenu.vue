@@ -25,12 +25,12 @@
           <v-card flat>
             <v-card-actions class="components-menu__btn-container">
               <v-btn
-                v-for="type in item.types"
-                :key="type[0]"
-                height="120px"
-                width="120px"
-                :color="componentEnum.banner.color"
-                >{{ type }}</v-btn
+                v-for="componentType in item.types"
+                :key="componentType[0]"
+                height="100px"
+                :color="componentType.color"
+                style="white-space: normal"
+                >{{ componentType.type }}</v-btn
               >
             </v-card-actions>
           </v-card>
@@ -52,24 +52,65 @@ export default {
         {
           tab: 'Galleries',
           content: 'Galleries Content',
-          types: ['slideshow', 'carousel']
+          types: [
+            {
+              type: 'slideshow',
+              color: '#FFAB00'
+            },
+            {
+              type: 'carousel',
+              color: 'red'
+            }
+          ]
         },
         {
           tab: 'Banner',
           content: 'Banner Content',
-          types: ['banner']
+          types: [
+            {
+              type: 'banner',
+              color: 'blue'
+            }
+          ]
         },
         {
           tab: 'Video',
           content: 'Video Content',
-          types: ['youtube', 'embedded']
+          types: [
+            {
+              type: 'youtube',
+              color: 'pink'
+            },
+            {
+              type: 'embedded',
+              color: '#D81B60'
+            }
+          ]
         },
         {
           tab: 'Advertisements',
           content: 'Advertisements Content',
-          types: ['promo', 'offer']
+          types: [
+            {
+              type: 'promo',
+              color: '#00B0FF'
+            },
+            {
+              type: 'offer',
+              color: '#FF5722'
+            }
+          ]
         },
-        { tab: 'Store', content: 'Store Content', types: ['product card'] }
+        {
+          tab: 'Store',
+          content: 'Store Content',
+          types: [
+            {
+              type: 'product card',
+              color: '#689F38'
+            }
+          ]
+        }
       ]
     }
   },
@@ -92,7 +133,7 @@ export default {
 }
 
 .tab-items-wrapper {
-  min-width: 280px;
+  min-width: 300px;
 }
 
 .components-menu__heading {
@@ -104,5 +145,9 @@ export default {
   display: flex;
   justify-content: space-evenly;
   padding: 20px;
+}
+
+.v-icon.v-icon::after {
+  height: 40%;
 }
 </style>
