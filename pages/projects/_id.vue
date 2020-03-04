@@ -2,26 +2,32 @@
   <div>
     <h1>Project # {{ id }}</h1>
     <ComponentsMenu v-if="isComponentsMenuOpen" />
+    <Workspace :sections="data.rows" />
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import ComponentsMenu from '../../components/ComponentsMenu'
+import Workspace from '~/components/Workspace'
 
 export default {
   components: {
-    ComponentsMenu
+    ComponentsMenu,
+    Workspace
   },
   data: () => {
     return {
-      isComponentsMenuOpen: true
+      isComponentsMenuOpen: false
     }
   },
   computed: {
     id() {
       return this.$route.params.id
-    }
+    },
+    ...mapGetters({
+      data: 'project/data'
+    })
   },
   mounted() {
     this.fetch({ id: this.id })

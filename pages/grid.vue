@@ -1,6 +1,6 @@
 <template>
   <div>
-    <GridBlock
+    <Section
       v-for="section in canvasCollection"
       :key="section.id"
       :section="section"
@@ -10,12 +10,12 @@
 </template>
 
 <script>
-import GridBlock from '~/components/GridBlock.vue'
+import Section from '~/components/Section.vue'
 import AddSection from '~/components/AddSection.vue'
 
 export default {
   components: {
-    GridBlock,
+    Section,
     AddSection
   },
   data: () => {

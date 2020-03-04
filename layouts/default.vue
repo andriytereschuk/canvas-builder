@@ -24,6 +24,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <!-- <v-btn
@@ -61,6 +62,7 @@
         <v-icon>mdi-menu</v-icon>
       </v-btn> -->
     </v-app-bar>
+
     <v-content>
       <v-container>
         <nuxt />
@@ -96,7 +98,7 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Grid',
-          to: '/'
+          to: '/grid'
         },
         {
           icon: 'mdi-wall',
