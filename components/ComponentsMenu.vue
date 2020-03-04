@@ -1,43 +1,41 @@
 <template>
-  <div class="components-menu__wrapper">
-    <v-card class="components-menu__wrapper">
-      <v-tabs
-        v-model="tab"
-        background-color="green darken-4"
-        color="light-green"
-        dark
-        vertical
-        class="tabs-wrapper"
-      >
-        <v-tab v-for="item in items" :key="item.tab">
-          {{ item.tab }}
-        </v-tab>
-      </v-tabs>
-      <v-tabs-items v-model="tab" vertical class="tab-items-wrapper">
-        <v-tab-item v-for="item in items" :key="item.tab">
-          <v-card flat class="components-menu__heading">
-            <v-card-text class="title" size="18px"
-              >Add {{ item.tab }}</v-card-text
-            >
+  <v-card class="components-menu__wrapper">
+    <v-tabs
+      v-model="tab"
+      background-color="green darken-4"
+      color="light-green"
+      dark
+      vertical
+      class="tabs-wrapper"
+    >
+      <v-tab v-for="item in items" :key="item.tab">
+        {{ item.tab }}
+      </v-tab>
+    </v-tabs>
+    <v-tabs-items v-model="tab" vertical class="tab-items-wrapper">
+      <v-tab-item v-for="item in items" :key="item.tab">
+        <v-card flat class="components-menu__heading">
+          <v-toolbar-title size="18px"> Add {{ item.tab }} </v-toolbar-title>
+          <v-btn icon>
             <v-icon @click="$emit('closeMenu')">mdi-close-circle</v-icon>
-          </v-card>
-          <v-divider></v-divider>
-          <v-card flat>
-            <v-card-actions class="components-menu__btn-container">
-              <v-btn
-                v-for="componentType in item.types"
-                :key="componentType[0]"
-                height="100px"
-                :color="componentType.color"
-                style="white-space: normal"
-                >{{ componentType.type }}</v-btn
-              >
-            </v-card-actions>
-          </v-card>
-        </v-tab-item>
-      </v-tabs-items>
-    </v-card>
-  </div>
+          </v-btn>
+        </v-card>
+        <v-divider></v-divider>
+        <v-card flat>
+          <v-card-actions class="components-menu__btn-container">
+            <v-btn
+              v-for="componentType in item.types"
+              :key="componentType[0]"
+              height="100px"
+              :color="componentType.color"
+              style="white-space: normal"
+              >{{ componentType.type }}</v-btn
+            >
+          </v-card-actions>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
+  </v-card>
 </template>
 
 <script>
@@ -125,6 +123,7 @@ export default {
 <style lang="scss" scoped>
 .components-menu__wrapper {
   display: flex;
+  max-width: 300px;
 }
 
 .tabs-wrapper,
@@ -138,6 +137,7 @@ export default {
 
 .components-menu__heading {
   display: flex;
+  justify-content: space-between;
   padding: 5px 10px;
 }
 
@@ -145,9 +145,5 @@ export default {
   display: flex;
   justify-content: space-evenly;
   padding: 20px;
-}
-
-.v-icon.v-icon::after {
-  height: 40%;
 }
 </style>
