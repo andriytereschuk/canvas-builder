@@ -15,6 +15,7 @@ export const actions = {
         zones: [
           {
             id: 12,
+            componentId: null,
             coords: {
               start: {
                 x: 1,
@@ -28,6 +29,7 @@ export const actions = {
           },
           {
             id: 13,
+            componentId: null,
             coords: {
               start: {
                 x: 1,
@@ -41,6 +43,7 @@ export const actions = {
           },
           {
             id: 14,
+            componentId: null,
             coords: {
               start: {
                 x: 2,
@@ -54,6 +57,7 @@ export const actions = {
           },
           {
             id: 15,
+            componentId: null,
             coords: {
               start: {
                 x: 1,
@@ -86,6 +90,22 @@ export const actions = {
 export const mutations = {
   add(state, project) {
     state.project = project
+  },
+  attachComponent(state, payload) {
+    const rows = state.project.rows.map((section) => {
+      return {
+        ...section.zones.forEach((zone) => {
+          zone.componentId =
+            payload.id === zone.id ? payload.componentId : zone.componentId
+        }),
+        section
+      }
+    })
+
+    state.project = {
+      rows,
+      ...state.project
+    }
   }
 }
 

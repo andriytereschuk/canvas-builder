@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import { mapMutations, mapGetters } from 'vuex'
 import { componentMixin } from '~/mixins/component.mixin'
 
 export default {
@@ -17,28 +18,33 @@ export default {
       required: true
     }
   },
-  data: () => ({
-    component: null
-  }),
   computed: {
+    ...mapGetters({
+      components: 'components/components'
+    }),
+    component() {
+      return this.components[this.zone.componentId]
+    },
     bg() {
       const type = (this.component && this.component.type) || null
       const backgroundColor = this.getComponentColor(type)
 
       return { backgroundColor }
-    },
-    isEmpty() {
-      return this.zone.status === 'empty'
     }
   },
   methods: {
+    ...mapMutations({
+      set: 'components/set',
+      attachComponentToProject: 'project/attachComponent'
+    }),
     attachComponent() {
-      // const { id } = this.zone
       const temp = {
+        id: Date.now(),
         type: 'promo'
       }
 
-      this.component = temp
+      this.set(temp)
+      this.attachComponentToProject({ id: this.zone.id, componentId: temp.id })
     },
     setBg(type) {
       const backgroundColor = this.getComponentColor(type)
