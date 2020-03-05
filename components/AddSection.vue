@@ -1,6 +1,17 @@
 <template>
-  <div class="add">+</div>
+  <div class="add" @click="handleClick()">+</div>
 </template>
+
+<script>
+export default {
+  methods: {
+    handleClick() {
+      console.log('add')
+      this.$emit('add')
+    }
+  }
+}
+</script>
 
 <style lang="scss" scoped>
 .add {

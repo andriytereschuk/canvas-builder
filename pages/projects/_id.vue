@@ -2,7 +2,7 @@
   <div>
     <h1>Project # {{ id }}</h1>
     <ComponentsMenu v-if="isComponentsMenuOpen" @closeMenu="closeMenu" />
-    <Workspace :sections="data.rows" />
+    <Workspace :sections="data.rows" @openMenu="showMenu" />
   </div>
 </template>
 
