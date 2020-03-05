@@ -106,13 +106,21 @@ export const mutations = {
       rows,
       ...state.project
     }
-  }
-}
+  },
+  detachComponent(state, payload) {
+    const rows = state.project.rows.map((section) => {
+      return {
+        zones: section.zones.forEach((zone) => {
+          zone.componentId =
+            payload.componentId === zone.componentId ? null : zone.componentId
+        }),
+        ...section
+      }
+    })
 
-export const getters = {
-  data(state) {
-    const { project } = state
-
-    return project
+    state.project = {
+      rows,
+      ...state.project
+    }
   }
 }

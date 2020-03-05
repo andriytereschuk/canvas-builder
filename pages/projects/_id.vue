@@ -1,13 +1,15 @@
 <template>
   <div>
     <h1>Project # {{ id }}</h1>
-    <Workspace :sections="data.rows" />
+    <Workspace :sections="project.rows" />
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
 import Workspace from '~/components/Workspace'
+
+const { mapState, mapActions } = createNamespacedHelpers('project')
 
 export default {
   components: {
@@ -17,8 +19,8 @@ export default {
     id() {
       return this.$route.params.id
     },
-    ...mapGetters({
-      data: 'project/data'
+    ...mapState({
+      project: 'project'
     })
   },
   mounted() {
@@ -26,7 +28,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetch: 'project/get'
+      fetch: 'get'
     })
   }
 }

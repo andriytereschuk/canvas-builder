@@ -5,8 +5,10 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
 import ProjectCard from '~/components/ProjectCard.vue'
+
+const { mapGetters, mapActions } = createNamespacedHelpers('projects')
 
 export default {
   components: {
@@ -14,7 +16,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      projects: 'projects/filtered'
+      projects: 'filtered'
     })
   },
   mounted() {
@@ -22,7 +24,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetch: 'projects/get'
+      fetch: 'get'
     })
   }
 }
