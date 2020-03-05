@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Project # {{ id }}</h1>
-    <ComponentsMenu v-if="isComponentsMenuOpen" @closeMenu="closeMenu" />
+    <ComponentsMenu @closeMenu="closeMenu" />
     <Workspace :sections="data.rows" @openMenu="showMenu" />
   </div>
 </template>
@@ -15,11 +15,6 @@ export default {
   components: {
     ComponentsMenu,
     Workspace
-  },
-  data: () => {
-    return {
-      isComponentsMenuOpen: true
-    }
   },
   computed: {
     id() {
@@ -35,13 +30,7 @@ export default {
   methods: {
     ...mapActions({
       fetch: 'project/get'
-    }),
-    closeMenu() {
-      this.isComponentsMenuOpen = false
-    },
-    showMenu() {
-      this.isComponentsMenuOpen = true
-    }
+    })
   }
 }
 </script>

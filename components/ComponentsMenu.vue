@@ -1,5 +1,6 @@
 <template>
   <v-menu
+    v-if="isComponentsMenuOpen"
     :close-on-click="closeOnClick"
     :close-on-content-click="closeOnContentClick"
     left
@@ -31,7 +32,7 @@
             min-width="20px"
             height="40px"
           >
-            <v-icon class="components-menu__icon" @click="$emit('closeMenu')">
+            <v-icon class="components-menu__icon" @click="closeMenu">
               mdi-close-circle
             </v-icon>
           </v-btn>
@@ -63,7 +64,7 @@ import { componentTypes } from '~/config/componentTypes.config'
 export default {
   data: () => {
     return {
-      tab: null,
+      isComponentsMenuOpen: true,
       selectedType: '',
       selectedCategory: 'galleries',
       selectedComponent: '',
@@ -87,6 +88,24 @@ export default {
     },
     selectComponent(type) {
       this.selectedComponent = type
+    },
+    closeMenu() {
+      this.isComponentsMenuOpen = false
+    },
+    open() {
+      this.isComponentsMenuOpen = true
+      return new Promise((resolve, reject) => {
+        this.resolve = resolve
+        this.reject = reject
+      })
+    },
+    agree() {
+      this.resolve({ category: this.selectedCategory, type: this.selectedType })
+      this.isComponentsMenuOpen = false
+    },
+    cancel() {
+      this.reject(false)
+      this.isComponentsMenuOpen = false
     }
   }
 }
