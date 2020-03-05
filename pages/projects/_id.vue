@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Project # {{ id }}</h1>
-    <ComponentsMenu v-if="isComponentsMenuOpen" />
+    <ComponentsMenu v-if="isComponentsMenuOpen" @closeMenu="closeMenu" />
     <Workspace :sections="data.rows" />
   </div>
 </template>
@@ -38,7 +38,9 @@ export default {
     }),
     closeMenu() {
       this.isComponentsMenuOpen = false
-      console.log('this.isComponentsMenuOpen>> ', this.isComponentsMenuOpen)
+    },
+    showMenu() {
+      this.isComponentsMenuOpen = true
     }
   }
 }
