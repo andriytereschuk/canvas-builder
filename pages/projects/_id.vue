@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Project # {{ id }}</h1>
-    <ComponentsMenu @closeMenu="closeMenu" />
+    <ComponentsMenu ref="componentsMenu" />
     <Workspace :sections="project.rows" />
   </div>
 </template>
@@ -28,6 +28,7 @@ export default {
   },
   mounted() {
     this.fetch({ id: this.id })
+    this.$root.$componentsMenu = this.$refs.componentsMenu.open
   },
   methods: {
     ...mapActions({

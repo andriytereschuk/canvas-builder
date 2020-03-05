@@ -1,36 +1,36 @@
 export const componentTypes = {
   galleries: {
     slideshow: {
-      color: '#FFAB00'
+      color: '#ff0000'
     },
     carousel: {
-      color: 'red'
+      color: '#ffa500'
     }
   },
   banners: {
     banner: {
-      color: 'blue'
+      color: '#ffffed'
     }
   },
   videos: {
     youtube: {
-      color: 'blue'
+      color: '#008000'
     },
     embedded: {
-      color: '#D81B60'
+      color: '#0000ff'
     }
   },
   advertisements: {
     promo: {
-      color: '#00B0FF'
+      color: '#4b0082'
     },
     offer: {
-      color: '#FF5722'
+      color: '#ee82ee'
     }
   },
   store: {
     productCard: {
-      color: '#689F38'
+      color: '#98fb98'
     }
   }
 }

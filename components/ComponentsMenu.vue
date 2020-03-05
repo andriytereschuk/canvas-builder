@@ -1,22 +1,12 @@
 <template>
-  <v-menu
-    v-if="isComponentsMenuOpen"
-    :close-on-click="closeOnClick"
-    :close-on-content-click="closeOnContentClick"
-    left
-  >
-    <template v-slot:activator="{ on }">
-      <v-btn color="primary" v-on="on">
-        Choose components
-      </v-btn>
-    </template>
+  <v-dialog v-model="isComponentsMenuOpen" max-width="470px">
     <v-card class="components-menu__wrapper">
       <v-card class="components-menu__categories-wrapper">
         <v-list-item
           v-for="category in categories"
           :key="category"
           class="components-menu__categories-list-item"
-          @click="selectType(category)"
+          @click="selectCategory(category)"
         >
           {{ category }}
         </v-list-item>
@@ -32,7 +22,7 @@
             min-width="20px"
             height="40px"
           >
-            <v-icon class="components-menu__icon" @click="closeMenu">
+            <v-icon class="components-menu__icon">
               mdi-close-circle
             </v-icon>
           </v-btn>
@@ -46,7 +36,7 @@
               height="120px"
               width="120px"
               class="components-menu__category-btn"
-              :color="componentTypes[selectedCategory][type].color"
+              :color="getComponentColor(selectedCategory, type)"
               @click="selectComponent(type)"
             >
               {{ type }}
@@ -55,16 +45,18 @@
         </v-card>
       </v-card>
     </v-card>
-  </v-menu>
+  </v-dialog>
 </template>
 
 <script>
 import { componentTypes } from '~/config/componentTypes.config'
+import { componentMixin } from '~/mixins/component.mixin'
 
 export default {
+  mixins: [componentMixin],
   data: () => {
     return {
-      isComponentsMenuOpen: true,
+      isComponentsMenuOpen: false,
       selectedType: '',
       selectedCategory: 'galleries',
       selectedComponent: '',
@@ -82,15 +74,12 @@ export default {
     }
   },
   methods: {
-    selectType(category) {
-      this.selectedCategoryItems = Object.keys(componentTypes[category])
+    selectCategory(category) {
       this.selectedCategory = category
     },
     selectComponent(type) {
       this.selectedComponent = type
-    },
-    closeMenu() {
-      this.isComponentsMenuOpen = false
+      this.agree()
     },
     open() {
       this.isComponentsMenuOpen = true
@@ -100,7 +89,10 @@ export default {
       })
     },
     agree() {
-      this.resolve({ category: this.selectedCategory, type: this.selectedType })
+      this.resolve({
+        category: this.selectedCategory,
+        type: this.selectedComponent
+      })
       this.isComponentsMenuOpen = false
     },
     cancel() {
