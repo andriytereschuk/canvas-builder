@@ -4,7 +4,7 @@ export const state = () => ({
 
 export const actions = {
   async get({ commit }) {
-    let component = null
+    let component
 
     try {
       component = await this.$axios.$get('/api/component')

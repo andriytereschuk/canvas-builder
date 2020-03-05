@@ -94,11 +94,11 @@ export const mutations = {
   attachComponent(state, payload) {
     const rows = state.project.rows.map((section) => {
       return {
-        ...section.zones.forEach((zone) => {
+        zones: section.zones.forEach((zone) => {
           zone.componentId =
             payload.id === zone.id ? payload.componentId : zone.componentId
         }),
-        section
+        ...section
       }
     })
 
