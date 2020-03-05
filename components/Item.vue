@@ -38,6 +38,8 @@ export default {
       attachComponentToProject: 'project/attachComponent'
     }),
     attachComponent() {
+      if (this.component) return
+
       const temp = {
         id: Date.now(),
         type: 'promo'
