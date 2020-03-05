@@ -2,14 +2,16 @@
   <div>
     <h1>Project # {{ id }}</h1>
     <ComponentsMenu @closeMenu="closeMenu" />
-    <Workspace :sections="data.rows" @openMenu="showMenu" />
+    <Workspace :sections="project.rows" />
   </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
 import ComponentsMenu from '../../components/ComponentsMenu'
 import Workspace from '~/components/Workspace'
+
+const { mapState, mapActions } = createNamespacedHelpers('project')
 
 export default {
   components: {
@@ -20,8 +22,8 @@ export default {
     id() {
       return this.$route.params.id
     },
-    ...mapGetters({
-      data: 'project/data'
+    ...mapState({
+      project: 'project'
     })
   },
   mounted() {
@@ -29,7 +31,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetch: 'project/get'
+      fetch: 'get'
     })
   }
 }

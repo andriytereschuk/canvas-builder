@@ -1,13 +1,21 @@
 <template>
-  <div class="component" :style="bg" @click="attachComponent()">
-    <div v-if="component">
+  <div class="component" :style="bg" @click="attachComponent">
+    <div v-if="component" class="content">
       {{ component.type }}
+    </div>
+    <div v-if="component" class="actions">
+      <v-btn class="mx-2" fab small color="primary">
+        <v-icon>mdi-settings</v-icon>
+      </v-btn>
+      <v-btn fab small color="error" @click.stop="detachComponent">
+        <v-icon>mdi-delete</v-icon>
+      </v-btn>
     </div>
   </div>
 </template>
 
 <script>
-import { mapMutations, mapGetters } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import { componentMixin } from '~/mixins/component.mixin'
 
 export default {
@@ -19,12 +27,11 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      components: 'components/components'
+    ...mapState('components', {
+      component(state) {
+        return state.components[this.zone.componentId]
+      }
     }),
-    component() {
-      return this.components[this.zone.componentId]
-    },
     bg() {
       const type = (this.component && this.component.type) || null
       const backgroundColor = this.getComponentColor(type)
@@ -33,20 +40,31 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({
-      set: 'components/set',
-      attachComponentToProject: 'project/attachComponent'
+    ...mapActions({
+      attach: 'components/attach',
+      detach: 'components/detach'
     }),
     attachComponent() {
-      if (this.component) return
+      if (!this.component) {
+        // open dialog and wait for picking the item
+        // this.$refs.componentsMenu.open().then((component) => {
+        //   this.attach({
+        //     id: this.zone.id,
+        //     component: { id: Date.now(), ...component }
+        //   })
+        // })
+        const component = {
+          type: 'promo'
+        }
 
-      const temp = {
-        id: Date.now(),
-        type: 'promo'
+        this.attach({
+          id: this.zone.id,
+          component: { id: Date.now(), ...component }
+        })
       }
-
-      this.set(temp)
-      this.attachComponentToProject({ id: this.zone.id, componentId: temp.id })
+    },
+    detachComponent(e) {
+      this.detach({ id: this.zone.id, component: this.component })
     },
     setBg(type) {
       const backgroundColor = this.getComponentColor(type)
@@ -60,10 +78,24 @@ export default {
 <style lang="scss" scoped>
 .component {
   height: 100%;
-  min-height: 50px;
+  min-height: 60px;
   border: 1px dashed #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  position: relative;
+
+  &:hover .actions {
+    display: flex;
+  }
+}
+
+.content {
+  padding: 5px 10px;
+  text-transform: capitalize;
+}
+
+.actions {
+  position: absolute;
+  display: none;
+  right: 10px;
+  top: 10px;
 }
 </style>
