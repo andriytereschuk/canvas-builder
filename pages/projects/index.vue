@@ -29,6 +29,7 @@
     <template v-slot:item.action="{ item }">
       <nuxt-link
         :to="`/projects/${projects[projects.indexOf(item)].id.toString()}`"
+        class="no-undeline"
       >
         <v-icon small class="mr-2">mdi-pencil</v-icon>
       </nuxt-link>
