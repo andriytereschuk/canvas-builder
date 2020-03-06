@@ -17,6 +17,11 @@ export const actions = {
 export const mutations = {
   add(state, projects) {
     state.projects = projects
+  },
+  remove(state, projectID) {
+    state.projects = [...state.projects].filter(
+      (project) => project.id !== projectID
+    )
   }
 }
 

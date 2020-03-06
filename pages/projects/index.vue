@@ -10,6 +10,11 @@
         <v-toolbar-title>All projects</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
+        <nuxt-link
+          :to="{ name: 'projects-id', params: { id: '1583143260046' } }"
+        >
+          <v-btn color="primary">New project</v-btn>
+        </nuxt-link>
       </v-toolbar>
     </template>
 
@@ -19,6 +24,7 @@
     <template v-slot:item.modified="{ item }">
       <div>{{ date(item.modified) }}</div>
     </template>
+
     <template v-slot:item.action="{ item }">
       <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
       <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
@@ -29,7 +35,9 @@
 <script>
 import { createNamespacedHelpers } from 'vuex'
 
-const { mapGetters, mapActions } = createNamespacedHelpers('projects')
+const { mapGetters, mapActions, mapMutations } = createNamespacedHelpers(
+  'projects'
+)
 
 export default {
   data: () => {
@@ -80,6 +88,9 @@ export default {
     ...mapGetters({
       projects: 'filtered'
     }),
+    ...mapMutations({
+      remove: 'remove'
+    }),
     formTitle() {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     }
@@ -97,11 +108,10 @@ export default {
       fetch: 'get'
     }),
     date(date) {
-      console.log(date)
       if (date) {
         return date.slice(0, 19).replace(/T/g, ' ')
       }
-    }
+    },
     // convertDate(projects) {
     //   const convertedDateProjects = []
     //   Object.assign(convertedDateProjects, projects)
@@ -109,19 +119,20 @@ export default {
     //     el.created = el.created.slice(0, 19).replace(/T/g, ' ')
     //     el.modified = el.modified.slice(0, 19).replace(/T/g, ' ')
     //   })
-  },
-  editItem(item) {
-    // save the item to the store and redirect
-    this.editedIndex = this.desserts.indexOf(item)
-    this.editedItem = Object.assign({}, item)
-    this.dialog = true
-  },
-
-  deleteItem(item) {
-    // add removing from the store
-    const index = this.projects.indexOf(item)
-    confirm('Are you sure you want to delete this item?') &&
-      this.projects.splice(index, 1)
+    editItem(item) {
+      // save the item to the store and redirect
+      this.editedIndex = this.projects.indexOf(item)
+      this.editedItem = Object.assign({}, item)
+      this.dialog = true
+    },
+    deleteItem(item) {
+      // const index = this.projects.indexOf(item)
+      // const projectToDeleteID = this.projects[index].id
+      console.log(this.remove)
+      // store.commitremove(projectToDeleteID)
+      // confirm('Are you sure you want to delete this item?') &&
+      //   this.projects.splice(index, 1)
+    }
   },
 
   close() {
