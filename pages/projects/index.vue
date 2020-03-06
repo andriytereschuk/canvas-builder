@@ -88,9 +88,6 @@ export default {
     ...mapGetters({
       projects: 'filtered'
     }),
-    ...mapMutations({
-      remove: 'remove'
-    }),
     formTitle() {
       return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
     }
@@ -106,6 +103,9 @@ export default {
   methods: {
     ...mapActions({
       fetch: 'get'
+    }),
+    ...mapMutations({
+      remove: 'remove'
     }),
     date(date) {
       if (date) {
@@ -126,12 +126,10 @@ export default {
       this.dialog = true
     },
     deleteItem(item) {
-      // const index = this.projects.indexOf(item)
-      // const projectToDeleteID = this.projects[index].id
-      console.log(this.remove)
-      // store.commitremove(projectToDeleteID)
-      // confirm('Are you sure you want to delete this item?') &&
-      //   this.projects.splice(index, 1)
+      const index = this.projects.indexOf(item)
+      const projectToDeleteID = this.projects[index].id
+      confirm('Are you sure you want to delete this item?') &&
+        this.remove(projectToDeleteID)
     }
   },
 
