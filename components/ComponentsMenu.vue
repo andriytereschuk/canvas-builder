@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="isComponentsMenuOpen" max-width="470px">
     <v-card class="components-menu__wrapper">
-      <v-card class="components-menu__categories-wrapper">
+      <v-card>
         <v-list-item
           v-for="category in categories"
           :key="category"
@@ -21,10 +21,9 @@
             color="transparent"
             min-width="20px"
             height="40px"
+            @click="closeMenu"
           >
-            <v-icon class="components-menu__icon">
-              mdi-close-circle
-            </v-icon>
+            <v-icon class="components-menu__icon">mdi-close-circle</v-icon>
           </v-btn>
         </v-card>
         <v-divider></v-divider>
@@ -57,11 +56,8 @@ export default {
   data: () => {
     return {
       isComponentsMenuOpen: false,
-      selectedType: '',
       selectedCategory: 'galleries',
       selectedComponent: '',
-      closeOnClick: false,
-      closeOnContentClick: false,
       componentTypes
     }
   },
@@ -81,6 +77,9 @@ export default {
       this.selectedComponent = type
       this.agree()
     },
+    closeMenu() {
+      this.isComponentsMenuOpen = false
+    },
     open() {
       this.isComponentsMenuOpen = true
       return new Promise((resolve, reject) => {
@@ -93,11 +92,11 @@ export default {
         category: this.selectedCategory,
         type: this.selectedComponent
       })
-      this.isComponentsMenuOpen = false
+      this.closeMenu()
     },
     cancel() {
       this.reject(false)
-      this.isComponentsMenuOpen = false
+      this.closeMenu()
     }
   }
 }

@@ -9,7 +9,7 @@ export const componentTypes = {
   },
   banners: {
     banner: {
-      color: '#ffffed'
+      color: '#9eb20b'
     }
   },
   videos: {
@@ -30,7 +30,7 @@ export const componentTypes = {
   },
   store: {
     productCard: {
-      color: '#98fb98'
+      color: '#9e94e1'
     }
   }
 }

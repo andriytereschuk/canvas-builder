@@ -1,7 +1,7 @@
 <template>
   <div>
     <Section v-for="section in sections" :key="section.id" :section="section" />
-    <AddSection @add="openMenu()" />
+    <AddSection />
   </div>
 </template>
 
@@ -18,12 +18,6 @@ export default {
     sections: {
       type: Array,
       required: true
-    }
-  },
-  methods: {
-    openMenu() {
-      console.log('openMenu')
-      this.$emit('openMenu')
     }
   }
 }

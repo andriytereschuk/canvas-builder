@@ -49,7 +49,6 @@ export default {
       if (!this.component) {
         // open dialog and wait for picking the item
         this.$root.$componentsMenu().then((component) => {
-          console.log(component)
           this.attach({
             id: this.zone.id,
             component: { id: Date.now(), ...component }

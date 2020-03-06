@@ -1,17 +1,6 @@
 <template>
-  <div class="add" @click="handleClick()">+</div>
+  <div class="add">+</div>
 </template>
-
-<script>
-export default {
-  methods: {
-    handleClick() {
-      console.log('add')
-      this.$emit('add')
-    }
-  }
-}
-</script>
 
 <style lang="scss" scoped>
 .add {
