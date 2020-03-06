@@ -73,19 +73,7 @@ export default {
           value: 'action'
         }
       ],
-      editedIndex: -1,
-      editedItem: {
-        name: '',
-        created: 0,
-        modified: 0,
-        actions: null
-      },
-      defaultItem: {
-        name: '',
-        created: 0,
-        modified: 0,
-        actions: null
-      }
+      editedIndex: -1
     }
   },
   computed: {
