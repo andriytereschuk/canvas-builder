@@ -34,7 +34,8 @@ export default {
     }),
     bg() {
       const type = (this.component && this.component.type) || null
-      const backgroundColor = this.getComponentColor(type)
+      const category = (this.component && this.component.category) || null
+      const backgroundColor = this.getComponentColor(category, type)
 
       return { backgroundColor }
     }
@@ -47,29 +48,16 @@ export default {
     attachComponent() {
       if (!this.component) {
         // open dialog and wait for picking the item
-        // this.$refs.componentsMenu.open().then((component) => {
-        //   this.attach({
-        //     id: this.zone.id,
-        //     component: { id: Date.now(), ...component }
-        //   })
-        // })
-        const component = {
-          type: 'promo'
-        }
-
-        this.attach({
-          id: this.zone.id,
-          component: { id: Date.now(), ...component }
+        this.$root.$componentsMenu().then((component) => {
+          this.attach({
+            id: this.zone.id,
+            component: { id: Date.now(), ...component }
+          })
         })
       }
     },
     detachComponent(e) {
       this.detach({ id: this.zone.id, component: this.component })
-    },
-    setBg(type) {
-      const backgroundColor = this.getComponentColor(type)
-
-      return { backgroundColor }
     }
   }
 }
