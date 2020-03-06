@@ -11,7 +11,7 @@
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <nuxt-link
-          :to="{ name: 'projects-id', params: { id: '1583143260046' } }"
+          :to="{ name: 'projects-id', params: { id: Date.now() } }"
           class="projects-link"
         >
           <v-btn color="primary">New project</v-btn>
