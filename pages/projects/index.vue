@@ -12,6 +12,7 @@
         <v-spacer></v-spacer>
         <nuxt-link
           :to="{ name: 'projects-id', params: { id: '1583143260046' } }"
+          class="projects-link"
         >
           <v-btn color="primary">New project</v-btn>
         </nuxt-link>
@@ -19,14 +20,18 @@
     </template>
 
     <template v-slot:item.created="{ item }">
-      <div>{{ date(item.created) }}</div>
+      <div>{{ convertDate(item.created) }}</div>
     </template>
     <template v-slot:item.modified="{ item }">
-      <div>{{ date(item.modified) }}</div>
+      <div>{{ convertDate(item.modified) }}</div>
     </template>
 
     <template v-slot:item.action="{ item }">
-      <v-icon small class="mr-2" @click="editItem(item)">mdi-pencil</v-icon>
+      <nuxt-link
+        :to="`/projects/${projects[projects.indexOf(item)].id.toString()}`"
+      >
+        <v-icon small class="mr-2">mdi-pencil</v-icon>
+      </nuxt-link>
       <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
     </template>
   </v-data-table>
@@ -107,23 +112,10 @@ export default {
     ...mapMutations({
       remove: 'remove'
     }),
-    date(date) {
+    convertDate(date) {
       if (date) {
         return date.slice(0, 19).replace(/T/g, ' ')
       }
-    },
-    // convertDate(projects) {
-    //   const convertedDateProjects = []
-    //   Object.assign(convertedDateProjects, projects)
-    //   return convertedDateProjects.map((el) => {
-    //     el.created = el.created.slice(0, 19).replace(/T/g, ' ')
-    //     el.modified = el.modified.slice(0, 19).replace(/T/g, ' ')
-    //   })
-    editItem(item) {
-      // save the item to the store and redirect
-      this.editedIndex = this.projects.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
     },
     deleteItem(item) {
       const index = this.projects.indexOf(item)
@@ -131,25 +123,12 @@ export default {
       confirm('Are you sure you want to delete this item?') &&
         this.remove(projectToDeleteID)
     }
-  },
-
-  close() {
-    this.dialog = false
-    setTimeout(() => {
-      this.editedItem = Object.assign({}, this.defaultItem)
-      this.editedIndex = -1
-    }, 300)
-  },
-  save() {
-    if (this.editedIndex > -1) {
-      Object.assign(this.desserts[this.editedIndex], this.editedItem)
-    } else {
-      this.desserts.push(this.editedItem)
-    }
-    this.close()
   }
 }
-// }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.projects-link {
+  text-decoration: none;
+}
+</style>
