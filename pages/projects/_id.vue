@@ -2,7 +2,8 @@
   <div>
     <h1>Project # {{ id }}</h1>
     <ComponentsMenu ref="componentsMenu" />
-    <Workspace :sections="project.rows" />
+    <Workspace :sections="project.rows" @add="add" />
+    <PresetList ref="presets" />
   </div>
 </template>
 
@@ -10,13 +11,20 @@
 import { createNamespacedHelpers } from 'vuex'
 import ComponentsMenu from '../../components/ComponentsMenu'
 import Workspace from '~/components/Workspace'
+import PresetList from '~/components/PresetList'
 
 const { mapState, mapActions } = createNamespacedHelpers('project')
 
 export default {
   components: {
     ComponentsMenu,
-    Workspace
+    Workspace,
+    PresetList
+  },
+  data() {
+    return {
+      isDialog: false
+    }
   },
   computed: {
     id() {
@@ -33,7 +41,10 @@ export default {
   methods: {
     ...mapActions({
       fetch: 'get'
-    })
+    }),
+    add() {
+      return this.$refs.presets.open()
+    }
   }
 }
 </script>
