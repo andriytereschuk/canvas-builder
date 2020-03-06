@@ -91,6 +91,20 @@ export const mutations = {
   add(state, project) {
     state.project = project
   },
+  addSection(state, section) {
+    const zones = section.zones.map((zone, index) => ({
+      id: `zone-${index}-${Date.now()}`,
+      componentId: null,
+      ...zone
+    }))
+    const row = {
+      ...section,
+      id: `row-${Date.now()}`,
+      zones
+    }
+    const rows = [...state.project.rows, row]
+    state.project = { ...state.project, rows }
+  },
   attachComponent(state, payload) {
     const rows = state.project.rows.map((section) => {
       return {

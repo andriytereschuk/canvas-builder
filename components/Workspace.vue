@@ -1,7 +1,7 @@
 <template>
   <div>
     <Section v-for="section in sections" :key="section.id" :section="section" />
-    <AddSection />
+    <AddSection @add="$emit('add')" />
   </div>
 </template>
 
