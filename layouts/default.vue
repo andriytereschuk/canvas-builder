@@ -45,9 +45,8 @@
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn> -->
-      <v-toolbar-title v-text="title" />
-      <span style="margin-left: 10px; position: relative; top: 2px;"
-        >/ All projects</span
+      <nuxt-link to="/projects" class="logo"
+        >Canvas Bulider <span>/ All projects</span></nuxt-link
       >
       <v-spacer />
       <v-btn text style="width: 100px; margin-right: 0;">
@@ -108,8 +107,7 @@ export default {
       ],
       miniVariant: false,
       right: true,
-      rightDrawer: false,
-      title: 'Canvas Builder'
+      rightDrawer: false
     }
   }
 }
