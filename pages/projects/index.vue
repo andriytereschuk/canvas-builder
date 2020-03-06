@@ -79,15 +79,7 @@ export default {
   computed: {
     ...mapGetters({
       projects: 'filtered'
-    }),
-    formTitle() {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-    }
-  },
-  watch: {
-    dialog(val) {
-      val || this.close()
-    }
+    })
   },
   mounted() {
     this.fetch()
