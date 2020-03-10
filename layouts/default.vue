@@ -24,6 +24,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
     <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <!-- <v-btn
@@ -44,9 +45,8 @@
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn> -->
-      <v-toolbar-title v-text="title" />
-      <span style="margin-left: 10px; position: relative; top: 2px;"
-        >/ All projects</span
+      <nuxt-link to="/projects" class="logo"
+        >Canvas Bulider <span>/ All projects</span></nuxt-link
       >
       <v-spacer />
       <v-btn text style="width: 100px; margin-right: 0;">
@@ -61,6 +61,7 @@
         <v-icon>mdi-menu</v-icon>
       </v-btn> -->
     </v-app-bar>
+
     <v-content>
       <v-container>
         <nuxt />
@@ -96,7 +97,7 @@ export default {
         {
           icon: 'mdi-apps',
           title: 'Grid',
-          to: '/'
+          to: '/grid'
         },
         {
           icon: 'mdi-wall',
@@ -106,8 +107,7 @@ export default {
       ],
       miniVariant: false,
       right: true,
-      rightDrawer: false,
-      title: 'Canvas Builder'
+      rightDrawer: false
     }
   }
 }

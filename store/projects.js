@@ -4,19 +4,24 @@ export const state = () => ({
 
 export const actions = {
   async get({ commit }) {
-    let projects = []
+    let projects
 
     try {
       projects = await this.$axios.$get('/api/projects')
     } catch (e) {}
 
-    commit('add', projects)
+    if (projects) commit('add', projects)
   }
 }
 
 export const mutations = {
   add(state, projects) {
     state.projects = projects
+  },
+  remove(state, projectID) {
+    state.projects = [...state.projects].filter(
+      (project) => project.id !== projectID
+    )
   }
 }
 

@@ -1,9 +1,11 @@
-import { componentEnum } from '~/config/component.config'
+import { componentTypes } from '~/config/componentTypes.config'
 
 export const componentMixin = {
   methods: {
-    getComponentColor(type) {
-      return componentEnum[type].color
+    getComponentColor(category, type) {
+      return (
+        (category && type && componentTypes[category][type].color) || '#263238'
+      )
     }
   }
 }
