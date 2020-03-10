@@ -1,5 +1,5 @@
 <template>
-  <v-card outlined>
+  <v-card outlined class="workspace-menu__wrapper">
     <v-card-subtitle class="subtitle">
       Select mode:
     </v-card-subtitle>
@@ -45,6 +45,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.workspace-menu__wrapper {
+  padding: 0 10px;
+}
+
 .radiobtn-wrapper {
   margin: 0;
 }

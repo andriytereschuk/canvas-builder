@@ -29,6 +29,11 @@ export default {
     zone: {
       type: Object,
       required: true
+    },
+    isReorderingMode: {
+      type: Boolean,
+      required: true,
+      default: false
     }
   },
   computed: {
@@ -51,7 +56,7 @@ export default {
       detach: 'components/detach'
     }),
     attachComponent() {
-      if (!this.component) {
+      if (!this.component && !this.isReorderingMode) {
         // open dialog and wait for picking the item
         this.$root.$componentsMenu().then((component) => {
           this.attach({

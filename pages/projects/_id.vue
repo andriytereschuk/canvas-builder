@@ -1,13 +1,9 @@
 <template>
   <div>
-    <h1>Project # {{ id }}</h1>
-    <ComponentsMenu v-if="isEditingComponentMode" ref="componentsMenu" />
     <WorkspaceMenu @changeMode="changeMode" />
-    <Workspace
-      :sections="project.rows"
-      :is-reordering-mode="isReorderingMode"
-      @add="add"
-    />
+    <h1>Project # {{ id }}</h1>
+    <ComponentsMenu ref="componentsMenu" />
+    <Workspace :is-reordering-mode="isReorderingMode" @add="add" />
     <PresetList ref="presets" />
   </div>
 </template>
@@ -62,9 +58,6 @@ export default {
         this.isReorderingMode = false
         this.isEditingComponentMode = true
       }
-      // this.$forceUpdate()
-      console.log('this.isReorderingMode: ', this.isReorderingMode)
-      console.log('this.isEditingComponentMode: ', this.isEditingComponentMode)
     }
   }
 }
