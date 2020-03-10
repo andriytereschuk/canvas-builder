@@ -7,71 +7,71 @@ export const state = () => ({
 
 export const actions = {
   async get({ commit }, { id }) {
-    const rows = [
-      {
-        id: 1,
-        columns: 4,
-        rows: 2,
-        zones: [
-          {
-            id: 12,
-            componentId: null,
-            coords: {
-              start: {
-                x: 1,
-                y: 1
-              },
-              end: {
-                x: 2,
-                y: 2
-              }
-            }
-          },
-          {
-            id: 13,
-            componentId: null,
-            coords: {
-              start: {
-                x: 1,
-                y: 2
-              },
-              end: {
-                x: 2,
-                y: 3
-              }
-            }
-          },
-          {
-            id: 14,
-            componentId: null,
-            coords: {
-              start: {
-                x: 2,
-                y: 1
-              },
-              end: {
-                x: 3,
-                y: 3
-              }
-            }
-          },
-          {
-            id: 15,
-            componentId: null,
-            coords: {
-              start: {
-                x: 1,
-                y: 3
-              },
-              end: {
-                x: 3,
-                y: 5
-              }
-            }
-          }
-        ]
-      }
-    ]
+    // const rows = [
+    //   {
+    //     id: 1,
+    //     columns: 4,
+    //     rows: 2,
+    //     zones: [
+    //       {
+    //         id: 12,
+    //         componentId: null,
+    //         coords: {
+    //           start: {
+    //             x: 1,
+    //             y: 1
+    //           },
+    //           end: {
+    //             x: 2,
+    //             y: 2
+    //           }
+    //         }
+    //       },
+    //       {
+    //         id: 13,
+    //         componentId: null,
+    //         coords: {
+    //           start: {
+    //             x: 1,
+    //             y: 2
+    //           },
+    //           end: {
+    //             x: 2,
+    //             y: 3
+    //           }
+    //         }
+    //       },
+    //       {
+    //         id: 14,
+    //         componentId: null,
+    //         coords: {
+    //           start: {
+    //             x: 2,
+    //             y: 1
+    //           },
+    //           end: {
+    //             x: 3,
+    //             y: 3
+    //           }
+    //         }
+    //       },
+    //       {
+    //         id: 15,
+    //         componentId: null,
+    //         coords: {
+    //           start: {
+    //             x: 1,
+    //             y: 3
+    //           },
+    //           end: {
+    //             x: 3,
+    //             y: 5
+    //           }
+    //         }
+    //       }
+    //     ]
+    //   }
+    // ]
     let project
 
     try {
@@ -81,7 +81,7 @@ export const actions = {
     if (project) {
       commit('add', {
         id: project.id,
-        rows
+        rows: []
       })
     }
   }

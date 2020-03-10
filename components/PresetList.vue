@@ -10,7 +10,7 @@
           :key="index"
           class="preset-item"
           :preset="preset"
-          :closeDialog="close"
+          :close-dialog="close"
         />
       </v-card-text>
       <!-- <v-card-actions>

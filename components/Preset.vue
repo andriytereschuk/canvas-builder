@@ -71,10 +71,17 @@ export default {
 .grid-container {
   max-width: 100px;
   grid-gap: 1px;
+
+  &:hover {
+    .position {
+      background-color: #b388ff;
+    }
+  }
 }
 .position {
   box-sizing: border-box;
   padding: 2px;
   background-color: #bebebe;
+  transition: 0.1s;
 }
 </style>

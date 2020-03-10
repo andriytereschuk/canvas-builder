@@ -14,5 +14,11 @@
   margin: 0 auto;
   margin-top: 30px;
   cursor: pointer;
+  transition: 0.1s;
+
+  &:hover {
+    border-color: #b388ff;
+    color: #b388ff;
+  }
 }
 </style>

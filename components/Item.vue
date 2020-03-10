@@ -1,5 +1,10 @@
 <template>
-  <div class="component" :style="bg" @click="attachComponent">
+  <div
+    class="component"
+    :class="{ 'not-assigned': !component }"
+    :style="bg"
+    @click="attachComponent"
+  >
     <div v-if="component" class="content">
       {{ component.type }}
     </div>
@@ -69,9 +74,17 @@ export default {
   min-height: 60px;
   border: 1px dashed #fff;
   position: relative;
+  cursor: pointer;
 
   &:hover .actions {
     display: flex;
+  }
+
+  &.not-assigned {
+    transition: 0.1s;
+    &:hover {
+      background-color: #645e71 !important;
+    }
   }
 }
 
