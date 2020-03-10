@@ -11,7 +11,7 @@
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <nuxt-link
-          :to="{ name: 'projects-id', params: { id: '1583143260046' } }"
+          :to="{ name: 'projects-id', params: { id: Date.now() } }"
           class="projects-link"
         >
           <v-btn color="primary">New project</v-btn>
@@ -22,15 +22,13 @@
     <template v-slot:item.created="{ item }">
       <div>{{ convertDate(item.created) }}</div>
     </template>
+
     <template v-slot:item.modified="{ item }">
       <div>{{ convertDate(item.modified) }}</div>
     </template>
 
     <template v-slot:item.action="{ item }">
-      <nuxt-link
-        :to="`/projects/${projects[projects.indexOf(item)].id.toString()}`"
-        class="no-undeline"
-      >
+      <nuxt-link :to="`/projects/${getProjectID(item)}`" class="no-undeline">
         <v-icon small class="mr-2">mdi-pencil</v-icon>
       </nuxt-link>
       <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
@@ -75,33 +73,13 @@ export default {
           value: 'action'
         }
       ],
-      editedIndex: -1,
-      editedItem: {
-        name: '',
-        created: 0,
-        modified: 0,
-        actions: null
-      },
-      defaultItem: {
-        name: '',
-        created: 0,
-        modified: 0,
-        actions: null
-      }
+      editedIndex: -1
     }
   },
   computed: {
     ...mapGetters({
       projects: 'filtered'
-    }),
-    formTitle() {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
-    }
-  },
-  watch: {
-    dialog(val) {
-      val || this.close()
-    }
+    })
   },
   mounted() {
     this.fetch()
@@ -113,6 +91,10 @@ export default {
     ...mapMutations({
       remove: 'remove'
     }),
+    getProjectID(item) {
+      const index = this.projects.indexOf(item)
+      return this.projects[index].id.toString()
+    },
     convertDate(date) {
       if (date) {
         return date.slice(0, 19).replace(/T/g, ' ')
@@ -121,15 +103,10 @@ export default {
     deleteItem(item) {
       const index = this.projects.indexOf(item)
       const projectToDeleteID = this.projects[index].id
+
       confirm('Are you sure you want to delete this item?') &&
         this.remove(projectToDeleteID)
     }
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.projects-link {
-  text-decoration: none;
-}
-</style>
