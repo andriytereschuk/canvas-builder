@@ -1,8 +1,13 @@
 <template>
   <div>
     <h1>Project # {{ id }}</h1>
-    <ComponentsMenu ref="componentsMenu" />
-    <Workspace :sections="project.rows" @add="add" />
+    <ComponentsMenu v-if="isEditingComponentMode" ref="componentsMenu" />
+    <WorkspaceMenu @changeMode="changeMode" />
+    <Workspace
+      :sections="project.rows"
+      :is-reordering-mode="isReorderingMode"
+      @add="add"
+    />
     <PresetList ref="presets" />
   </div>
 </template>
@@ -11,6 +16,7 @@
 import { createNamespacedHelpers } from 'vuex'
 import ComponentsMenu from '../../components/ComponentsMenu'
 import Workspace from '~/components/Workspace'
+import WorkspaceMenu from '~/components/WorkspaceMenu'
 import PresetList from '~/components/PresetList'
 
 const { mapState, mapActions } = createNamespacedHelpers('project')
@@ -19,11 +25,14 @@ export default {
   components: {
     ComponentsMenu,
     Workspace,
+    WorkspaceMenu,
     PresetList
   },
   data() {
     return {
-      isDialog: false
+      isDialog: false,
+      isReorderingMode: false,
+      isEditingComponentMode: true
     }
   },
   computed: {
@@ -44,6 +53,18 @@ export default {
     }),
     add() {
       return this.$refs.presets.open()
+    },
+    changeMode(selectedMode) {
+      if (selectedMode === 'isReorderingMode') {
+        this.isReorderingMode = true
+        this.isEditingComponentMode = false
+      } else {
+        this.isReorderingMode = false
+        this.isEditingComponentMode = true
+      }
+      // this.$forceUpdate()
+      console.log('this.isReorderingMode: ', this.isReorderingMode)
+      console.log('this.isEditingComponentMode: ', this.isEditingComponentMode)
     }
   }
 }

@@ -22,6 +22,14 @@ export const mutations = {
     state.projects = [...state.projects].filter(
       (project) => project.id !== projectID
     )
+  },
+  changeMode(state) {
+    state.isReorderingMode = !state.isReorderingMode
+    console.log('state.isReorderingMode >> ', state.isReorderingMode)
+    console.log(
+      'state.isEditingComponentMode >> ',
+      state.isEditingComponentMode
+    )
   }
 }
 
