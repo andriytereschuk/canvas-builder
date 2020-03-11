@@ -1,49 +1,15 @@
 <template>
   <div>
-    <ComponentsMenu ref="componentsMenu" />
-    <Workspace @add="add" />
-    <PresetList ref="presets" />
+    <Stepper />
   </div>
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-import ComponentsMenu from '../../components/ComponentsMenu'
-import Workspace from '~/components/Workspace'
-import PresetList from '~/components/PresetList'
-
-const { mapState, mapActions } = createNamespacedHelpers('project')
+import Stepper from '~/components/Stepper'
 
 export default {
   components: {
-    ComponentsMenu,
-    Workspace,
-    PresetList
-  },
-  data() {
-    return {
-      isDialog: false
-    }
-  },
-  computed: {
-    id() {
-      return this.$route.params.id
-    },
-    ...mapState({
-      project: 'project'
-    })
-  },
-  mounted() {
-    this.fetch({ id: this.id })
-    this.$root.$componentsMenu = this.$refs.componentsMenu.open
-  },
-  methods: {
-    ...mapActions({
-      fetch: 'get'
-    }),
-    add() {
-      return this.$refs.presets.open()
-    }
+    Stepper
   }
 }
 </script>
