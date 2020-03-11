@@ -82,7 +82,7 @@ export default {
     return {
       e1: 1,
       stepsEnum,
-      currentStep: 1,
+      currentStep: 'desktop',
       isDialog: false
     }
   },
@@ -105,8 +105,8 @@ export default {
       return this.$refs.presets.open()
     },
     changeStep(stepNum) {
-      console.log(1111, stepNum)
       this.el1 = stepNum
+      console.log(1111, this.el1)
       this.changeCurrentStep(stepNum)
       console.log('this.currentStep', this.currentStep)
       this.setCurrentStep(this.currentStep)
