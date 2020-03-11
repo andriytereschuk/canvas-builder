@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Project # {{ id }}</h1>
     <ComponentsMenu ref="componentsMenu" />
     <Workspace @add="add" />
     <PresetList ref="presets" />

@@ -45,9 +45,15 @@
       >
         <v-icon>mdi-minus</v-icon>
       </v-btn> -->
-      <nuxt-link to="/projects" class="logo"
-        >Canvas Bulider <span>/ All projects</span></nuxt-link
-      >
+      <v-breadcrumbs :items="breadcrumbs">
+        <v-breadcrumbs-item
+          slot="item"
+          slot-scope="{ item }"
+          :href="getLink(item)"
+        >
+          {{ item.text === 'projectID' ? id : item.text }}
+        </v-breadcrumbs-item>
+      </v-breadcrumbs>
       <v-spacer />
       <v-btn text style="width: 100px; margin-right: 0;">
         <v-icon>mdi-play</v-icon>
@@ -107,7 +113,36 @@ export default {
       ],
       miniVariant: false,
       right: true,
-      rightDrawer: false
+      rightDrawer: false,
+      breadcrumbs: [
+        {
+          text: 'Canvas Builder',
+          disabled: false,
+          href: '/'
+        },
+        {
+          text: 'All projects',
+          disabled: false,
+          href: '/projects'
+        },
+        {
+          text: 'projectID',
+          disabled: false,
+          href: ''
+        }
+      ]
+    }
+  },
+  computed: {
+    id() {
+      return this.$route.params.id
+    }
+  },
+  methods: {
+    getLink(item) {
+      return this.$route.params.id && item.text === 'projectID'
+        ? this.$route.params.id
+        : item.href
     }
   }
 }
