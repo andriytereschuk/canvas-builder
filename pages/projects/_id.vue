@@ -2,7 +2,7 @@
   <div>
     <h1>Project # {{ id }}</h1>
     <ComponentsMenu ref="componentsMenu" />
-    <Workspace :sections="project.rows" @add="add" />
+    <Workspace @add="add" />
     <PresetList ref="presets" />
   </div>
 </template>

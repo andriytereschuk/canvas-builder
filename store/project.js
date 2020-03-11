@@ -136,5 +136,14 @@ export const mutations = {
       rows,
       ...state.project
     }
+  },
+  changeSectionsOrder(state, sections) {
+    state.project.rows = sections
+  }
+}
+
+export const getters = {
+  sections(state) {
+    return state.project.rows
   }
 }
