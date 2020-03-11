@@ -18,11 +18,11 @@
       <v-stepper-content step="1">
         <div class="stepper-content__wrapper">
           <ComponentsMenu ref="componentsMenu" />
-          <Workspace @add="add" />
+          <Workspace :current-step="currentStep" @add="add" />
           <PresetList ref="presets" />
         </div>
 
-        <v-btn color="green darken-3" @click="e1 = 2">
+        <v-btn color="green darken-3" @click="changeStep(2)">
           Next
         </v-btn>
       </v-stepper-content>
@@ -30,14 +30,18 @@
       <v-stepper-content step="2" class="stepper-content__wrapper">
         <div class="stepper-content__wrapper">
           <ComponentsMenu ref="componentsMenu" />
-          <Workspace @add="add" />
+          <Workspace :current-step="currentStep" @add="add" />
           <PresetList ref="presets" />
         </div>
 
-        <v-btn color="orange darken-3" class="steppen-btn" @click="e1 = 1">
+        <v-btn
+          color="orange darken-3"
+          class="steppen-btn"
+          @click="changeStep(1)"
+        >
           Back
         </v-btn>
-        <v-btn color="green darken-3" @click="e1 = 3">
+        <v-btn color="green darken-3" @click="changeStep(3)">
           Next
         </v-btn>
       </v-stepper-content>
@@ -45,11 +49,15 @@
       <v-stepper-content step="3">
         <div class="stepper-content__wrapper">
           <ComponentsMenu ref="componentsMenu" />
-          <Workspace @add="add" />
+          <Workspace :current-step="currentStep" @add="add" />
           <PresetList ref="presets" />
         </div>
 
-        <v-btn color="orange darken-3" class="steppen-btn" @click="e1 = 2">
+        <v-btn
+          color="orange darken-3"
+          class="steppen-btn"
+          @click="changeStep(2)"
+        >
           Back
         </v-btn>
       </v-stepper-content>
@@ -58,13 +66,11 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 import { stepsEnum } from '~/config/stepsEnum.config'
 import ComponentsMenu from '~/components/ComponentsMenu'
 import Workspace from '~/components/Workspace'
 import PresetList from '~/components/PresetList'
-
-const { mapState, mapActions } = createNamespacedHelpers('project')
 
 export default {
   components: {
@@ -76,6 +82,7 @@ export default {
     return {
       e1: 1,
       stepsEnum,
+      currentStep: 1,
       isDialog: false
     }
   },
@@ -83,20 +90,42 @@ export default {
     id() {
       return this.$route.params.id
     },
-    ...mapState({
-      project: 'project'
-    })
+    ...mapState('project', ['project'])
   },
   mounted() {
     this.fetch({ id: this.id })
     this.$root.$componentsMenu = this.$refs.componentsMenu.open
   },
   methods: {
-    ...mapActions({
+    ...mapActions('project', {
       fetch: 'get'
     }),
+    ...mapMutations('project', ['setCurrentStep']),
     add() {
       return this.$refs.presets.open()
+    },
+    changeStep(stepNum) {
+      console.log(1111, stepNum)
+      this.el1 = stepNum
+      this.changeCurrentStep(stepNum)
+      console.log('this.currentStep', this.currentStep)
+      this.setCurrentStep(this.currentStep)
+    },
+    changeCurrentStep(stepNum) {
+      console.log('changeCurrentStep: stepNum', stepNum)
+      switch (stepNum) {
+        case 1:
+          this.currentStep = this.stepsEnum.desktop
+          return this.stepsEnum.desktop
+        case 2:
+          this.currentStep = this.stepsEnum.tablet
+          return this.stepsEnum.tablet
+        case 3:
+          this.currentStep = this.stepsEnum.mobile
+          return this.stepsEnum.mobile
+        default:
+          return this.stepsEnum.desktop
+      }
     }
   }
 }

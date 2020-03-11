@@ -17,11 +17,10 @@
 
 <script>
 import draggable from 'vuedraggable'
-import { createNamespacedHelpers } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
+import { stepsEnum } from '~/config/stepsEnum.config'
 import Section from '~/components/Section.vue'
 import AddSection from '~/components/AddSection.vue'
-
-const { mapGetters, mapMutations } = createNamespacedHelpers('project')
 
 export default {
   components: {
@@ -29,10 +28,20 @@ export default {
     AddSection,
     draggable
   },
+  // props: {
+  //   currentStep: {
+  //     type: String,
+  //     required: true,
+  //     default: stepsEnum.desktop
+  //   }
+  // },
+  data: () => {
+    return {
+      stepsEnum
+    }
+  },
   computed: {
-    ...mapGetters({
-      sections: 'sections'
-    }),
+    ...mapGetters('project', ['sections']),
     changedSections: {
       get() {
         return this.sections
@@ -43,9 +52,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({
-      changeSectionsOrder: 'changeSectionsOrder'
-    })
+    ...mapMutations('project', ['changeSectionsOrder'])
   }
 }
 </script>

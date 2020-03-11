@@ -1,6 +1,10 @@
 export const state = () => ({
   project: {
     id: null,
+    desktop: [],
+    tablet: [],
+    mobile: [],
+    currentStep: 'desktop',
     rows: []
   }
 })
@@ -139,11 +143,25 @@ export const mutations = {
   },
   changeSectionsOrder(state, sections) {
     state.project.rows = sections
+  },
+  setCurrentStep(state, newStep) {
+    state.project.currentStep = newStep
+    console.log('state/project', state.project.currentStep)
   }
 }
 
 export const getters = {
   sections(state) {
-    return state.project.rows
+    console.log('state/project/get', state.project.currentStep)
+    switch (state.project.currentStep) {
+      case 'desktop':
+        return state.project.desktop
+      case 'tablet':
+        return state.project.tablet
+      case 'mobile':
+        return state.project.mobile
+      default:
+        return state.project.desktop
+    }
   }
 }
