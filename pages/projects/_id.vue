@@ -1,6 +1,5 @@
 <template>
   <div>
-    <WorkspaceMenu />
     <h1>Project # {{ id }}</h1>
     <ComponentsMenu ref="componentsMenu" />
     <Workspace @add="add" />
@@ -12,7 +11,6 @@
 import { createNamespacedHelpers } from 'vuex'
 import ComponentsMenu from '../../components/ComponentsMenu'
 import Workspace from '~/components/Workspace'
-import WorkspaceMenu from '~/components/WorkspaceMenu'
 import PresetList from '~/components/PresetList'
 
 const { mapState, mapActions } = createNamespacedHelpers('project')
@@ -21,7 +19,6 @@ export default {
   components: {
     ComponentsMenu,
     Workspace,
-    WorkspaceMenu,
     PresetList
   },
   data() {

@@ -62,11 +62,26 @@ export default {
 
 <style lang="scss" scoped>
 .grid-container {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
 
   & + & {
     margin-top: 30px;
+  }
+
+  &::before {
+    content: '...';
+    position: absolute;
+    top: 40%;
+    margin-left: -20px;
+    font-weight: bold;
+    text-shadow: 0px 5px 0px white, 0px 10px 0px white;
+    transform: translateY(-50%);
+    color: white;
+    cursor: grab;
+    cursor: -webkit-grab;
+    cursor: -moz-grab;
   }
 }
 
