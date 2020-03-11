@@ -31,11 +31,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      sectionsFromStore: 'sections'
+      sections: 'sections'
     }),
     changedSections: {
       get() {
-        return this.sectionsFromStore
+        return this.sections
       },
       set(newSectionsSet) {
         this.changeSectionsOrder(newSectionsSet)

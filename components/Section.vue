@@ -73,15 +73,14 @@ export default {
   &::before {
     content: '...';
     position: absolute;
-    top: 40%;
+    top: 50%;
+    margin-top: -10px;
     margin-left: -20px;
     font-weight: bold;
     text-shadow: 0px 5px 0px white, 0px 10px 0px white;
     transform: translateY(-50%);
     color: white;
     cursor: grab;
-    cursor: -webkit-grab;
-    cursor: -moz-grab;
   }
 }
 
