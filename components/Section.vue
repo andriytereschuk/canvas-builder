@@ -6,7 +6,7 @@
       :style="getCellStyle(zone)"
       class="position"
     >
-      <Item :zone="zone" :is-reordering-mode="isReorderingMode" />
+      <Item :zone="zone" />
     </div>
   </div>
 </template>
@@ -23,11 +23,6 @@ export default {
     section: {
       type: Object,
       required: true
-    },
-    isReorderingMode: {
-      type: Boolean,
-      required: false,
-      default: false
     }
   },
   computed: {},

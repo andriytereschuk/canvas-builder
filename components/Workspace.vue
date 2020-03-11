@@ -1,14 +1,6 @@
 <template>
   <div>
-    <div v-if="!isReorderingMode">
-      <Section
-        v-for="section in sectionsFromStore"
-        :key="section.id"
-        :section="section"
-      />
-    </div>
     <draggable
-      v-if="isReorderingMode"
       v-model="changedSections"
       @start="drag = true"
       @end="drag = false"
@@ -17,7 +9,6 @@
         v-for="section in changedSections"
         :key="section.id"
         :section="section"
-        :is-reordering-mode="isReorderingMode"
       />
     </draggable>
     <AddSection @add="$emit('add')" />
@@ -37,13 +28,6 @@ export default {
     Section,
     AddSection,
     draggable
-  },
-  props: {
-    isReorderingMode: {
-      type: Boolean,
-      required: true,
-      default: false
-    }
   },
   computed: {
     ...mapGetters({

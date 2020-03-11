@@ -1,9 +1,9 @@
 <template>
   <div>
-    <WorkspaceMenu @changeMode="changeMode" />
+    <WorkspaceMenu />
     <h1>Project # {{ id }}</h1>
     <ComponentsMenu ref="componentsMenu" />
-    <Workspace :is-reordering-mode="isReorderingMode" @add="add" />
+    <Workspace @add="add" />
     <PresetList ref="presets" />
   </div>
 </template>
@@ -26,9 +26,7 @@ export default {
   },
   data() {
     return {
-      isDialog: false,
-      isReorderingMode: false,
-      isEditingComponentMode: true
+      isDialog: false
     }
   },
   computed: {
@@ -49,15 +47,6 @@ export default {
     }),
     add() {
       return this.$refs.presets.open()
-    },
-    changeMode(selectedMode) {
-      if (selectedMode === 'isReorderingMode') {
-        this.isReorderingMode = true
-        this.isEditingComponentMode = false
-      } else {
-        this.isReorderingMode = false
-        this.isEditingComponentMode = true
-      }
     }
   }
 }
