@@ -28,8 +28,11 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Preset from '~/components/Preset'
 import { presets } from '~/config/preset.config'
+import { mobilePresets } from '~/config/mobilePreset.config'
+
 export default {
   components: {
     Preset
@@ -40,8 +43,9 @@ export default {
     }
   },
   computed: {
+    ...mapState('project', ['project']),
     presets() {
-      return presets
+      return this.project.currentStep === 'desktop' ? presets : mobilePresets
     }
   },
   methods: {
