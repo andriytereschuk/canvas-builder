@@ -14,9 +14,12 @@ export default (req, res) => {
       name: 'Project 1',
       created: '2012-04-22T18:25:43.511Z',
       modified: '2013-04-22T18:25:43.511Z',
-      desktop: [],
-      tablet: [],
-      mobile: [],
+      desktop: {
+        rows: []
+      },
+      mobile: {
+        rows: []
+      },
       currentStep: 'desktop'
     },
     {
@@ -24,9 +27,12 @@ export default (req, res) => {
       name: 'Project 2',
       created: '2015-04-23T18:25:43.511Z',
       modified: '2016-04-22T18:25:43.511Z',
-      desktop: [],
-      tablet: [],
-      mobile: [],
+      desktop: {
+        rows: []
+      },
+      mobile: {
+        rows: []
+      },
       currentStep: 'desktop'
     },
     {
@@ -34,9 +40,12 @@ export default (req, res) => {
       name: 'Project 3',
       created: '2015-04-23T18:25:43.511Z',
       modified: '2016-04-22T18:25:43.511Z',
-      desktop: [],
-      tablet: [],
-      mobile: [],
+      desktop: {
+        rows: []
+      },
+      mobile: {
+        rows: []
+      },
       currentStep: 'desktop'
     },
     {
@@ -44,9 +53,12 @@ export default (req, res) => {
       name: 'Project 4',
       created: '2015-04-23T18:25:43.511Z',
       modified: '2016-04-22T18:25:43.511Z',
-      desktop: [],
-      tablet: [],
-      mobile: [],
+      desktop: {
+        rows: []
+      },
+      mobile: {
+        rows: []
+      },
       currentStep: 'desktop'
     },
     {
@@ -54,9 +66,12 @@ export default (req, res) => {
       name: 'Project 5',
       created: '2015-04-23T18:25:43.511Z',
       modified: '2016-04-22T18:25:43.511Z',
-      desktop: [],
-      tablet: [],
-      mobile: [],
+      desktop: {
+        rows: []
+      },
+      mobile: {
+        rows: []
+      },
       currentStep: 'desktop'
     }
   ]

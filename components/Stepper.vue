@@ -114,11 +114,11 @@ export default {
           this.currentStep = this.stepsEnum.desktop
           return this.stepsEnum.desktop
         case 2:
-          this.currentStep = this.stepsEnum.tablet
-          return this.stepsEnum.tablet
-        case 3:
           this.currentStep = this.stepsEnum.mobile
           return this.stepsEnum.mobile
+        case 3:
+          this.currentStep = 'finish'
+          return 'finish'
         default:
           return this.stepsEnum.desktop
       }

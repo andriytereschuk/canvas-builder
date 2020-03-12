@@ -127,6 +127,11 @@ export const mutations = {
       : (state.project = { ...state.project, mobile })
   },
   attachComponent(state, payload) {
+    console.log('state.project.currentStep', state.project.currentStep)
+    console.log(
+      'state.project[state.project.currentStep]',
+      state.project[state.project.currentStep]
+    )
     const rows = state.project[state.project.currentStep].rows.map(
       (section) => {
         return {
