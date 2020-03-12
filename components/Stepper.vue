@@ -6,14 +6,10 @@
       </v-stepper-step>
       <v-divider></v-divider>
       <v-stepper-step :complete="e1 > 2" step="2">
-        Tablet
-      </v-stepper-step>
-      <v-divider></v-divider>
-      <v-stepper-step :complete="e1 > 3" step="3">
         Mobile
       </v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step step="4">
+      <v-stepper-step step="3">
         Finish
       </v-stepper-step>
     </v-stepper-header>
@@ -31,8 +27,8 @@
         </v-btn>
       </v-stepper-content>
 
-      <v-stepper-content step="2" class="stepper-content__wrapper tablet">
-        <div class="stepper-content__wrapper">
+      <v-stepper-content step="2">
+        <div class="stepper-content__wrapper mobile">
           <ComponentsMenu ref="componentsMenu" />
           <Workspace :current-step="currentStep" @add="add" />
           <PresetList ref="presets" />
@@ -53,37 +49,13 @@
           Next
         </v-btn>
       </v-stepper-content>
-
       <v-stepper-content step="3">
-        <div class="stepper-content__wrapper mobile">
-          <ComponentsMenu ref="componentsMenu" />
-          <Workspace :current-step="currentStep" @add="add" />
-          <PresetList ref="presets" />
-        </div>
-
+        <span style="font-weight: bold;">Result:</span>
+        <pre class="stepper-content__wrapper">{{ project }}</pre>
         <v-btn
           color="orange darken-3"
           class="steppen-btn"
           @click="changeStep(2)"
-        >
-          Back
-        </v-btn>
-        <v-btn
-          color="green darken-3"
-          class="steppen-btn"
-          @click="changeStep(4)"
-        >
-          Next
-        </v-btn>
-      </v-stepper-content>
-      <v-stepper-content step="4">
-        <div class="stepper-content__wrapper">
-          {{ project }}
-        </div>
-        <v-btn
-          color="orange darken-3"
-          class="steppen-btn"
-          @click="changeStep(3)"
         >
           Back
         </v-btn>
@@ -156,11 +128,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tablet {
-  width: 768px;
-  margin: auto;
-}
-
 .mobile {
   width: 320px;
   margin: auto;

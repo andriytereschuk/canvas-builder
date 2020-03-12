@@ -1,11 +1,13 @@
 export const state = () => ({
   project: {
     id: null,
-    desktop: [],
-    tablet: [],
-    mobile: [],
-    currentStep: 'desktop',
-    rows: []
+    desktop: {
+      rows: []
+    },
+    mobile: {
+      rows: []
+    },
+    currentStep: 'desktop'
   }
 })
 
@@ -84,11 +86,12 @@ export const actions = {
 
     if (project) {
       commit('add', {
-        id: project.id,
-        rows: [],
-        desktop: [],
-        tablet: [],
-        mobile: [],
+        desktop: {
+          rows: []
+        },
+        mobile: {
+          rows: []
+        },
         currentStep: 'desktop'
       })
     }
@@ -110,34 +113,31 @@ export const mutations = {
       id: `row-${Date.now()}`,
       zones
     }
-    const desktop = [...state.project.desktop, row]
-    const tablet = [...state.project.tablet, row]
-    const mobile = [...state.project.mobile, row]
-
-    switch (state.project.currentStep) {
-      case 'desktop':
-        state.project = { ...state.project, desktop }
-        return
-      case 'tablet':
-        state.project = { ...state.project, tablet }
-        return
-      case 'mobile':
-        state.project = { ...state.project, mobile }
-        return
-      default:
-        console.error('The current step in not valid')
+    const desktop = {
+      ...state.project.desktop,
+      rows: [...state.project.desktop.rows, row]
     }
+    const mobile = {
+      ...state.project.mobile,
+      rows: [...state.project.mobile.rows, row]
+    }
+
+    state.project.currentStep === 'desktop'
+      ? (state.project = { ...state.project, desktop })
+      : (state.project = { ...state.project, mobile })
   },
   attachComponent(state, payload) {
-    const rows = state.project[state.project.currentStep].map((section) => {
-      return {
-        zones: section.zones.forEach((zone) => {
-          zone.componentId =
-            payload.id === zone.id ? payload.componentId : zone.componentId
-        }),
-        ...section
+    const rows = state.project[state.project.currentStep].rows.map(
+      (section) => {
+        return {
+          zones: section.zones.forEach((zone) => {
+            zone.componentId =
+              payload.id === zone.id ? payload.componentId : zone.componentId
+          }),
+          ...section
+        }
       }
-    })
+    )
 
     state.project = {
       rows,
@@ -145,15 +145,17 @@ export const mutations = {
     }
   },
   detachComponent(state, payload) {
-    const rows = state.project.rows.map((section) => {
-      return {
-        zones: section.zones.forEach((zone) => {
-          zone.componentId =
-            payload.componentId === zone.componentId ? null : zone.componentId
-        }),
-        ...section
+    const rows = state.project[state.project.currentStep].rows.map(
+      (section) => {
+        return {
+          zones: section.zones.forEach((zone) => {
+            zone.componentId =
+              payload.componentId === zone.componentId ? null : zone.componentId
+          }),
+          ...section
+        }
       }
-    })
+    )
 
     state.project = {
       rows,
@@ -161,7 +163,7 @@ export const mutations = {
     }
   },
   changeSectionsOrder(state, sections) {
-    state.project.rows = sections
+    state.project[state.project.currentStep].rows = sections
   },
   setCurrentStep(state, newStep) {
     state.project.currentStep = newStep
@@ -170,15 +172,8 @@ export const mutations = {
 
 export const getters = {
   sections(state) {
-    switch (state.project.currentStep) {
-      case 'desktop':
-        return state.project.desktop
-      case 'tablet':
-        return state.project.tablet
-      case 'mobile':
-        return state.project.mobile
-      default:
-        return state.project.desktop
-    }
+    return state.project.currentStep === 'desktop'
+      ? state.project.desktop.rows
+      : state.project.mobile.rows
   }
 }
