@@ -4,12 +4,14 @@
     <ComponentsMenu ref="componentsMenu" />
     <Workspace @add="add" />
     <PresetList ref="presets" />
+    <ComponentsSettings ref="componentsSettings" />
   </div>
 </template>
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
 import ComponentsMenu from '../../components/ComponentsMenu'
+import ComponentsSettings from '../../components/ComponentsSettings'
 import Workspace from '~/components/Workspace'
 import PresetList from '~/components/PresetList'
 
@@ -18,8 +20,15 @@ const { mapState, mapActions } = createNamespacedHelpers('project')
 export default {
   components: {
     ComponentsMenu,
+    ComponentsSettings,
     Workspace,
     PresetList
+  },
+  provide() {
+    return {
+      openComponentSettings: (component) =>
+        this.$refs.componentsSettings.open(component)
+    }
   },
   data() {
     return {

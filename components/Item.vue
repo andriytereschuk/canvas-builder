@@ -9,7 +9,13 @@
       {{ component.type }}
     </div>
     <div v-if="component" class="actions">
-      <v-btn class="mx-2" fab small color="primary">
+      <v-btn
+        class="mx-2"
+        fab
+        small
+        color="primary"
+        @click.stop="openComponentSettings(component)"
+      >
         <v-icon>mdi-settings</v-icon>
       </v-btn>
       <v-btn fab small color="error" @click.stop="detachComponent">
@@ -31,6 +37,7 @@ export default {
       required: true
     }
   },
+  inject: ['openComponentSettings'],
   computed: {
     ...mapState('components', {
       component(state) {
@@ -61,7 +68,7 @@ export default {
         })
       }
     },
-    detachComponent(e) {
+    detachComponent() {
       this.detach({ id: this.zone.id, component: this.component })
     }
   }
