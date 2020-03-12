@@ -53,7 +53,6 @@ export default {
       const {
         coords: { start, end }
       } = zone
-      console.log(zone)
 
       return isIE()
         ? {
