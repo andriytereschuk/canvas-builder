@@ -28,13 +28,6 @@ export default {
     AddSection,
     draggable
   },
-  // props: {
-  //   currentStep: {
-  //     type: String,
-  //     required: true,
-  //     default: stepsEnum.desktop
-  //   }
-  // },
   data: () => {
     return {
       stepsEnum
