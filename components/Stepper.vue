@@ -105,14 +105,11 @@ export default {
       return this.$refs.presets.open()
     },
     changeStep(stepNum) {
-      this.el1 = stepNum
-      console.log(1111, this.el1)
+      this.e1 = stepNum
       this.changeCurrentStep(stepNum)
-      console.log('this.currentStep', this.currentStep)
       this.setCurrentStep(this.currentStep)
     },
     changeCurrentStep(stepNum) {
-      console.log('changeCurrentStep: stepNum', stepNum)
       switch (stepNum) {
         case 1:
           this.currentStep = this.stepsEnum.desktop

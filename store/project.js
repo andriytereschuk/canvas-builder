@@ -85,7 +85,11 @@ export const actions = {
     if (project) {
       commit('add', {
         id: project.id,
-        rows: []
+        rows: [],
+        desktop: [],
+        tablet: [],
+        mobile: [],
+        currentStep: 'desktop'
       })
     }
   }
@@ -106,11 +110,26 @@ export const mutations = {
       id: `row-${Date.now()}`,
       zones
     }
-    const rows = [...state.project.rows, row]
-    state.project = { ...state.project, rows }
+    const desktop = [...state.project.desktop, row]
+    const tablet = [...state.project.tablet, row]
+    const mobile = [...state.project.mobile, row]
+
+    switch (state.project.currentStep) {
+      case 'desktop':
+        state.project = { ...state.project, desktop }
+        return
+      case 'tablet':
+        state.project = { ...state.project, tablet }
+        return
+      case 'mobile':
+        state.project = { ...state.project, mobile }
+        return
+      default:
+        console.error('The current step in not valid')
+    }
   },
   attachComponent(state, payload) {
-    const rows = state.project.rows.map((section) => {
+    const rows = state.project[state.project.currentStep].map((section) => {
       return {
         zones: section.zones.forEach((zone) => {
           zone.componentId =
@@ -146,13 +165,11 @@ export const mutations = {
   },
   setCurrentStep(state, newStep) {
     state.project.currentStep = newStep
-    console.log('state/project', state.project.currentStep)
   }
 }
 
 export const getters = {
   sections(state) {
-    console.log('state/project/get', state.project.currentStep)
     switch (state.project.currentStep) {
       case 'desktop':
         return state.project.desktop
