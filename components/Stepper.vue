@@ -50,8 +50,13 @@
         </v-btn>
       </v-stepper-content>
       <v-stepper-content step="3">
-        <span style="font-weight: bold;">Result:</span>
-        <pre class="stepper-content__wrapper">{{ project }}</pre>
+        <json-viewer
+          :value="project"
+          theme="json-theme"
+          :expand-depth="6"
+          copyable
+          class="stepper-content__wrapper"
+        ></json-viewer>
         <v-btn
           color="orange darken-3"
           class="steppen-btn"
@@ -89,14 +94,6 @@ export default {
       return this.$route.params.id
     },
     ...mapState('project', ['project'])
-    // currentStep: {
-    //   get() {
-    //     return this.project.currentStep
-    //   },
-    //   set(nextStep) {
-    //     this.setCurrentStep(nextStep)
-    //   }
-    // }
   },
   mounted() {
     this.fetch({ id: this.id })

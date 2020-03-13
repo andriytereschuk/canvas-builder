@@ -30,7 +30,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/vue-form-generator' }],
+  plugins: [
+    { src: '~/plugins/vue-form-generator' },
+    { src: '~/plugins/vue-json-viewer' }
+  ],
   /*
    ** Nuxt.js dev-modules
    */

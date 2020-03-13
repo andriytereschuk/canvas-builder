@@ -1,28 +1,23 @@
 <template>
   <div class="grid-container" :style="getContainerStyle(section)">
-    <!-- <draggable v-model="changedZones" @start="drag = true" @end="drag = false"> -->
     <div
-      v-for="zone in changedZones"
+      v-for="zone in section.zones"
       :key="zone.id"
       :style="getCellStyle(zone)"
       class="position"
     >
       <Item :zone="zone" />
     </div>
-    <!-- </draggable> -->
   </div>
 </template>
 
 <script>
-// import draggable from 'vuedraggable'
-import { mapMutations } from 'vuex'
 import { getFractions, isIE } from '~/utils/helpers'
 import Item from '~/components/Item'
 
 export default {
   components: {
     Item
-    // draggable
   },
   props: {
     section: {
@@ -30,22 +25,7 @@ export default {
       required: true
     }
   },
-  computed: {
-    changedZones: {
-      get() {
-        return this.section.zones
-      },
-      set(newZonesSet) {
-        const zonesToChange = {
-          sectionID: this.section.id,
-          newZonesSet
-        }
-        this.changeZonesOrder(zonesToChange)
-      }
-    }
-  },
   methods: {
-    ...mapMutations('project', ['changeZonesOrder']),
     getContainerStyle(section) {
       const { rows, columns } = section
 
@@ -96,9 +76,9 @@ export default {
     margin-top: -10px;
     margin-left: -20px;
     font-weight: bold;
-    text-shadow: 0px 5px 0px white, 0px 10px 0px white;
+    text-shadow: 0px 5px 0px #ffffff, 0px 10px 0px #ffffff;
     transform: translateY(-50%);
-    color: white;
+    color: #ffffff;
     cursor: grab;
   }
 }
