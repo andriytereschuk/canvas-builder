@@ -30,7 +30,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [{ src: '~/plugins/VueNumberInput' }],
   /*
    ** Nuxt.js dev-modules
    */

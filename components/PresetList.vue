@@ -13,16 +13,16 @@
           :close-dialog="close"
         />
       </v-card-text>
-      <!-- <v-card-actions>
+      <v-card-actions>
         <v-btn
-          color="green darken-1"
+          rounded
+          color="deep-purple accent-4"
           align="center"
-          text
-          @click="dialog = false"
+          @click="$emit('openCustomPreset')"
         >
           Customize
         </v-btn>
-      </v-card-actions> -->
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
