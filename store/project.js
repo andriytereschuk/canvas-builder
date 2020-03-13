@@ -129,48 +129,52 @@ export const mutations = {
       : (state.project = { ...state.project, mobile })
   },
   attachComponent(state, payload) {
-    const rows = state.project[state.project.currentStep].rows.map(
-      (section) => {
-        return {
-          zones: section.zones.forEach((zone) => {
-            zone.componentId =
-              payload.id === zone.id ? payload.componentId : zone.componentId
-          }),
-          ...section
-        }
+    const { currentStep } = state.project
+    let screenType = state.project[currentStep]
+    const rows = screenType.rows.map((section) => {
+      return {
+        zones: section.zones.forEach((zone) => {
+          zone.componentId =
+            payload.id === zone.id ? payload.componentId : zone.componentId
+        }),
+        ...section
       }
-    )
-
-    state.project = {
-      rows,
-      ...state.project
+    })
+    screenType = {
+      ...screenType,
+      rows
     }
   },
   detachComponent(state, payload) {
-    const rows = state.project[state.project.currentStep].rows.map(
-      (section) => {
-        return {
-          zones: section.zones.forEach((zone) => {
-            zone.componentId =
-              payload.componentId === zone.componentId ? null : zone.componentId
-          }),
-          ...section
-        }
+    const { currentStep } = state.project
+    let screenType = state.project[currentStep]
+    const rows = screenType.rows.map((section) => {
+      return {
+        zones: section.zones.forEach((zone) => {
+          zone.componentId =
+            payload.componentId === zone.componentId ? null : zone.componentId
+        }),
+        ...section
       }
-    )
+    })
 
-    state.project = {
-      rows,
-      ...state.project
+    screenType = {
+      ...screenType,
+      rows
     }
   },
   changeSectionsOrder(state, sections) {
-    state.project[state.project.currentStep].rows = sections
+    const { currentStep } = state.project
+    const screenType = state.project[currentStep]
+
+    screenType.rows = sections
   },
   changeZonesOrder(state, zonesToChange) {
+    const { currentStep } = state.project
+    const screenType = state.project[currentStep]
     const { sectionID, newZonesSet } = zonesToChange
 
-    state.project[state.project.currentStep].rows.map((el) => {
+    screenType.rows.map((el) => {
       if (el.id === sectionID) {
         el.zones = newZonesSet
       }
