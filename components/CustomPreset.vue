@@ -1,4 +1,4 @@
-<template @kekw="dialog = true">
+<template>
   <v-dialog
     v-model="dialog"
     fullscreen
@@ -38,10 +38,7 @@ export default {
   },
   data() {
     return {
-      dialog: false,
-      notifications: false,
-      sound: true,
-      widgets: false
+      dialog: false
     }
   },
   created() {
