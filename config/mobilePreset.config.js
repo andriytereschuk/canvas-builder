@@ -49,7 +49,7 @@ export const mobilePresets = [
   },
   {
     columns: 1,
-    rows: 2,
+    rows: 4,
     zones: [
       {
         coords: {
@@ -58,20 +58,20 @@ export const mobilePresets = [
             y: 1
           },
           end: {
-            x: 1.5,
-            y: 3
+            x: 3,
+            y: 2
           }
         }
       },
       {
         coords: {
           start: {
-            x: 1.5,
+            x: 3,
             y: 1
           },
           end: {
-            x: 2,
-            y: 3
+            x: 5,
+            y: 2
           }
         }
       }

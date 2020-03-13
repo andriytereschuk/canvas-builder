@@ -1,11 +1,11 @@
 <template>
-  <v-stepper v-model="e1">
+  <v-stepper v-model="stepNumber">
     <v-stepper-header>
-      <v-stepper-step :complete="e1 > 1" step="1">
+      <v-stepper-step :complete="stepNumber > 1" step="1">
         Desktop
       </v-stepper-step>
       <v-divider></v-divider>
-      <v-stepper-step :complete="e1 > 2" step="2">
+      <v-stepper-step :complete="stepNumber > 2" step="2">
         Mobile
       </v-stepper-step>
       <v-divider></v-divider>
@@ -79,10 +79,9 @@ export default {
   },
   data: () => {
     return {
-      e1: 1,
       stepsEnum,
-      currentStep: 'desktop',
-      isDialog: false
+      stepNumber: 1,
+      currentStep: 'desktop'
     }
   },
   computed: {
@@ -90,6 +89,14 @@ export default {
       return this.$route.params.id
     },
     ...mapState('project', ['project'])
+    // currentStep: {
+    //   get() {
+    //     return this.project.currentStep
+    //   },
+    //   set(nextStep) {
+    //     this.setCurrentStep(nextStep)
+    //   }
+    // }
   },
   mounted() {
     this.fetch({ id: this.id })
@@ -104,7 +111,7 @@ export default {
       return this.$refs.presets.open()
     },
     changeStep(stepNum) {
-      this.e1 = stepNum
+      this.stepNumber = stepNum
       this.changeCurrentStep(stepNum)
       this.setCurrentStep(this.currentStep)
     },
@@ -134,10 +141,6 @@ export default {
 }
 .stepper-content__wrapper {
   padding: 20px;
-}
-
-.stepper-content {
-  padding: 10px;
 }
 
 button {

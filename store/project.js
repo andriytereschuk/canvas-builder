@@ -1,3 +1,5 @@
+import { stepsEnum } from '~/config/stepsEnum.config'
+
 export const state = () => ({
   project: {
     id: null,
@@ -92,7 +94,7 @@ export const actions = {
         mobile: {
           rows: []
         },
-        currentStep: 'desktop'
+        currentStep: stepsEnum.desktop
       })
     }
   }
@@ -122,7 +124,7 @@ export const mutations = {
       rows: [...state.project.mobile.rows, row]
     }
 
-    state.project.currentStep === 'desktop'
+    state.project.currentStep === stepsEnum.desktop
       ? (state.project = { ...state.project, desktop })
       : (state.project = { ...state.project, mobile })
   },
@@ -181,7 +183,7 @@ export const mutations = {
 
 export const getters = {
   sections(state) {
-    return state.project.currentStep === 'desktop'
+    return state.project.currentStep === stepsEnum.desktop
       ? state.project.desktop.rows
       : state.project.mobile.rows
   }
