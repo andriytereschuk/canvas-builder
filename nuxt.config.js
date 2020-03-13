@@ -30,7 +30,10 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/VueNumberInput' }],
+  plugins: [
+    { src: '~/plugins/VueNumberInput' },
+    { src: '~/plugins/vue-form-generator' }
+  ],
   /*
    ** Nuxt.js dev-modules
    */

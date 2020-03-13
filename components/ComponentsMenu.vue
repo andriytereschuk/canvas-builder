@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { componentTypes } from '~/config/componentTypes.config'
+import { componentConfig } from '~/config/component.config'
 import { componentMixin } from '~/mixins/component.mixin'
 
 export default {
@@ -58,15 +58,15 @@ export default {
       isComponentsMenuOpen: false,
       selectedCategory: 'galleries',
       selectedComponent: '',
-      componentTypes
+      componentConfig
     }
   },
   computed: {
     categories() {
-      return Object.keys(componentTypes)
+      return Object.keys(componentConfig)
     },
     selectedCategoryItems() {
-      return Object.keys(componentTypes[this.selectedCategory])
+      return Object.keys(componentConfig[this.selectedCategory])
     }
   },
   methods: {
@@ -90,7 +90,9 @@ export default {
     agree() {
       this.resolve({
         category: this.selectedCategory,
-        type: this.selectedComponent
+        type: this.selectedComponent,
+        model:
+          componentConfig[this.selectedCategory][this.selectedComponent].model
       })
       this.closeMenu()
     },
