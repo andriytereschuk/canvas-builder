@@ -18,7 +18,6 @@
 <script>
 import draggable from 'vuedraggable'
 import { mapGetters, mapMutations } from 'vuex'
-import { stepsEnum } from '~/config/stepsEnum.config'
 import Section from '~/components/Section.vue'
 import AddSection from '~/components/AddSection.vue'
 
@@ -27,11 +26,6 @@ export default {
     Section,
     AddSection,
     draggable
-  },
-  data: () => {
-    return {
-      stepsEnum
-    }
   },
   computed: {
     ...mapGetters('project', ['sections']),

@@ -19,8 +19,7 @@ export default (req, res) => {
       },
       mobile: {
         rows: []
-      },
-      currentStep: 'desktop'
+      }
     },
     {
       id: 1583143260047,
@@ -32,8 +31,7 @@ export default (req, res) => {
       },
       mobile: {
         rows: []
-      },
-      currentStep: 'desktop'
+      }
     },
     {
       id: 1583143260048,
@@ -45,8 +43,7 @@ export default (req, res) => {
       },
       mobile: {
         rows: []
-      },
-      currentStep: 'desktop'
+      }
     },
     {
       id: 1583143260049,
@@ -58,8 +55,7 @@ export default (req, res) => {
       },
       mobile: {
         rows: []
-      },
-      currentStep: 'desktop'
+      }
     },
     {
       id: 1583143260050,
@@ -71,8 +67,7 @@ export default (req, res) => {
       },
       mobile: {
         rows: []
-      },
-      currentStep: 'desktop'
+      }
     }
   ]
 

@@ -17,9 +17,7 @@
     <v-stepper-items>
       <v-stepper-content step="1">
         <div class="stepper-content__wrapper">
-          <ComponentsMenu ref="componentsMenu" />
-          <Workspace :current-step="currentStep" @add="add" />
-          <PresetList ref="presets" />
+          <slot />
         </div>
 
         <v-btn color="green darken-3" @click="changeStep(2)">
@@ -29,9 +27,7 @@
 
       <v-stepper-content step="2">
         <div class="stepper-content__wrapper mobile">
-          <ComponentsMenu ref="componentsMenu" />
-          <Workspace :current-step="currentStep" @add="add" />
-          <PresetList ref="presets" />
+          <slot />
         </div>
 
         <v-btn
@@ -70,18 +66,10 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import { stepsEnum } from '~/config/stepsEnum.config'
-import ComponentsMenu from '~/components/ComponentsMenu'
-import Workspace from '~/components/Workspace'
-import PresetList from '~/components/PresetList'
 
 export default {
-  components: {
-    ComponentsMenu,
-    Workspace,
-    PresetList
-  },
   data: () => {
     return {
       stepsEnum,
@@ -90,19 +78,9 @@ export default {
     }
   },
   computed: {
-    id() {
-      return this.$route.params.id
-    },
     ...mapState('project', ['project'])
   },
-  mounted() {
-    this.fetch({ id: this.id })
-    this.$root.$componentsMenu = this.$refs.componentsMenu.open
-  },
   methods: {
-    ...mapActions('project', {
-      fetch: 'get'
-    }),
     ...mapMutations('project', ['setCurrentStep']),
     add() {
       return this.$refs.presets.open()

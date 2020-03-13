@@ -28,9 +28,8 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 import { presets } from '~/config/preset.config'
-import { mobilePresets } from '~/config/mobilePreset.config'
 import { stepsEnum } from '~/config/stepsEnum.config'
 import Preset from '~/components/Preset'
 
@@ -46,10 +45,9 @@ export default {
   },
   computed: {
     ...mapState('project', ['project']),
+    ...mapGetters('project', ['currentStep']),
     presets() {
-      return this.project.currentStep === this.stepsEnum.desktop
-        ? presets
-        : mobilePresets
+      return presets[this.currentStep]
     }
   },
   methods: {

@@ -105,6 +105,8 @@ export const mutations = {
     state.project = project
   },
   addSection(state, section) {
+    const { currentStep } = state.project
+    const screenType = state.project[currentStep]
     const zones = section.zones.map((zone, index) => ({
       id: `zone-${index}-${Date.now()}`,
       componentId: null,
@@ -115,23 +117,16 @@ export const mutations = {
       id: `row-${Date.now()}`,
       zones
     }
-    const desktop = {
-      ...state.project.desktop,
-      rows: [...state.project.desktop.rows, row]
-    }
-    const mobile = {
-      ...state.project.mobile,
-      rows: [...state.project.mobile.rows, row]
+    const newSectionsSet = {
+      ...screenType,
+      rows: [...screenType.rows, row]
     }
 
-    state.project.currentStep === stepsEnum.desktop
-      ? (state.project = { ...state.project, desktop })
-      : (state.project = { ...state.project, mobile })
+    state.project[currentStep] = newSectionsSet
   },
   attachComponent(state, payload) {
     const { currentStep } = state.project
-    let screenType = state.project[currentStep]
-    const rows = screenType.rows.map((section) => {
+    const rows = state.project[currentStep].rows.map((section) => {
       return {
         zones: section.zones.forEach((zone) => {
           zone.componentId =
@@ -140,15 +135,14 @@ export const mutations = {
         ...section
       }
     })
-    screenType = {
-      ...screenType,
+    state.project[currentStep] = {
+      ...state.project[currentStep],
       rows
     }
   },
   detachComponent(state, payload) {
     const { currentStep } = state.project
-    let screenType = state.project[currentStep]
-    const rows = screenType.rows.map((section) => {
+    const rows = state.project[currentStep].rows.map((section) => {
       return {
         zones: section.zones.forEach((zone) => {
           zone.componentId =
@@ -158,8 +152,8 @@ export const mutations = {
       }
     })
 
-    screenType = {
-      ...screenType,
+    state.project[currentStep] = {
+      ...state.project[currentStep],
       rows
     }
   },
@@ -190,5 +184,8 @@ export const getters = {
     return state.project.currentStep === stepsEnum.desktop
       ? state.project.desktop.rows
       : state.project.mobile.rows
+  },
+  currentStep(state) {
+    return state.project.currentStep
   }
 }
