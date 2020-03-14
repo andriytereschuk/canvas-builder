@@ -20,7 +20,7 @@
           <slot />
         </div>
 
-        <v-btn color="green darken-3" @click="changeStep(2)">
+        <v-btn color="green darken-3" @click="changeStep(2, steps.mobile)">
           Next
         </v-btn>
       </v-stepper-content>
@@ -33,14 +33,14 @@
         <v-btn
           color="orange darken-3"
           class="steppen-btn"
-          @click="changeStep(1)"
+          @click="changeStep(1, steps.desktop)"
         >
           Back
         </v-btn>
         <v-btn
           color="green darken-3"
           class="steppen-btn"
-          @click="changeStep(3)"
+          @click="changeStep(3, steps.finish)"
         >
           Next
         </v-btn>
@@ -56,7 +56,7 @@
         <v-btn
           color="orange darken-3"
           class="steppen-btn"
-          @click="changeStep(2)"
+          @click="changeStep(2, steps.mobile)"
         >
           Back
         </v-btn>
@@ -67,43 +67,29 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
-import { stepsEnum } from '~/config/stepsEnum.config'
+import { steps } from '~/config/steps.config'
 
 export default {
   data: () => {
     return {
-      stepsEnum,
       stepNumber: 1,
-      currentStep: 'desktop'
+      steps
     }
   },
   computed: {
-    ...mapState('project', ['project'])
+    ...mapState('project', ['project', 'step'])
   },
   methods: {
-    ...mapMutations('project', ['setCurrentStep']),
+    ...mapMutations('project', ['setStep']),
     add() {
       return this.$refs.presets.open()
     },
-    changeStep(stepNum) {
-      this.stepNumber = stepNum
-      this.changeCurrentStep(stepNum)
-      this.setCurrentStep(this.currentStep)
-    },
-    changeCurrentStep(stepNum) {
-      switch (stepNum) {
-        case 1:
-          this.currentStep = this.stepsEnum.desktop
-          return this.stepsEnum.desktop
-        case 2:
-          this.currentStep = this.stepsEnum.mobile
-          return this.stepsEnum.mobile
-        case 3:
-          this.currentStep = 'finish'
-          return 'finish'
-        default:
-          return this.stepsEnum.desktop
-      }
+    changeStep(stepNumber, step) {
+      this.stepNumber = stepNumber
+
+      if (step === steps.finish) return
+
+      this.setStep(step)
     }
   }
 }
@@ -111,7 +97,7 @@ export default {
 
 <style lang="scss" scoped>
 .mobile {
-  width: 320px;
+  width: 420px;
   margin: auto;
 }
 .stepper-content__wrapper {

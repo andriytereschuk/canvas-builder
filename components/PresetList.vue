@@ -28,9 +28,8 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import { presets } from '~/config/preset.config'
-import { stepsEnum } from '~/config/stepsEnum.config'
 import Preset from '~/components/Preset'
 
 export default {
@@ -39,15 +38,13 @@ export default {
   },
   data() {
     return {
-      dialog: false,
-      stepsEnum
+      dialog: false
     }
   },
   computed: {
-    ...mapState('project', ['project']),
-    ...mapGetters('project', ['currentStep']),
+    ...mapState('project', ['project', 'step']),
     presets() {
-      return presets[this.currentStep]
+      return presets[this.step]
     }
   },
   methods: {

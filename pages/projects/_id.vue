@@ -2,7 +2,7 @@
   <div>
     <Stepper>
       <ComponentsMenu ref="componentsMenu" />
-      <Workspace :current-step="currentStep" @add="add" />
+      <Workspace @add="add" />
       <PresetList ref="presets" />
     </Stepper>
     <ComponentsSettings ref="componentsSettings" />
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import ComponentsSettings from '../../components/ComponentsSettings'
 import Stepper from '~/components/Stepper'
 import ComponentsMenu from '~/components/ComponentsMenu'
@@ -26,7 +26,6 @@ export default {
     PresetList
   },
   computed: {
-    ...mapGetters('project', ['currentStep']),
     id() {
       return this.$route.params.id
     }

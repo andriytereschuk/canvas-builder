@@ -1,4 +1,4 @@
-import { stepsEnum } from '~/config/stepsEnum.config'
+import { steps } from '~/config/steps.config'
 
 export const state = () => ({
   project: {
@@ -8,78 +8,13 @@ export const state = () => ({
     },
     mobile: {
       rows: []
-    },
-    currentStep: 'desktop'
-  }
+    }
+  },
+  step: steps.desktop
 })
 
 export const actions = {
   async get({ commit }, { id }) {
-    // const rows = [
-    //   {
-    //     id: 1,
-    //     columns: 4,
-    //     rows: 2,
-    //     zones: [
-    //       {
-    //         id: 12,
-    //         componentId: null,
-    //         coords: {
-    //           start: {
-    //             x: 1,
-    //             y: 1
-    //           },
-    //           end: {
-    //             x: 2,
-    //             y: 2
-    //           }
-    //         }
-    //       },
-    //       {
-    //         id: 13,
-    //         componentId: null,
-    //         coords: {
-    //           start: {
-    //             x: 1,
-    //             y: 2
-    //           },
-    //           end: {
-    //             x: 2,
-    //             y: 3
-    //           }
-    //         }
-    //       },
-    //       {
-    //         id: 14,
-    //         componentId: null,
-    //         coords: {
-    //           start: {
-    //             x: 2,
-    //             y: 1
-    //           },
-    //           end: {
-    //             x: 3,
-    //             y: 3
-    //           }
-    //         }
-    //       },
-    //       {
-    //         id: 15,
-    //         componentId: null,
-    //         coords: {
-    //           start: {
-    //             x: 1,
-    //             y: 3
-    //           },
-    //           end: {
-    //             x: 3,
-    //             y: 5
-    //           }
-    //         }
-    //       }
-    //     ]
-    //   }
-    // ]
     let project
 
     try {
@@ -88,13 +23,13 @@ export const actions = {
 
     if (project) {
       commit('add', {
+        id: `p-${Date.now()}`,
         desktop: {
           rows: []
         },
         mobile: {
           rows: []
-        },
-        currentStep: stepsEnum.desktop
+        }
       })
     }
   }
@@ -105,8 +40,6 @@ export const mutations = {
     state.project = project
   },
   addSection(state, section) {
-    const { currentStep } = state.project
-    const screenType = state.project[currentStep]
     const zones = section.zones.map((zone, index) => ({
       id: `zone-${index}-${Date.now()}`,
       componentId: null,
@@ -117,16 +50,11 @@ export const mutations = {
       id: `row-${Date.now()}`,
       zones
     }
-    const newSectionsSet = {
-      ...screenType,
-      rows: [...screenType.rows, row]
-    }
 
-    state.project[currentStep] = newSectionsSet
+    state.project[state.step].rows = [...state.project[state.step].rows, row]
   },
   attachComponent(state, payload) {
-    const { currentStep } = state.project
-    const rows = state.project[currentStep].rows.map((section) => {
+    const rows = state.project[state.step].rows.map((section) => {
       return {
         zones: section.zones.forEach((zone) => {
           zone.componentId =
@@ -135,14 +63,11 @@ export const mutations = {
         ...section
       }
     })
-    state.project[currentStep] = {
-      ...state.project[currentStep],
-      rows
-    }
+
+    state.project[state.step].rows = rows
   },
   detachComponent(state, payload) {
-    const { currentStep } = state.project
-    const rows = state.project[currentStep].rows.map((section) => {
+    const rows = state.project[state.step].rows.map((section) => {
       return {
         zones: section.zones.forEach((zone) => {
           zone.componentId =
@@ -152,40 +77,27 @@ export const mutations = {
       }
     })
 
-    state.project[currentStep] = {
-      ...state.project[currentStep],
-      rows
-    }
+    state.project[state.step].rows = rows
   },
   changeSectionsOrder(state, sections) {
-    const { currentStep } = state.project
-    const screenType = state.project[currentStep]
-
-    screenType.rows = sections
+    state.project[state.step].rows = sections
   },
   changeZonesOrder(state, zonesToChange) {
-    const { currentStep } = state.project
-    const screenType = state.project[currentStep]
     const { sectionID, newZonesSet } = zonesToChange
 
-    screenType.rows.map((el) => {
+    state.project[state.step].rows.map((el) => {
       if (el.id === sectionID) {
         el.zones = newZonesSet
       }
     })
   },
-  setCurrentStep(state, newStep) {
-    state.project.currentStep = newStep
+  setStep(state, step) {
+    state.step = step
   }
 }
 
 export const getters = {
   sections(state) {
-    return state.project.currentStep === stepsEnum.desktop
-      ? state.project.desktop.rows
-      : state.project.mobile.rows
-  },
-  currentStep(state) {
-    return state.project.currentStep
+    return state.project[state.step].rows
   }
 }
