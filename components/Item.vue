@@ -16,10 +16,10 @@
         color="primary"
         @click.stop="openComponentSettings(component)"
       >
-        <v-icon>mdi-settings</v-icon>
+        <v-icon>mdi-cog-outline</v-icon>
       </v-btn>
       <v-btn fab small color="error" @click.stop="detachComponent">
-        <v-icon>mdi-delete</v-icon>
+        <v-icon>mdi-trash-can-outline</v-icon>
       </v-btn>
     </div>
   </div>

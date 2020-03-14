@@ -20,14 +20,29 @@
         </v-toolbar-items>
       </v-toolbar>
 
-      <v-subheader>General</v-subheader>
+      <v-container>
+        <v-row>
+          <v-col>
+            <v-subheader>General</v-subheader>
 
-      <vue-form-generator
-        :schema="component.schema"
-        :model="component.model"
-        :options="formOptions"
-        tag="div"
-      ></vue-form-generator>
+            <vue-form-generator
+              :schema="component.schema"
+              :model="component.model"
+              :options="formOptions"
+              tag="div"
+            ></vue-form-generator>
+
+            <template v-if="component.schema.hasChildren">
+              <v-subheader>Items</v-subheader>
+
+              <Subitems :items="component.model.items" @add="addSubitem" />
+            </template>
+          </v-col>
+          <v-col>
+            <pre>{{ component.model }}</pre>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-card>
   </v-dialog>
 </template>
@@ -35,8 +50,20 @@
 <script>
 import { componentConfig } from '~/config/component.config'
 import { filtersMixin } from '~/mixins/filters.mixins'
+import Subitems from '~/components/Subitems'
 export default {
+  components: { Subitems },
   mixins: [filtersMixin],
+  // computed: {
+  //   model: {
+  //     get() {
+  //       return this.component.model
+  //     },
+  //     set(model) {
+  //       this.updateComponentModel()
+  //     }
+  //   }
+  // },
   data: () => {
     return {
       dialog: false,
@@ -54,11 +81,18 @@ export default {
       const schema = componentConfig[category][type].schema
       this.component = {
         ...component,
-        model: { ...model },
+        model: JSON.parse(JSON.stringify(model)),
         schema
       }
       this.dialog = true
+    },
+    addSubitem() {
+      this.component.model.items.push({
+        componentId: null
+      })
     }
   }
 }
 </script>
+
+<style scoped></style>

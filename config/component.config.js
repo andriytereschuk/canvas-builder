@@ -4,14 +4,16 @@ export const componentConfig = {
       color: '#ff0000',
       model: {
         autoplay: true,
-        slides: []
+        items: []
       },
       schema: {
+        hasChildren: true,
         fields: [
           {
             type: 'toggle',
             title: 'Autoplay',
-            model: 'autoplay'
+            model: 'autoplay',
+            styleClasses: 'form-field--full'
           }
         ]
       }
