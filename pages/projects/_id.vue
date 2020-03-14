@@ -1,28 +1,38 @@
 <template>
   <div>
-    <h1>Project # {{ id }}</h1>
-    <ComponentsMenu ref="componentsMenu" />
-    <Workspace @add="add" />
-    <PresetList ref="presets" />
+    <Stepper>
+      <ComponentsMenu ref="componentsMenu" />
+      <Workspace @add="add" />
+      <PresetList ref="presets" />
+    </Stepper>
     <ComponentsSettings ref="componentsSettings" />
   </div>
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-import ComponentsMenu from '../../components/ComponentsMenu'
+import { mapActions } from 'vuex'
 import ComponentsSettings from '../../components/ComponentsSettings'
+import Stepper from '~/components/Stepper'
+import ComponentsMenu from '~/components/ComponentsMenu'
 import Workspace from '~/components/Workspace'
 import PresetList from '~/components/PresetList'
 
-const { mapState, mapActions } = createNamespacedHelpers('project')
-
 export default {
   components: {
-    ComponentsMenu,
     ComponentsSettings,
+    Stepper,
+    ComponentsMenu,
     Workspace,
     PresetList
+  },
+  computed: {
+    id() {
+      return this.$route.params.id
+    }
+  },
+  mounted() {
+    this.fetch({ id: this.id })
+    this.$root.$componentsMenu = this.$refs.componentsMenu.open
   },
   provide() {
     return {
@@ -30,25 +40,8 @@ export default {
         this.$refs.componentsSettings.open(component)
     }
   },
-  data() {
-    return {
-      isDialog: false
-    }
-  },
-  computed: {
-    id() {
-      return this.$route.params.id
-    },
-    ...mapState({
-      project: 'project'
-    })
-  },
-  mounted() {
-    this.fetch({ id: this.id })
-    this.$root.$componentsMenu = this.$refs.componentsMenu.open
-  },
   methods: {
-    ...mapActions({
+    ...mapActions('project', {
       fetch: 'get'
     }),
     add() {

@@ -1,8 +1,8 @@
 <template>
   <div class="grid-container" :style="getContainerStyle(section)">
     <div
-      v-for="(zone, index) in section.zones"
-      :key="index"
+      v-for="zone in section.zones"
+      :key="zone.id"
       :style="getCellStyle(zone)"
       class="position"
     >
@@ -25,7 +25,6 @@ export default {
       required: true
     }
   },
-  computed: {},
   methods: {
     getContainerStyle(section) {
       const { rows, columns } = section
@@ -77,9 +76,9 @@ export default {
     margin-top: -10px;
     margin-left: -20px;
     font-weight: bold;
-    text-shadow: 0px 5px 0px white, 0px 10px 0px white;
+    text-shadow: 0px 5px 0px #ffffff, 0px 10px 0px #ffffff;
     transform: translateY(-50%);
-    color: white;
+    color: #ffffff;
     cursor: grab;
   }
 }

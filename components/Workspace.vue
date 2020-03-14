@@ -17,11 +17,9 @@
 
 <script>
 import draggable from 'vuedraggable'
-import { createNamespacedHelpers } from 'vuex'
+import { mapGetters, mapMutations } from 'vuex'
 import Section from '~/components/Section.vue'
 import AddSection from '~/components/AddSection.vue'
-
-const { mapGetters, mapMutations } = createNamespacedHelpers('project')
 
 export default {
   components: {
@@ -30,9 +28,7 @@ export default {
     draggable
   },
   computed: {
-    ...mapGetters({
-      sections: 'sections'
-    }),
+    ...mapGetters('project', ['sections']),
     changedSections: {
       get() {
         return this.sections
@@ -43,9 +39,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations({
-      changeSectionsOrder: 'changeSectionsOrder'
-    })
+    ...mapMutations('project', ['changeSectionsOrder'])
   }
 }
 </script>

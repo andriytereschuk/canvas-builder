@@ -28,8 +28,10 @@
 </template>
 
 <script>
-import Preset from '~/components/Preset'
+import { mapState } from 'vuex'
 import { presets } from '~/config/preset.config'
+import Preset from '~/components/Preset'
+
 export default {
   components: {
     Preset
@@ -40,8 +42,9 @@ export default {
     }
   },
   computed: {
+    ...mapState('project', ['project', 'step']),
     presets() {
-      return presets
+      return presets[this.step]
     }
   },
   methods: {
