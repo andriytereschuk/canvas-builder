@@ -13,11 +13,11 @@
           :key="i"
           :class="'box' + i"
           :data-id="item"
-          @mousedown="placeChild(item, 's')"
-          @mouseup="placeChild(item, 'e')"
-          @mouseover="placeChild(item, 'h')"
-          @touchstart="placeChild(item, 's')"
-          @touchend="placeChild(item, 'e')"
+          @mousedown="placeZone(item, 'start')"
+          @mouseup="placeZone(item, 'end')"
+          @mouseover="placeZone(item, 'hover')"
+          @touchstart="placeZone(item, 'start')"
+          @touchend="placeZone(item, 'end')"
         ></div>
       </section>
 
@@ -29,17 +29,17 @@
         }"
       >
         <div
-          v-for="(children, i) in childarea"
-          :key="children"
-          :class="'children' + i"
-          :style="{ gridArea: children }"
+          v-for="(zone, i) in zones"
+          :key="zone"
+          :class="'zone' + i"
+          :style="{ gridArea: zone }"
         >
-          <button class="x-mark" @click="removeChild(i)">&#x2715;</button>
+          <button class="x-mark" @click="removeZone(i)">&#x2715;</button>
         </div>
         <div
-          v-if="!!previewarea"
-          :class="'children' + childarea.length + ' preview'"
-          :style="{ gridArea: previewarea }"
+          v-if="!!previewZone"
+          :class="'zone' + zones.length + 'preview'"
+          :style="{ gridArea: previewZone }"
         ></div>
       </section>
     </div>
@@ -49,7 +49,7 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-import { makeChildString, parseToObject, isIntersect } from '~/utils/helpers'
+import { createZone, parseToObject, isIntersect } from '~/utils/helpers'
 
 const { mapGetters, mapState, mapMutations } = createNamespacedHelpers(
   'customPreset'
@@ -58,12 +58,7 @@ const { mapGetters, mapState, mapMutations } = createNamespacedHelpers(
 export default {
   data() {
     return {
-      child: {},
-      widthfull: 'widthfull',
-      errors: {
-        col: [],
-        row: []
-      }
+      createdZone: {}
     }
   },
   computed: {
@@ -72,8 +67,8 @@ export default {
       rowArr: 'rowArr',
       columns: 'columns',
       rows: 'rows',
-      childarea: 'childarea',
-      previewarea: 'previewarea'
+      zones: 'zones',
+      previewZone: 'previewZone'
     }),
     ...mapGetters({
       rowTemplate: 'rowTemplate',
@@ -84,47 +79,48 @@ export default {
   },
   methods: {
     ...mapMutations({
-      addChildren: 'addChildren',
-      removeChildren: 'removeChildren',
-      updateChildPreview: 'updateChildPreview'
+      addZoneItem: 'addZoneItem',
+      removeZoneItem: 'removeZoneItem',
+      updateZonePreview: 'updateZonePreview'
     }),
-    placeChild(item, startendhover) {
-      if (startendhover === 'h' && Object.keys(this.child).length < 2) {
+    placeZone(item, startendhover) {
+      if (
+        startendhover === 'hover' &&
+        Object.keys(this.createdZone).length < 2
+      ) {
         return
       }
-      // built an object first because I might use this for something else
-      this.child[`${startendhover}row`] = Math.ceil(item / this.columns)
-      this.child[`${startendhover}col`] =
-        item - (this.child[`${startendhover}row`] - 1) * this.columns
-      // create the children css units as a string
+      this.createdZone[`${startendhover}Row`] = Math.ceil(item / this.columns)
+      this.createdZone[`${startendhover}Col`] =
+        item - (this.createdZone[`${startendhover}Row`] - 1) * this.columns
 
-      if (startendhover === 'e') {
+      if (startendhover === 'end') {
         // flip starts and ends if dragged in the opposite direction
-        const childstring = makeChildString(this.child, 'e')
-        this.child = {}
-        this.updateChildPreview(null)
+        const zone = createZone(this.createdZone, 'end')
+        this.createdZone = {}
+        this.updateZonePreview(null)
 
-        for (let i = 0; i < this.childarea.length; i++) {
-          const parsedZone = parseToObject(this.childarea[i])
-          const temporaryZone = parseToObject(childstring)
+        for (let i = 0; i < this.zones.length; i++) {
+          const parsedZone = parseToObject(this.zones[i])
+          const temporaryZone = parseToObject(zone)
 
           if (isIntersect(parsedZone, temporaryZone)) {
             return
           }
         }
 
-        this.addChildren(childstring)
-      } else if (startendhover === 'h') {
-        const childstring = makeChildString(this.child, 'h')
-        this.updateChildPreview(childstring)
+        this.addZoneItem(zone)
+      } else if (startendhover === 'hover') {
+        const zone = createZone(this.createdZone, 'hover')
+        this.updateZonePreview(zone)
       }
       // we're starting a child, so let's update the hover preview
-      else if (startendhover === 's') {
-        this.placeChild(item, 'h')
+      else if (startendhover === 'start') {
+        this.placeZone(item, 'hover')
       }
     },
-    removeChild(index) {
-      this.removeChildren(index)
+    removeZone(index) {
+      this.removeZoneItem(index)
     }
   }
 }
@@ -138,9 +134,9 @@ main {
 }
 @mixin colors($max, $color-frequency) {
   $color: 300 / $max;
-  // fruit loops!
+  // different zone colors!
   @for $i from 1 through $max {
-    div[class*='child']:nth-child(#{$i}) {
+    div[class*='zone']:nth-child(#{$i}) {
       background: hsla(($i - 15) * ($color * 1.5), 80%, 30%, 0.7);
       border: 1px solid #ddd;
 
@@ -183,23 +179,7 @@ main {
   height: 100%;
   z-index: 0;
   position: relative;
-  background: #131321; /* Old browsers */
-  background: -moz-linear-gradient(
-    top,
-    #131321 0%,
-    #1f1c2c 100%
-  ); /* FF3.6-15 */
-  background: -webkit-linear-gradient(
-    top,
-    #131321 0%,
-    #1f1c2c 100%
-  ); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(
-    to bottom,
-    #131321 0%,
-    #1f1c2c 100%
-  ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#131321', endColorstr='#1f1c2c',GradientType=0 ); /* IE6-9 */
+  background: linear-gradient(to bottom, #131321 0%, #1f1c2c 100%);
   box-shadow: 0 2px 20px 0 #000;
 }
 .grid {
@@ -221,25 +201,6 @@ main {
     opacity: 0.5;
   }
 }
-.rowunits,
-.colunits {
-  display: grid;
-  div {
-    text-align: center;
-    position: relative;
-  }
-}
-.rowunits {
-  margin-left: -70px;
-  float: left;
-  height: 100%;
-  div {
-    align-self: center;
-  }
-}
-.widthfull {
-  width: 100%;
-}
 input {
   font-size: 17px;
   background: #211f2f;
@@ -255,16 +216,5 @@ input {
     width: calc(80vw - 50px);
     height: calc(40vh - 50px);
   }
-}
-.errors {
-  position: absolute;
-  bottom: -5px;
-  border-radius: 4px;
-  padding: 8px 12px;
-  z-index: 1;
-  font-weight: bold;
-  width: 150px;
-  min-height: 50px;
-  background: #6d1a39;
 }
 </style>

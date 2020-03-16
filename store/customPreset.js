@@ -1,42 +1,22 @@
-import { groupRepeatedUnits, createRepetition } from '../utils/helpers'
+import {
+  groupRepeatedUnits,
+  createRepetition,
+  createInitialArr
+} from '../utils/helpers'
 
 export const state = () => ({
   columns: 4,
   rows: 2,
   colArr: [],
   rowArr: [],
-  childarea: [],
-  previewarea: null
+  zones: [],
+  previewZone: null
 })
-
-export const getters = {
-  colTemplate(state) {
-    const unitGroups = groupRepeatedUnits(state.colArr)
-
-    return createRepetition(unitGroups)
-  },
-  rowTemplate(state) {
-    const unitGroups = groupRepeatedUnits(state.rowArr)
-    return createRepetition(unitGroups)
-  },
-  divNum(state) {
-    return state.columns * state.rows
-  },
-  rowNumber(state) {
-    return state.rows
-  },
-  columnNumber(state) {
-    return state.columns
-  },
-  customPreset(state) {
-    return state.childarea
-  }
-}
 
 export const mutations = {
   initialArrIndex(state) {
-    createArr(state.columns, state.colArr)
-    createArr(state.rows, state.rowArr)
+    createInitialArr(state.columns, state.colArr)
+    createInitialArr(state.rows, state.rowArr)
   },
   adjustArr(state, payload) {
     const newVal = Number(payload.newVal)
@@ -55,11 +35,11 @@ export const mutations = {
       }
     }
   },
-  addChildren(state, payload) {
-    state.childarea.push(payload)
+  addZoneItem(state, payload) {
+    state.zones.push(payload)
   },
-  removeChildren(state, payload) {
-    state.childarea.splice(payload, 1)
+  removeZoneItem(state, payload) {
+    state.zones.splice(payload, 1)
   },
   updateColumns(state, payload) {
     state.columns = payload
@@ -67,20 +47,26 @@ export const mutations = {
   updateRows(state, payload) {
     state.rows = payload
   },
-  updateChildPreview(state, payload) {
-    state.previewarea = payload
+  updateZonePreview(state, payload) {
+    state.previewZone = payload
   },
   resetGrid(state, payload) {
-    state.childarea = []
+    state.zones = []
     state.rows = 2
     state.columns = 4
   }
 }
 
-// we start off with just a few rows and columns filled with 1fr units
-
-const createArr = (direction, arr) => {
-  for (let i = 1; i <= direction; i++) {
-    arr.push({ unit: '1fr' })
+export const getters = {
+  colTemplate(state) {
+    const unitGroups = groupRepeatedUnits(state.colArr)
+    return createRepetition(unitGroups)
+  },
+  rowTemplate(state) {
+    const unitGroups = groupRepeatedUnits(state.rowArr)
+    return createRepetition(unitGroups)
+  },
+  divNum(state) {
+    return state.columns * state.rows
   }
 }

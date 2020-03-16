@@ -29,7 +29,9 @@
 
     <template v-slot:item.action="{ item }">
       <nuxt-link :to="`/projects/${getProjectID(item)}`" class="no-undeline">
-        <v-icon small class="mr-2">mdi-pencil</v-icon>
+        <v-icon small class="mr-2">
+          mdi-pencil
+        </v-icon>
       </nuxt-link>
       <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
     </template>

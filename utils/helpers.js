@@ -11,44 +11,43 @@ export const isIE = () => {
 
 export const groupRepeatedUnits = (templateUnitArray = [{ unit: '1fr' }]) => {
   const templateArray = templateUnitArray.map((i) => i.unit)
-  const groups = [[templateArray.shift()]]
+  const fractionArr = [[templateArray.shift()]]
   for (const templateUnit of templateArray) {
-    const lastGroup = groups[groups.length - 1]
-    if (lastGroup.includes(templateUnit)) {
-      lastGroup.push(templateUnit)
+    const lastFraction = fractionArr[fractionArr.length - 1]
+    if (lastFraction.includes(templateUnit)) {
+      lastFraction.push(templateUnit)
     } else {
-      groups.push([templateUnit])
+      fractionArr.push([templateUnit])
     }
   }
-  return groups
+
+  return fractionArr
 }
 
-export const createRepetition = (groups, maxRepetition = 1) => {
-  return groups
-    .map((group) =>
+export const createRepetition = (fractions, maxRepetition = 1) => {
+  return fractions
+    .map((fraction) =>
       // If you want to add repetition only when a measure is repeated more than x times,
       // change maxRepetition value to x
-      group.length === maxRepetition
-        ? group.join(' ')
-        : `repeat(${group.length}, ${group[0]})`
+      fraction.length === maxRepetition
+        ? fraction.join(' ')
+        : `repeat(${fraction.length}, ${fraction[0]})`
     )
     .join(' ')
 }
 
-export const makeChildString = (child, endhover) => {
-  // endhover is 'e' or 'h'
+export const createZone = (child, endhover) => {
   const [startRow, endRow] =
-    child.srow <= child[`${endhover}row`]
-      ? [child.srow, child[`${endhover}row`]]
-      : [child[`${endhover}row`], child.srow]
+    child.startRow <= child[`${endhover}Row`]
+      ? [child.startRow, child[`${endhover}Row`]]
+      : [child[`${endhover}Row`], child.startRow]
   const [startCol, endCol] =
-    child.scol <= child[`${endhover}col`]
-      ? [child.scol, child[`${endhover}col`]]
-      : [child[`${endhover}col`], child.scol]
-  const childstring = `${startRow} / ${startCol} / ${endRow + 1} / ${endCol +
-    1}`
-  // const lel = [startRow, startCol, endRow + 1, endCol + 1]
-  return childstring
+    child.startCol <= child[`${endhover}Col`]
+      ? [child.startCol, child[`${endhover}Col`]]
+      : [child[`${endhover}Col`], child.startCol]
+  const zone = `${startRow} / ${startCol} / ${endRow + 1} / ${endCol + 1}`
+
+  return zone
 }
 
 export const parseToObject = (element) => {
@@ -75,4 +74,10 @@ export const isIntersect = (zone1, zone2) => {
     zone1.coords.start.y < zone2.coords.end.y &&
     zone1.coords.end.y > zone2.coords.start.y
   )
+}
+
+export const createInitialArr = (direction, arr) => {
+  for (let i = 1; i <= direction; i++) {
+    arr.push({ unit: '1fr' })
+  }
 }

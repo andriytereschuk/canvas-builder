@@ -55,11 +55,11 @@
 </template>
 
 <script>
-import { mapState, mapMutations, mapGetters } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 import { parseToObject } from '~/utils/helpers'
 export default {
   computed: {
-    ...mapState('customPreset', ['columns', 'rows'])
+    ...mapState('customPreset', ['columns', 'rows', 'zones'])
   },
   watch: {
     columns(newVal, oldVal) {
@@ -88,16 +88,11 @@ export default {
       'projects/addSection'
     ]),
     ...mapMutations('project', ['addSection']),
-    ...mapGetters('customPreset', [
-      'customPreset',
-      'rowNumber',
-      'columnNumber'
-    ]),
     ApplyPreset() {
       const section = {
-        columns: this.columnNumber(),
-        rows: this.rowNumber(),
-        zones: this.customPreset().map((el) => parseToObject(el))
+        columns: this.columns,
+        rows: this.rows,
+        zones: this.zones.map((el) => parseToObject(el))
       }
 
       this.addSection(section)
