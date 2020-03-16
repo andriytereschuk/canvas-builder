@@ -1,10 +1,10 @@
-import { componentTypes } from '~/config/componentTypes.config'
+import { componentConfig } from '~/config/component.config'
 
 export const componentMixin = {
   methods: {
     getComponentColor(category, type) {
       return (
-        (category && type && componentTypes[category][type].color) || '#263238'
+        (category && type && componentConfig[category][type].color) || '#263238'
       )
     }
   }

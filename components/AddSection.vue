@@ -1,5 +1,5 @@
 <template>
-  <div class="add" @click="$emit('add')">+</div>
+  <div class="add" @click="$emit('addPreset')">+</div>
 </template>
 
 <style lang="scss" scoped>

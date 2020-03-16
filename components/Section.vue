@@ -1,17 +1,20 @@
 <template>
   <div class="grid-container" :style="getContainerStyle(section)">
     <div
-      v-for="(zone, index) in section.zones"
-      :key="index"
+      v-for="zone in section.zones"
+      :key="zone.id"
       :style="getCellStyle(zone)"
       class="position"
+      @dragstart="getZone($event, zone)"
+      @drop.stop="moveItem(zone)"
     >
-      <Item :zone="zone" />
+      <Item :zone="zone" draggable />
     </div>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 import { getFractions, isIE } from '~/utils/helpers'
 import Item from '~/components/Item'
 
@@ -25,8 +28,30 @@ export default {
       required: true
     }
   },
-  computed: {},
+  data: () => {
+    return {
+      fromZone: null,
+      componentIdToMove: null
+    }
+  },
   methods: {
+    ...mapMutations('project', ['changeZonesOrder']),
+    getZone(e, fromZone) {
+      e.dataTransfer.effectAllowed = 'move'
+      e.dataTransfer.dropEffect = 'move'
+      this.fromZone = fromZone
+      this.componentIdToMove = fromZone.componentId
+    },
+    moveItem(toZone) {
+      const dragData = {
+        selectedSection: this.section,
+        fromZone: this.fromZone,
+        toZoneID: toZone.id,
+        componentIdToMove: this.componentIdToMove
+      }
+
+      this.changeZonesOrder(dragData)
+    },
     getContainerStyle(section) {
       const { rows, columns } = section
 
@@ -62,11 +87,25 @@ export default {
 
 <style lang="scss" scoped>
 .grid-container {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
 
   & + & {
     margin-top: 30px;
+  }
+
+  &::before {
+    content: '...';
+    position: absolute;
+    top: 50%;
+    margin-top: -10px;
+    margin-left: -20px;
+    font-weight: bold;
+    text-shadow: 0px 5px 0px #ffffff, 0px 10px 0px #ffffff;
+    transform: translateY(-50%);
+    color: #ffffff;
+    cursor: grab;
   }
 }
 

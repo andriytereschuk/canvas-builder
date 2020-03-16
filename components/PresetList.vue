@@ -13,23 +13,25 @@
           :close-dialog="close"
         />
       </v-card-text>
-      <!-- <v-card-actions>
+      <v-card-actions>
         <v-btn
-          color="green darken-1"
+          rounded
+          color="deep-purple accent-4"
           align="center"
-          text
-          @click="dialog = false"
+          @click="$emit('openCustomPreset')"
         >
           Customize
         </v-btn>
-      </v-card-actions> -->
+      </v-card-actions>
     </v-card>
   </v-dialog>
 </template>
 
 <script>
-import Preset from '~/components/Preset'
+import { mapState } from 'vuex'
 import { presets } from '~/config/preset.config'
+import Preset from '~/components/Preset'
+
 export default {
   components: {
     Preset
@@ -40,8 +42,9 @@ export default {
     }
   },
   computed: {
+    ...mapState('project', ['project', 'step']),
     presets() {
-      return presets
+      return presets[this.step]
     }
   },
   methods: {

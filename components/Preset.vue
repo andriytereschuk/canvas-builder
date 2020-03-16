@@ -29,11 +29,11 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('project', ['addSection']),
     select() {
-      this.addSections(this.preset)
+      this.addSection(this.preset)
       this.closeDialog()
     },
-    ...mapMutations({ addSections: 'project/addSection' }),
     getContainerStyle(preset) {
       const { rows, columns } = preset
 

@@ -1,77 +1,20 @@
+import { steps } from '~/config/steps.config'
+
 export const state = () => ({
   project: {
     id: null,
-    rows: []
-  }
+    desktop: {
+      rows: []
+    },
+    mobile: {
+      rows: []
+    }
+  },
+  step: steps.desktop
 })
 
 export const actions = {
   async get({ commit }, { id }) {
-    // const rows = [
-    //   {
-    //     id: 1,
-    //     columns: 4,
-    //     rows: 2,
-    //     zones: [
-    //       {
-    //         id: 12,
-    //         componentId: null,
-    //         coords: {
-    //           start: {
-    //             x: 1,
-    //             y: 1
-    //           },
-    //           end: {
-    //             x: 2,
-    //             y: 2
-    //           }
-    //         }
-    //       },
-    //       {
-    //         id: 13,
-    //         componentId: null,
-    //         coords: {
-    //           start: {
-    //             x: 1,
-    //             y: 2
-    //           },
-    //           end: {
-    //             x: 2,
-    //             y: 3
-    //           }
-    //         }
-    //       },
-    //       {
-    //         id: 14,
-    //         componentId: null,
-    //         coords: {
-    //           start: {
-    //             x: 2,
-    //             y: 1
-    //           },
-    //           end: {
-    //             x: 3,
-    //             y: 3
-    //           }
-    //         }
-    //       },
-    //       {
-    //         id: 15,
-    //         componentId: null,
-    //         coords: {
-    //           start: {
-    //             x: 1,
-    //             y: 3
-    //           },
-    //           end: {
-    //             x: 3,
-    //             y: 5
-    //           }
-    //         }
-    //       }
-    //     ]
-    //   }
-    // ]
     let project
 
     try {
@@ -80,8 +23,13 @@ export const actions = {
 
     if (project) {
       commit('add', {
-        id: project.id,
-        rows: []
+        id: `p-${Date.now()}`,
+        desktop: {
+          rows: []
+        },
+        mobile: {
+          rows: []
+        }
       })
     }
   }
@@ -102,11 +50,11 @@ export const mutations = {
       id: `row-${Date.now()}`,
       zones
     }
-    const rows = [...state.project.rows, row]
-    state.project = { ...state.project, rows }
+
+    state.project[state.step].rows = [...state.project[state.step].rows, row]
   },
   attachComponent(state, payload) {
-    const rows = state.project.rows.map((section) => {
+    const rows = state.project[state.step].rows.map((section) => {
       return {
         zones: section.zones.forEach((zone) => {
           zone.componentId =
@@ -116,13 +64,10 @@ export const mutations = {
       }
     })
 
-    state.project = {
-      rows,
-      ...state.project
-    }
+    state.project[state.step].rows = rows
   },
   detachComponent(state, payload) {
-    const rows = state.project.rows.map((section) => {
+    const rows = state.project[state.step].rows.map((section) => {
       return {
         zones: section.zones.forEach((zone) => {
           zone.componentId =
@@ -132,9 +77,30 @@ export const mutations = {
       }
     })
 
-    state.project = {
-      rows,
-      ...state.project
-    }
+    state.project[state.step].rows = rows
+  },
+  changeSectionsOrder(state, sections) {
+    state.project[state.step].rows = sections
+  },
+  changeZonesOrder(state, dragData) {
+    const { selectedSection, fromZone, toZoneID, componentIdToMove } = dragData
+    const newZonesSet = selectedSection.zones.map((zone) => {
+      if (zone.id === toZoneID) {
+        fromZone.componentId = zone.componentId
+        zone.componentId = componentIdToMove
+      }
+      return zone
+    })
+
+    selectedSection.zones = newZonesSet
+  },
+  setStep(state, step) {
+    state.step = step
+  }
+}
+
+export const getters = {
+  sections(state) {
+    return state.project[state.step].rows
   }
 }

@@ -1,24 +1,45 @@
 <template>
   <div>
-    <Section v-for="section in sections" :key="section.id" :section="section" />
-    <AddSection @add="$emit('add')" />
+    <draggable
+      v-model="changedSections"
+      @start="drag = true"
+      @end="drag = false"
+    >
+      <Section
+        v-for="section in changedSections"
+        :key="section.id"
+        :section="section"
+      />
+    </draggable>
+    <AddSection @addPreset="$emit('addPreset')" />
   </div>
 </template>
 
 <script>
+import draggable from 'vuedraggable'
+import { mapGetters, mapMutations } from 'vuex'
 import Section from '~/components/Section.vue'
 import AddSection from '~/components/AddSection.vue'
 
 export default {
   components: {
     Section,
-    AddSection
+    AddSection,
+    draggable
   },
-  props: {
-    sections: {
-      type: Array,
-      required: true
+  computed: {
+    ...mapGetters('project', ['sections']),
+    changedSections: {
+      get() {
+        return this.sections
+      },
+      set(newSectionsSet) {
+        this.changeSectionsOrder(newSectionsSet)
+      }
     }
+  },
+  methods: {
+    ...mapMutations('project', ['changeSectionsOrder'])
   }
 }
 </script>

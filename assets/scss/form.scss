@@ -1,0 +1,28 @@
+fieldset {
+  border: none;
+}
+
+.vue-form-generator {
+  max-width: 900px;
+  padding: 0 5px;
+
+  & > div {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1 1 auto;
+
+    & > div {
+      padding: 0 10px;
+    }
+  }
+}
+
+.form-field--inline {
+  flex-basis: 0;
+  flex-grow: 1;
+  max-width: 100%;
+}
+
+.form-field--full {
+  flex-basis: 100%;
+}

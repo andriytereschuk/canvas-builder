@@ -1,49 +1,61 @@
 <template>
   <div>
-    <h1>Project # {{ id }}</h1>
-    <ComponentsMenu ref="componentsMenu" />
-    <Workspace :sections="project.rows" @add="add" />
-    <PresetList ref="presets" />
+    <Stepper>
+      <ComponentsMenu ref="componentsMenu" />
+      <Workspace @addPreset="addPreset" />
+      <PresetList ref="presets" @openCustomPreset="openCustomPreset" />
+    </Stepper>
+    <CustomPreset ref="customPreset" @closeCustomPreset="closeCustomPreset" />
+    <ComponentsSettings ref="componentsSettings" />
   </div>
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-import ComponentsMenu from '../../components/ComponentsMenu'
+import { mapActions } from 'vuex'
+import ComponentsSettings from '../../components/ComponentsSettings'
+import CustomPreset from '~/components/CustomPreset'
+import Stepper from '~/components/Stepper'
+import ComponentsMenu from '~/components/ComponentsMenu'
 import Workspace from '~/components/Workspace'
 import PresetList from '~/components/PresetList'
 
-const { mapState, mapActions } = createNamespacedHelpers('project')
-
 export default {
   components: {
+    ComponentsSettings,
+    Stepper,
     ComponentsMenu,
     Workspace,
-    PresetList
-  },
-  data() {
-    return {
-      isDialog: false
-    }
+    PresetList,
+    CustomPreset
   },
   computed: {
     id() {
       return this.$route.params.id
-    },
-    ...mapState({
-      project: 'project'
-    })
+    }
   },
   mounted() {
     this.fetch({ id: this.id })
     this.$root.$componentsMenu = this.$refs.componentsMenu.open
   },
+  provide() {
+    return {
+      openComponentSettings: (component) =>
+        this.$refs.componentsSettings.open(component)
+    }
+  },
   methods: {
-    ...mapActions({
+    ...mapActions('project', {
       fetch: 'get'
     }),
-    add() {
+    addPreset() {
       return this.$refs.presets.open()
+    },
+    openCustomPreset() {
+      this.$refs.customPreset.open()
+      this.$refs.presets.close()
+    },
+    closeCustomPreset() {
+      this.$refs.customPreset.close()
     }
   }
 }
