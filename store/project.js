@@ -82,15 +82,21 @@ export const mutations = {
   changeSectionsOrder(state, sections) {
     state.project[state.step].rows = sections
   },
-  changeZonesOrder(state, zonesToChange) {
-    const { sectionID, newZonesSet } = zonesToChange
-    console.log('store/sectionID', sectionID)
-    console.log('store/newZonesSet', newZonesSet)
-
-    state.project[state.step].rows.map((el) => {
-      if (el.id === sectionID) {
-        el.zones = newZonesSet
+  changeZonesOrder(state, dragData) {
+    const { selectedSection, fromZone, toZoneID, componentIdToMove } = dragData
+    const newZonesSet = selectedSection.zones.map((zone) => {
+      if (zone.id === toZoneID) {
+        fromZone.componentId = zone.componentId
+        zone.componentId = componentIdToMove
       }
+      return zone
+    })
+
+    state.project[state.step].rows.map((section) => {
+      if (section.id === selectedSection.id) {
+        section.zones = newZonesSet
+      }
+      return section
     })
   },
   setStep(state, step) {

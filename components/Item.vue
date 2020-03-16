@@ -9,9 +9,6 @@
       {{ component.type }}
     </div>
     <div v-if="component" class="actions">
-      <v-btn fab small color="green">
-        <v-icon>mdi-drag-indicator</v-icon>
-      </v-btn>
       <v-btn
         class="mx-2"
         fab
