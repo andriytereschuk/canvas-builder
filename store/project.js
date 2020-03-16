@@ -84,6 +84,8 @@ export const mutations = {
   },
   changeZonesOrder(state, zonesToChange) {
     const { sectionID, newZonesSet } = zonesToChange
+    console.log('store/sectionID', sectionID)
+    console.log('store/newZonesSet', newZonesSet)
 
     state.project[state.step].rows.map((el) => {
       if (el.id === sectionID) {

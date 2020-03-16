@@ -6,18 +6,23 @@
       :style="getCellStyle(zone)"
       class="position"
     >
-      <Item :zone="zone" />
+      <draggable v-model="section.zones" @start="start(zone)" @end="end()">
+        <Item :zone="zone" />
+      </draggable>
     </div>
   </div>
 </template>
 
 <script>
+import draggable from 'vuedraggable'
+import { mapMutations } from 'vuex'
 import { getFractions, isIE } from '~/utils/helpers'
 import Item from '~/components/Item'
 
 export default {
   components: {
-    Item
+    Item,
+    draggable
   },
   props: {
     section: {
@@ -26,6 +31,19 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('project', ['changeZonesOrder']),
+    start(zone) {
+      this.drag = true
+      // componentID
+      // zoneID
+      console.log(zone.id, zone.componentId)
+    },
+    end() {
+      this.drag = false
+      const sectionID = this.section.id
+      const newZonesSet = this.section.zones
+      this.changeZonesOrder({ sectionID, newZonesSet })
+    },
     getContainerStyle(section) {
       const { rows, columns } = section
 
