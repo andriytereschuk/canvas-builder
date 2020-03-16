@@ -2,9 +2,10 @@
   <div>
     <Stepper>
       <ComponentsMenu ref="componentsMenu" />
-      <Workspace @add="add" />
-      <PresetList ref="presets" />
+      <Workspace @addPreset="addPreset" />
+      <PresetList ref="presets" @openCustomPreset="openCustomPreset" />
     </Stepper>
+    <CustomPreset ref="customPreset" @closeCustomPreset="closeCustomPreset" />
     <ComponentsSettings ref="componentsSettings" />
   </div>
 </template>
@@ -12,6 +13,7 @@
 <script>
 import { mapActions } from 'vuex'
 import ComponentsSettings from '../../components/ComponentsSettings'
+import CustomPreset from '~/components/CustomPreset'
 import Stepper from '~/components/Stepper'
 import ComponentsMenu from '~/components/ComponentsMenu'
 import Workspace from '~/components/Workspace'
@@ -23,7 +25,8 @@ export default {
     Stepper,
     ComponentsMenu,
     Workspace,
-    PresetList
+    PresetList,
+    CustomPreset
   },
   computed: {
     id() {
@@ -44,8 +47,15 @@ export default {
     ...mapActions('project', {
       fetch: 'get'
     }),
-    add() {
+    addPreset() {
       return this.$refs.presets.open()
+    },
+    openCustomPreset() {
+      this.$refs.customPreset.open()
+      this.$refs.presets.close()
+    },
+    closeCustomPreset() {
+      this.$refs.customPreset.close()
     }
   }
 }
