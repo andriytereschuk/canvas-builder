@@ -1,5 +1,5 @@
 <template>
-  <div class="add" @click="$emit('add')">+</div>
+  <div class="add" @click="$emit('addPreset')">+</div>
 </template>
 
 <style lang="scss" scoped>
@@ -15,7 +15,6 @@
   margin-top: 30px;
   cursor: pointer;
   transition: 0.1s;
-
   &:hover {
     border-color: #b388ff;
     color: #b388ff;

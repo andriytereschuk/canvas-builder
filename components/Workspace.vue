@@ -11,7 +11,7 @@
         :section="section"
       />
     </draggable>
-    <AddSection @add="$emit('add')" />
+    <AddSection @addPreset="$emit('addPreset')" />
   </div>
 </template>
 
