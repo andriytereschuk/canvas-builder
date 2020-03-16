@@ -92,12 +92,7 @@ export const mutations = {
       return zone
     })
 
-    state.project[state.step].rows.map((section) => {
-      if (section.id === selectedSection.id) {
-        section.zones = newZonesSet
-      }
-      return section
-    })
+    selectedSection.zones = newZonesSet
   },
   setStep(state, step) {
     state.step = step
