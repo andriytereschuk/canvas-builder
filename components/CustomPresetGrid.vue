@@ -73,8 +73,7 @@ export default {
     ...mapGetters({
       rowTemplate: 'rowTemplate',
       colTemplate: 'colTemplate',
-      divNum: 'divNum',
-      customPreset: 'customPreset'
+      divNum: 'divNum'
     })
   },
   methods: {
@@ -95,7 +94,6 @@ export default {
         item - (this.createdZone[`${startendhover}Row`] - 1) * this.columns
 
       if (startendhover === 'end') {
-        // flip starts and ends if dragged in the opposite direction
         const zone = createZone(this.createdZone, 'end')
         this.createdZone = {}
         this.updateZonePreview(null)
@@ -113,9 +111,7 @@ export default {
       } else if (startendhover === 'hover') {
         const zone = createZone(this.createdZone, 'hover')
         this.updateZonePreview(zone)
-      }
-      // we're starting a child, so let's update the hover preview
-      else if (startendhover === 'start') {
+      } else if (startendhover === 'start') {
         this.placeZone(item, 'hover')
       }
     },
@@ -134,7 +130,7 @@ main {
 }
 @mixin colors($max, $color-frequency) {
   $color: 300 / $max;
-  // different zone colors!
+  // different zone colors
   @for $i from 1 through $max {
     div[class*='zone']:nth-child(#{$i}) {
       background: hsla(($i - 15) * ($color * 1.5), 80%, 30%, 0.7);
