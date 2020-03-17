@@ -10,11 +10,8 @@
         <v-toolbar-title>All projects</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <nuxt-link
-          :to="{ name: 'projects-id', params: { id: Date.now() } }"
-          class="projects-link"
-        >
-          <v-btn color="primary">New project</v-btn>
+        <nuxt-link :to="`/projects/${newProject.id}`" class="projects-link">
+          <v-btn color="primary" @click="addProjectToDB">New project</v-btn>
         </nuxt-link>
       </v-toolbar>
     </template>
@@ -49,6 +46,18 @@ export default {
   data: () => {
     return {
       dialog: false,
+      newProject: {
+        id: Date.now(),
+        name: 'New Project',
+        created: '2012-04-22T18:25:43.511Z',
+        modified: '2012-04-22T18:25:43.511Z',
+        desktop: {
+          rows: []
+        },
+        mobile: {
+          rows: []
+        }
+      },
       headers: [
         {
           text: 'Name',
@@ -88,17 +97,28 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetch: 'get'
+      fetch: 'get',
+      addProject: 'addProject'
     }),
     ...mapMutations({
       remove: 'remove'
     }),
+    createProject() {
+      this.newProject.id = Date.now()
+      this.newProject.created = new Date().toISOString()
+      this.newProject.modified = new Date().toISOString()
+    },
+    addProjectToDB() {
+      this.createProject()
+      this.addProject(this.newProject)
+    },
     getProjectID(item) {
       const index = this.projects.indexOf(item)
       return this.projects[index].id.toString()
     },
     convertDate(date) {
       if (date) {
+        console.log('date', date)
         return date.slice(0, 19).replace(/T/g, ' ')
       }
     },

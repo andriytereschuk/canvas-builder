@@ -1,22 +1,41 @@
+import EventService from './../services/ProjectService'
+
 export const state = () => ({
-  projects: []
+  projects: [],
+  perPage: 100,
+  page: 1
 })
 
 export const actions = {
-  async get({ commit }) {
+  async get({ commit, perPage, page }) {
     let projects
 
     try {
-      projects = await this.$axios.$get('/api/projects')
+      projects = await EventService.getProjects(perPage, page)
     } catch (e) {}
 
-    if (projects) commit('add', projects)
+    if (projects) commit('add', projects.data)
+  },
+  async addProject(state, project) {
+    try {
+      const res = await EventService.postProject(project)
+      console.log(res)
+    } catch (e) {
+      console.log(e)
+    }
+
+    state.commit('addProject', project)
   }
 }
 
 export const mutations = {
   add(state, projects) {
     state.projects = projects
+  },
+  addProject(state, project) {
+    console.log('state.projects', state.projects)
+    state.projects = [...state.projects, project]
+    console.log('state.projects', state.projects)
   },
   remove(state, projectID) {
     state.projects = [...state.projects].filter(
