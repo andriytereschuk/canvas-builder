@@ -1,19 +1,19 @@
 export const state = () => ({
-  components: {}
+  components: []
 })
 
 export const actions = {
-  async get({ commit }) {
+  async fetchComponent({ commit }, id) {
     let component
 
     try {
-      component = await this.$axios.$get('/api/component')
+      component = await this.$axios.$get(`/api/component/${id}`)
     } catch (e) {}
 
-    if (component) commit('set', component)
+    if (component) commit('add', component)
   },
   attach({ commit }, { id, component }) {
-    commit('set', component)
+    commit('add', component)
     commit(
       'project/attachComponent',
       { id, componentId: component.id },
@@ -31,12 +31,15 @@ export const actions = {
 }
 
 export const mutations = {
-  set(state, component) {
-    const { id } = component
-
-    state.components[id] = component
+  add(state, component) {
+    state.components.push(component)
   },
-  remove(state, id) {
-    delete state.components[id]
+  remove(state, _id) {
+    state.components = state.components.filter(({ id }) => id !== _id)
   }
+}
+
+export const getters = {
+  getComponentById: (state) => (id) =>
+    state.components.find((component) => component.id === id)
 }

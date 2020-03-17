@@ -2,22 +2,21 @@
   <div
     class="component"
     :class="{ 'not-assigned': !component }"
-    :style="bg"
+    :style="componentBgColor"
     @click="attachComponent"
   >
     <div v-if="component" class="content">
       {{ component.type }}
     </div>
     <div v-if="component" class="actions">
-      <v-btn
+      <nuxt-link
         class="mx-2"
-        fab
-        small
-        color="primary"
-        @click.stop="openComponentSettings(component)"
+        :to="{ name: 'components-id', params: { id: component.id } }"
       >
-        <v-icon>mdi-cog-outline</v-icon>
-      </v-btn>
+        <v-btn fab small color="primary">
+          <v-icon>mdi-cog-outline</v-icon>
+        </v-btn>
+      </nuxt-link>
       <v-btn fab small color="error" @click.stop="detachComponent">
         <v-icon>mdi-trash-can-outline</v-icon>
       </v-btn>
@@ -26,7 +25,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapGetters, mapMutations } from 'vuex'
 import { componentMixin } from '~/mixins/component.mixin'
 
 export default {
@@ -37,35 +36,30 @@ export default {
       required: true
     }
   },
-  inject: ['openComponentSettings'],
+  inject: ['openComponentMenu'],
   computed: {
-    ...mapState('components', {
-      component(state) {
-        return state.components[this.zone.componentId]
-      }
-    }),
-    bg() {
-      const type = (this.component && this.component.type) || null
-      const category = (this.component && this.component.category) || null
-      const backgroundColor = this.getComponentColor(category, type)
-
-      return { backgroundColor }
+    ...mapGetters('components', ['getComponentById']),
+    component() {
+      return this.getComponentById(this.zone.componentId)
     }
   },
   methods: {
-    ...mapActions({
-      attach: 'components/attach',
-      detach: 'components/detach'
-    }),
-    attachComponent() {
+    ...mapActions('components', ['attach', 'detach']),
+    ...mapMutations('components', ['add']),
+    async attachComponent() {
       if (!this.component) {
         // open dialog and wait for picking the item
-        this.$root.$componentsMenu().then((component) => {
-          this.attach({
+        const componentInitialData = await this.openComponentMenu()
+        const component = { id: Date.now(), ...componentInitialData }
+
+        if (this.zone.id)
+          return this.attach({
             id: this.zone.id,
-            component: { id: Date.now(), ...component }
+            component
           })
-        })
+
+        this.zone.componentId = component.id
+        return this.add(component)
       }
     },
     detachComponent() {

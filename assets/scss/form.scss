@@ -2,6 +2,10 @@ fieldset {
   border: none;
 }
 
+.form-group {
+  flex-basis: 100%;
+}
+
 .vue-form-generator {
   max-width: 900px;
   padding: 0 5px;
@@ -21,8 +25,4 @@ fieldset {
   flex-basis: 0;
   flex-grow: 1;
   max-width: 100%;
-}
-
-.form-field--full {
-  flex-basis: 100%;
 }

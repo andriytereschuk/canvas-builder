@@ -12,8 +12,7 @@ export const componentConfig = {
           {
             type: 'toggle',
             title: 'Autoplay',
-            model: 'autoplay',
-            styleClasses: 'form-field--full'
+            model: 'autoplay'
           }
         ]
       }
@@ -22,9 +21,10 @@ export const componentConfig = {
       color: '#ffa500',
       model: {
         autoplay: true,
-        slides: []
+        items: []
       },
       schema: {
+        hasChildren: true,
         fields: [
           {
             type: 'toggle',
@@ -47,14 +47,12 @@ export const componentConfig = {
           {
             type: 'text',
             title: 'Title',
-            model: 'title',
-            styleClasses: 'form-field--inline'
+            model: 'title'
           },
           {
             type: 'text',
             title: 'Subtitle',
-            model: 'subtitle',
-            styleClasses: 'form-field--inline'
+            model: 'subtitle'
           }
         ]
       }
