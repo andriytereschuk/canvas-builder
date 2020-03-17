@@ -11,7 +11,7 @@
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
         <nuxt-link :to="`/projects/${newProject.id}`" class="projects-link">
-          <v-btn color="primary" @click="addProjectToDB">New project</v-btn>
+          <v-btn color="primary" @click="createProject">New project</v-btn>
         </nuxt-link>
       </v-toolbar>
     </template>
@@ -107,9 +107,6 @@ export default {
       this.newProject.id = Date.now()
       this.newProject.created = new Date().toISOString()
       this.newProject.modified = new Date().toISOString()
-    },
-    addProjectToDB() {
-      this.createProject()
       this.addProject(this.newProject)
     },
     getProjectID(item) {
