@@ -1,3 +1,4 @@
+import EventService from './../services/ProjectService'
 import { steps } from '~/config/steps.config'
 const defaultProjectState = {
   id: null,
@@ -26,7 +27,7 @@ export const actions = {
 
     // fetch the project
     try {
-      project = await this.$axios.$get(`/api/projects/${id}`)
+      project = await EventService.getProject(id)
     } catch (e) {}
 
     if (project) {
