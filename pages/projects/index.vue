@@ -90,7 +90,7 @@ export default {
       projects: 'filtered'
     })
   },
-  mounted() {
+  created() {
     this.fetch()
   },
   methods: {

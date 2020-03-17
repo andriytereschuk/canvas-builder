@@ -35,7 +35,7 @@
               height="120px"
               width="120px"
               class="components-menu__category-btn"
-              :color="getComponentColor(selectedCategory, type)"
+              :color="getComponentColor({ category: selectedCategory, type })"
               @click="selectComponent(type)"
             >
               {{ type }}

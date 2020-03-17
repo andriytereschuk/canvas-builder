@@ -1,23 +1,31 @@
 import EventService from './../services/ProjectService'
 import { steps } from '~/config/steps.config'
+const defaultProjectState = {
+  id: null,
+  desktop: {
+    rows: []
+  },
+  mobile: {
+    rows: []
+  }
+}
 
 export const state = () => ({
-  project: {
-    id: null,
-    desktop: {
-      rows: []
-    },
-    mobile: {
-      rows: []
-    }
-  },
+  project: defaultProjectState,
   step: steps.desktop
 })
 
 export const actions = {
-  async get({ commit }, { id }) {
+  async fetchProject({ commit, state }, id) {
     let res
 
+    // return if project is already in the store
+    if (state.project.id && state.project.id === id) return Promise.resolve()
+
+    // clean up the state
+    commit('add', defaultProjectState)
+
+    // fetch the project
     try {
       res = await EventService.getProject(id)
     } catch (e) {}
