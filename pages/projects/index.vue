@@ -47,8 +47,8 @@ export default {
       newProject: {
         id: Date.now(),
         name: 'New Project',
-        created: '2012-04-22T18:25:43.511Z',
-        modified: '2012-04-22T18:25:43.511Z',
+        created: '',
+        modified: '',
         desktop: {
           rows: []
         },
