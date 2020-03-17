@@ -55,6 +55,10 @@
         </v-breadcrumbs-item>
       </v-breadcrumbs>
       <v-spacer />
+      <v-btn text style="width: 100px; margin-right: 0;" @click="save">
+        <v-icon>mdi-save</v-icon>
+        save
+      </v-btn>
       <v-btn text style="width: 100px; margin-right: 0;">
         <v-icon>mdi-play</v-icon>
         preview
@@ -93,6 +97,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   middleware: 'redirect',
   data() {
@@ -140,6 +146,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('project', ['save']),
     getLink(item) {
       return this.$route.params.id && item.text === 'projectID'
         ? this.$route.params.id

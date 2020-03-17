@@ -6,7 +6,64 @@
       "created": "2012-04-22T18:25:43.511Z",
       "modified": "2013-04-22T18:25:43.511Z",
       "desktop": {
-        "rows": []
+        "rows": [
+          {
+            "zones": [
+              {
+                "id": "zone-0-1584453377256",
+                "componentId": 1584454864143,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 2
+                  }
+                }
+              }
+            ],
+            "columns": 1,
+            "rows": 1,
+            "id": "row-1584453377256"
+          },
+          {
+            "zones": [
+              {
+                "id": "zone-0-1584453495747",
+                "componentId": 1584453584811,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 2
+                  }
+                }
+              },
+              {
+                "id": "zone-1-1584453495747",
+                "componentId": 1584453498437,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 2
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 3
+                  }
+                }
+              }
+            ],
+            "columns": 2,
+            "rows": 1,
+            "id": "row-1584453495747"
+          }
+        ]
       },
       "mobile": {
         "rows": []
@@ -18,7 +75,43 @@
       "created": "2015-04-23T18:25:43.511Z",
       "modified": "2016-04-22T18:25:43.511Z",
       "desktop": {
-        "rows": []
+        "rows": [
+          {
+            "zones": [
+              {
+                "id": "zone-0-1584453361767",
+                "componentId": 1584453363456,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 2
+                  }
+                }
+              },
+              {
+                "id": "zone-1-1584453361768",
+                "componentId": null,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 2
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 3
+                  }
+                }
+              }
+            ],
+            "columns": 2,
+            "rows": 1,
+            "id": "row-1584453361768"
+          }
+        ]
       },
       "mobile": {
         "rows": []
@@ -53,30 +146,6 @@
       "name": "Project 5",
       "created": "2015-04-23T18:25:43.511Z",
       "modified": "2016-04-22T18:25:43.511Z",
-      "desktop": {
-        "rows": []
-      },
-      "mobile": {
-        "rows": []
-      }
-    },
-    {
-      "id": 1584448121032,
-      "name": "New Project",
-      "created": "2020-03-17T12:28:41.033Z",
-      "modified": "2020-03-17T12:28:41.033Z",
-      "desktop": {
-        "rows": []
-      },
-      "mobile": {
-        "rows": []
-      }
-    },
-    {
-      "id": 1584448828691,
-      "name": "New Project",
-      "created": "2020-03-17T12:40:28.692Z",
-      "modified": "2020-03-17T12:40:28.692Z",
       "desktop": {
         "rows": []
       },

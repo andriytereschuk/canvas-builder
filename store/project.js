@@ -16,22 +16,21 @@ export const state = () => ({
 
 export const actions = {
   async get({ commit }, { id }) {
-    let project
+    let res
 
     try {
-      project = await EventService.getProject(id)
+      res = await EventService.getProject(id)
     } catch (e) {}
 
-    if (project) {
-      commit('add', {
-        id: `p-${Date.now()}`,
-        desktop: {
-          rows: []
-        },
-        mobile: {
-          rows: []
-        }
-      })
+    if (res) {
+      commit('add', res.data)
+    }
+  },
+  async save() {
+    try {
+      await EventService.saveProject(this.state.project.project)
+    } catch (e) {
+      console.log(e)
     }
   }
 }

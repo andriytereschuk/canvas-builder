@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 import { steps } from '~/config/steps.config'
 
 export default {
@@ -81,13 +81,17 @@ export default {
   },
   methods: {
     ...mapMutations('project', ['setStep']),
+    ...mapActions('project', ['save']),
     add() {
       return this.$refs.presets.open()
     },
     changeStep(stepNumber, step) {
       this.stepNumber = stepNumber
 
-      if (step === steps.finish) return
+      if (step === steps.finish) {
+        this.save()
+        return
+      }
 
       this.setStep(step)
     }
