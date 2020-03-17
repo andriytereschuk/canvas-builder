@@ -83,6 +83,18 @@
       "mobile": {
         "rows": []
       }
+    },
+    {
+      "id": 1584449053676,
+      "name": "New Project",
+      "created": "2020-03-17T12:44:13.677Z",
+      "modified": "2020-03-17T12:44:13.677Z",
+      "desktop": {
+        "rows": []
+      },
+      "mobile": {
+        "rows": []
+      }
     }
   ]
 }
