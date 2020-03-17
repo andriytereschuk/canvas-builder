@@ -20,6 +20,9 @@ export default {
   postProject(project) {
     return apiClient.post('/projects', project)
   },
+  saveProject(project) {
+    return apiClient.put('/projects/' + project.id, project)
+  },
   deleteProject(projectID) {
     return apiClient.delete('/projects/' + projectID)
   }

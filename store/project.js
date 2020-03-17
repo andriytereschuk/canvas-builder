@@ -17,7 +17,7 @@ export const state = () => ({
 
 export const actions = {
   async fetchProject({ commit, state }, id) {
-    let project
+    let res
 
     // return if project is already in the store
     if (state.project.id && state.project.id === id) return Promise.resolve()
@@ -27,19 +27,18 @@ export const actions = {
 
     // fetch the project
     try {
-      project = await EventService.getProject(id)
+      res = await EventService.getProject(id)
     } catch (e) {}
 
-    if (project) {
-      commit('add', {
-        id,
-        desktop: {
-          rows: []
-        },
-        mobile: {
-          rows: []
-        }
-      })
+    if (res) {
+      commit('add', res.data)
+    }
+  },
+  async save() {
+    try {
+      await EventService.saveProject(this.state.project.project)
+    } catch (e) {
+      console.log(e)
     }
   }
 }
