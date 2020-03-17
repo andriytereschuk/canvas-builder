@@ -38,9 +38,7 @@
 <script>
 import { createNamespacedHelpers } from 'vuex'
 
-const { mapGetters, mapActions, mapMutations } = createNamespacedHelpers(
-  'projects'
-)
+const { mapGetters, mapActions } = createNamespacedHelpers('projects')
 
 export default {
   data: () => {
@@ -98,10 +96,8 @@ export default {
   methods: {
     ...mapActions({
       fetch: 'get',
-      addProject: 'addProject'
-    }),
-    ...mapMutations({
-      remove: 'remove'
+      addProject: 'addProject',
+      deleteProject: 'deleteProject'
     }),
     createProject() {
       this.newProject.id = Date.now()
@@ -115,7 +111,6 @@ export default {
     },
     convertDate(date) {
       if (date) {
-        console.log('date', date)
         return date.slice(0, 19).replace(/T/g, ' ')
       }
     },
@@ -124,7 +119,7 @@ export default {
       const projectToDeleteID = this.projects[index].id
 
       confirm('Are you sure you want to delete this item?') &&
-        this.remove(projectToDeleteID)
+        this.deleteProject(projectToDeleteID)
     }
   }
 }

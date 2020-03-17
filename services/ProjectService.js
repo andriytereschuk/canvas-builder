@@ -19,5 +19,8 @@ export default {
   },
   postProject(project) {
     return apiClient.post('/projects', project)
+  },
+  deleteProject(projectID) {
+    return apiClient.delete('/projects/' + projectID)
   }
 }
