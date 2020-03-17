@@ -18,13 +18,17 @@ export const actions = {
   },
   async addProject(state, project) {
     try {
-      const res = await EventService.postProject(project)
-      console.log(res)
-    } catch (e) {
-      console.log(e)
-    }
+      await EventService.postProject(project)
+    } catch (e) {}
 
     state.commit('addProject', project)
+  },
+  async deleteProject(state, projectID) {
+    try {
+      await EventService.deleteProject(projectID)
+    } catch (e) {}
+
+    state.commit('remove', projectID)
   }
 }
 
