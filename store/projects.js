@@ -37,9 +37,7 @@ export const mutations = {
     state.projects = projects
   },
   addProject(state, project) {
-    console.log('state.projects', state.projects)
     state.projects = [...state.projects, project]
-    console.log('state.projects', state.projects)
   },
   remove(state, projectID) {
     state.projects = [...state.projects].filter(
