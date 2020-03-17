@@ -5,6 +5,7 @@
   "author": "andriytereschuk",
   "private": true,
   "scripts": {
+    "all": "nuxt & json-server --watch db.json --port 3001",
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
