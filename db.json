@@ -59,42 +59,6 @@
       "mobile": {
         "rows": []
       }
-    },
-    {
-      "id": 1584441429187,
-      "name": "New Project",
-      "created": "2020-03-17T10:37:09.187Z",
-      "modified": "2020-03-17T10:37:09.187Z",
-      "desktop": {
-        "rows": []
-      },
-      "mobile": {
-        "rows": []
-      }
-    },
-    {
-      "id": 1584441441407,
-      "name": "New Project",
-      "created": "2020-03-17T10:37:21.407Z",
-      "modified": "2020-03-17T10:37:21.407Z",
-      "desktop": {
-        "rows": []
-      },
-      "mobile": {
-        "rows": []
-      }
-    },
-    {
-      "id": 1584441447959,
-      "name": "New Project",
-      "created": "2020-03-17T10:37:27.959Z",
-      "modified": "2020-03-17T10:37:27.959Z",
-      "desktop": {
-        "rows": []
-      },
-      "mobile": {
-        "rows": []
-      }
     }
   ]
 }
