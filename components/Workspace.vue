@@ -11,7 +11,7 @@
         :section="section"
       />
     </draggable>
-    <AddSection @addPreset="$emit('addPreset')" />
+    <Add @add="$emit('addPreset')" />
   </div>
 </template>
 
@@ -19,12 +19,12 @@
 import draggable from 'vuedraggable'
 import { mapGetters, mapMutations } from 'vuex'
 import Section from '~/components/Section.vue'
-import AddSection from '~/components/AddSection.vue'
+import Add from '~/components/Add.vue'
 
 export default {
   components: {
     Section,
-    AddSection,
+    Add,
     draggable
   },
   computed: {

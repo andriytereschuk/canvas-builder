@@ -1,29 +1,37 @@
 import { steps } from '~/config/steps.config'
+const defaultProjectState = {
+  id: null,
+  desktop: {
+    rows: []
+  },
+  mobile: {
+    rows: []
+  }
+}
 
 export const state = () => ({
-  project: {
-    id: null,
-    desktop: {
-      rows: []
-    },
-    mobile: {
-      rows: []
-    }
-  },
+  project: defaultProjectState,
   step: steps.desktop
 })
 
 export const actions = {
-  async get({ commit }, { id }) {
+  async fetchProject({ commit, state }, id) {
     let project
 
+    // return if project is already in the store
+    if (state.project.id && state.project.id === id) return Promise.resolve()
+
+    // clean up the state
+    commit('add', defaultProjectState)
+
+    // fetch the project
     try {
       project = await this.$axios.$get(`/api/projects/${id}`)
     } catch (e) {}
 
     if (project) {
       commit('add', {
-        id: `p-${Date.now()}`,
+        id,
         desktop: {
           rows: []
         },

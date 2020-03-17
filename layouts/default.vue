@@ -103,13 +103,8 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Grid',
-          to: '/grid'
-        },
-        {
-          icon: 'mdi-wall',
-          title: 'FlexBox',
-          to: '/flex'
+          title: 'Projects',
+          to: '/projects'
         }
       ],
       miniVariant: false,
@@ -122,7 +117,7 @@ export default {
           href: '/'
         },
         {
-          text: 'All projects',
+          text: 'Projects',
           disabled: false,
           href: '/projects'
         },
