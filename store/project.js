@@ -10,7 +10,8 @@ export const state = () => ({
       rows: []
     }
   },
-  step: steps.desktop
+  step: steps.desktop,
+  projectName: ''
 })
 
 export const actions = {
@@ -96,6 +97,9 @@ export const mutations = {
   },
   setStep(state, step) {
     state.step = step
+  },
+  updateProjectName(state, newName) {
+    state.projectName = newName
   }
 }
 

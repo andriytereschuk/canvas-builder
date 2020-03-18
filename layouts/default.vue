@@ -51,7 +51,29 @@
           slot-scope="{ item }"
           :href="getLink(item)"
         >
-          {{ item.text === 'projectID' ? id : item.text }}
+          <input
+            v-if="edit && item.text === 'projectID'"
+            v-focus=""
+            type="text"
+            :value="name"
+            @blur="
+              updateProjectName($event.target.value)
+              edit = false
+            "
+            @keyup.enter="
+              updateProjectName($event.target.value)
+              edit = false
+            "
+          />
+          <p
+            v-else=""
+            class="breadcrumbs-item"
+            data-hint="rename"
+            :class="item.text === 'projectID' ? 'tooltip tooltip--top' : false"
+            @click="name ? (edit = true) : false"
+          >
+            {{ item.text === 'projectID' ? name : item.text }}
+          </p>
         </v-breadcrumbs-item>
       </v-breadcrumbs>
       <v-spacer />
@@ -93,10 +115,21 @@
 </template>
 
 <script>
+import { createNamespacedHelpers } from 'vuex'
+const { mapState, mapMutations } = createNamespacedHelpers('project')
+
 export default {
+  directives: {
+    focus: {
+      inserted(el) {
+        el.focus()
+      }
+    }
+  },
   middleware: 'redirect',
   data() {
     return {
+      edit: false,
       clipped: false,
       drawer: false,
       fixed: false,
@@ -128,23 +161,82 @@ export default {
         },
         {
           text: 'projectID',
-          disabled: false,
+          disabled: true,
           href: ''
         }
       ]
     }
   },
   computed: {
-    id() {
-      return this.$route.params.id
-    }
+    ...mapState({
+      name: 'projectName'
+    })
   },
   methods: {
     getLink(item) {
-      return this.$route.params.id && item.text === 'projectID'
-        ? this.$route.params.id
-        : item.href
-    }
+      return item.text !== 'projectID' ? item.href : null
+    },
+    ...mapMutations({
+      updateProjectName: 'updateProjectName'
+    })
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.breadcrumbs-item {
+  margin-bottom: 0;
+}
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+.tooltip:before,
+.tooltip:after {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.tooltip:hover:before,
+.tooltip:hover:after {
+  opacity: 1;
+}
+.tooltip:before {
+  content: '';
+  position: absolute;
+  background: #bdbdbd;
+  width: 6px;
+  height: 6px;
+  transform: translateX(-50%) translateY(-45%) rotate(225deg);
+  z-index: 2;
+}
+.tooltip:after {
+  content: attr(data-hint);
+  z-index: 1;
+  padding: 5px 6px;
+  background: #bdbdbd;
+  color: black;
+  text-transform: capitalize;
+  font-size: 12px;
+  white-space: nowrap;
+  transform: translateX(-50%);
+  border-radius: 5px;
+}
+.tooltip--top:before,
+.tooltip--top:after {
+  top: 130%;
+  left: 50%;
+}
+.tooltip--top:hover:before {
+  width: 12px;
+  height: 12px;
+  border: 1px solid #f0f0f0;
+  border-width: 0 1px 1px 0;
+  border-top-left-radius: 100%;
+}
+.tooltip--top:hover:after {
+  border-width: 5px;
+  border-top-color: rgb(29, 104, 189);
+  border: 1px solid #f0f0f0;
+}
+</style>
