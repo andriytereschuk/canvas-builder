@@ -33,7 +33,7 @@
                     :disabled="isDisabled"
                     color="primary"
                     rounded
-                    @click="setProjectName"
+                    @click="createProject"
                   >
                     Create Project
                   </v-btn>
@@ -73,8 +73,21 @@ export default {
       dialog: false,
       title: '',
       rules: [
-        (v) => (v.length <= 25 && v.length >= 6) || 'Min 6 Max 25 characters'
+        (v) =>
+          (v.length <= 25 && v.length >= 6) || 'Min 6 and max 25 characters'
       ],
+      newProject: {
+        id: Date.now(),
+        name: '',
+        created: '',
+        modified: '',
+        desktop: {
+          rows: []
+        },
+        mobile: {
+          rows: []
+        }
+      },
       headers: [
         {
           text: 'Name',
@@ -112,17 +125,28 @@ export default {
       return this.title.length > 25 || this.title.length < 6
     }
   },
-  mounted() {
+  created() {
     this.fetch()
   },
   methods: {
     ...mapActions({
-      fetch: 'projects/get'
+      fetch: 'projects/getAllProjects',
+      addProject: 'projects/addProject',
+      deleteProject: 'projects/deleteProject'
     }),
     ...mapMutations({
       remove: 'projects/remove',
       updateProjectName: 'project/updateProjectName'
     }),
+    createProject() {
+      this.newProject.id = Date.now()
+      this.newProject.created = new Date().toISOString()
+      this.newProject.modified = new Date().toISOString()
+      this.newProject.name = this.title
+      this.addProject(this.newProject)
+      this.dialog = false
+      this.$router.push({ name: 'projects-id', params: { id: Date.now() } })
+    },
     getProjectID(item) {
       const index = this.projects.indexOf(item)
       return this.projects[index].id.toString()
@@ -137,20 +161,13 @@ export default {
       const projectToDeleteID = this.projects[index].id
 
       confirm('Are you sure you want to delete this item?') &&
-        this.remove(projectToDeleteID)
-    },
-    setProjectName() {
-      this.dialog = false
-      this.updateProjectName(this.title)
-      this.$router.push({ name: 'projects-id', params: { id: Date.now() } })
+        this.deleteProject(projectToDeleteID)
     }
+    // setProjectName() {
+    //   this.dialog = false
+    //   // this.updateProjectName(this.title)
+    //   this.$router.push({ name: 'projects-id', params: { id: Date.now() } })
+    // }
   }
 }
 </script>
-
-<style scoped>
-.projects-link {
-  text-decoration: none;
-  color: white;
-}
-</style>

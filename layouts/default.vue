@@ -77,6 +77,10 @@
         </v-breadcrumbs-item>
       </v-breadcrumbs>
       <v-spacer />
+      <v-btn text style="width: 100px; margin-right: 0;" @click="save">
+        <v-icon>mdi-save</v-icon>
+        save
+      </v-btn>
       <v-btn text style="width: 100px; margin-right: 0;">
         <v-icon>mdi-play</v-icon>
         preview
@@ -116,7 +120,9 @@
 
 <script>
 import { createNamespacedHelpers } from 'vuex'
-const { mapState, mapMutations } = createNamespacedHelpers('project')
+const { mapGetters, mapMutations, mapActions } = createNamespacedHelpers(
+  'project'
+)
 
 export default {
   directives: {
@@ -136,13 +142,8 @@ export default {
       items: [
         {
           icon: 'mdi-apps',
-          title: 'Grid',
-          to: '/grid'
-        },
-        {
-          icon: 'mdi-wall',
-          title: 'FlexBox',
-          to: '/flex'
+          title: 'Projects',
+          to: '/projects'
         }
       ],
       miniVariant: false,
@@ -155,7 +156,7 @@ export default {
           href: '/'
         },
         {
-          text: 'All projects',
+          text: 'Projects',
           disabled: false,
           href: '/projects'
         },
@@ -168,11 +169,12 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      name: 'projectName'
+    ...mapGetters({
+      name: 'getProjectName'
     })
   },
   methods: {
+    ...mapActions(['save']),
     getLink(item) {
       return item.text !== 'projectID' ? item.href : null
     },
