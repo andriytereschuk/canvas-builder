@@ -61,7 +61,6 @@ export const mutations = {
     state.project[state.step].rows = [...state.project[state.step].rows, row]
   },
   attachComponent(state, payload) {
-    console.log(payload)
     const rows = state.project[state.step].rows.map((section) => {
       return {
         zones: section.zones.forEach((zone) => {
