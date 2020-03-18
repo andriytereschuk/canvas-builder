@@ -10,11 +10,8 @@
         <v-toolbar-title>All projects</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <nuxt-link
-          :to="{ name: 'projects-id', params: { id: Date.now() } }"
-          class="projects-link"
-        >
-          <v-btn color="primary">New project</v-btn>
+        <nuxt-link :to="`/projects/${newProject.id}`" class="projects-link">
+          <v-btn color="primary" @click="createProject">New project</v-btn>
         </nuxt-link>
       </v-toolbar>
     </template>
@@ -41,14 +38,24 @@
 <script>
 import { createNamespacedHelpers } from 'vuex'
 
-const { mapGetters, mapActions, mapMutations } = createNamespacedHelpers(
-  'projects'
-)
+const { mapGetters, mapActions } = createNamespacedHelpers('projects')
 
 export default {
   data: () => {
     return {
       dialog: false,
+      newProject: {
+        id: Date.now(),
+        name: 'New Project',
+        created: '',
+        modified: '',
+        desktop: {
+          rows: []
+        },
+        mobile: {
+          rows: []
+        }
+      },
       headers: [
         {
           text: 'Name',
@@ -88,11 +95,16 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetch: 'get'
+      fetch: 'getAllProjects',
+      addProject: 'addProject',
+      deleteProject: 'deleteProject'
     }),
-    ...mapMutations({
-      remove: 'remove'
-    }),
+    createProject() {
+      this.newProject.id = Date.now()
+      this.newProject.created = new Date().toISOString()
+      this.newProject.modified = new Date().toISOString()
+      this.addProject(this.newProject)
+    },
     getProjectID(item) {
       const index = this.projects.indexOf(item)
       return this.projects[index].id.toString()
@@ -107,7 +119,7 @@ export default {
       const projectToDeleteID = this.projects[index].id
 
       confirm('Are you sure you want to delete this item?') &&
-        this.remove(projectToDeleteID)
+        this.deleteProject(projectToDeleteID)
     }
   }
 }
