@@ -17,11 +17,10 @@ export default {
   getComponent(id) {
     return apiClient.get('/components/' + id)
   },
-  //   postProject(project) {
-  //     return apiClient.post('/projects', project)
-  //   },
+  saveComponent(component) {
+    return apiClient.put('/components/' + component.id, component)
+  },
   postComponent(component) {
-    console.log(component)
     return apiClient.post('/components/', component)
   },
   deleteComponent(componentId) {
