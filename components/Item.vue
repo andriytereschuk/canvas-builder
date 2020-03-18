@@ -43,9 +43,12 @@ export default {
       return this.getComponentById(this.zone.componentId)
     }
   },
+  created() {
+    this.fetchComponent(this.zone.componentId)
+  },
   methods: {
-    ...mapActions('components', ['attach', 'detach']),
-    ...mapMutations('components', ['add']),
+    ...mapActions('components', ['attach', 'detach', 'fetchComponent']),
+    ...mapMutations('components', ['addComponent']),
     async attachComponent() {
       if (!this.component) {
         // open dialog and wait for picking the item
@@ -59,7 +62,7 @@ export default {
           })
 
         this.zone.componentId = component.id
-        return this.add(component)
+        return this.addComponent(component)
       }
     },
     detachComponent() {
