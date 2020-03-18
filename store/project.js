@@ -2,6 +2,7 @@ import ProjectService from './../services/ProjectService'
 import { steps } from '~/config/steps.config'
 const defaultProjectState = {
   id: null,
+  name: '',
   desktop: {
     rows: []
   },
@@ -103,11 +104,17 @@ export const mutations = {
   },
   setStep(state, step) {
     state.step = step
+  },
+  updateProjectName(state, newName) {
+    state.project.name = newName
   }
 }
 
 export const getters = {
   sections(state) {
     return state.project[state.step].rows
+  },
+  getProjectName(state) {
+    return state.project.name
   }
 }
