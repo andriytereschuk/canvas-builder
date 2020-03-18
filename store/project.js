@@ -1,4 +1,4 @@
-import EventService from './../services/ProjectService'
+import ProjectService from './../services/ProjectService'
 import { steps } from '~/config/steps.config'
 const defaultProjectState = {
   id: null,
@@ -23,28 +23,26 @@ export const actions = {
     if (state.project.id && state.project.id === id) return Promise.resolve()
 
     // clean up the state
-    commit('add', defaultProjectState)
+    commit('addFetchedProject', defaultProjectState)
 
     // fetch the project
     try {
-      res = await EventService.getProject(id)
+      res = await ProjectService.getProject(id)
     } catch (e) {}
 
     if (res) {
-      commit('add', res.data)
+      commit('addFetchedProject', res.data)
     }
   },
   async save() {
     try {
-      await EventService.saveProject(this.state.project.project)
-    } catch (e) {
-      console.log(e)
-    }
+      await ProjectService.saveProject(this.state.project.project)
+    } catch (e) {}
   }
 }
 
 export const mutations = {
-  add(state, project) {
+  addFetchedProject(state, project) {
     state.project = project
   },
   addSection(state, section) {

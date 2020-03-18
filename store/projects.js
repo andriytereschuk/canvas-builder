@@ -1,4 +1,4 @@
-import EventService from './../services/ProjectService'
+import ProjectService from './../services/ProjectService'
 
 export const state = () => ({
   projects: [],
@@ -7,39 +7,39 @@ export const state = () => ({
 })
 
 export const actions = {
-  async get({ commit, perPage, page }) {
+  async getAllProjects({ commit, perPage, page }) {
     let projects
 
     try {
-      projects = await EventService.getProjects(perPage, page)
+      projects = await ProjectService.getProjects(perPage, page)
     } catch (e) {}
 
-    if (projects) commit('add', projects.data)
+    if (projects) commit('addAllProjects', projects.data)
   },
   async addProject(state, project) {
     try {
-      await EventService.postProject(project)
+      await ProjectService.postProject(project)
     } catch (e) {}
 
     state.commit('addProject', project)
   },
   async deleteProject(state, projectID) {
     try {
-      await EventService.deleteProject(projectID)
+      await ProjectService.deleteProject(projectID)
     } catch (e) {}
 
-    state.commit('remove', projectID)
+    state.commit('removeProject', projectID)
   }
 }
 
 export const mutations = {
-  add(state, projects) {
+  addAllProjects(state, projects) {
     state.projects = projects
   },
   addProject(state, project) {
     state.projects = [...state.projects, project]
   },
-  remove(state, projectID) {
+  removeProject(state, projectID) {
     state.projects = [...state.projects].filter(
       (project) => project.id !== projectID
     )

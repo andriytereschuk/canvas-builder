@@ -95,7 +95,7 @@ export default {
   },
   methods: {
     ...mapActions({
-      fetch: 'get',
+      fetch: 'getAllProjects',
       addProject: 'addProject',
       deleteProject: 'deleteProject'
     }),
