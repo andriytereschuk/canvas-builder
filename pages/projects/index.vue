@@ -163,11 +163,6 @@ export default {
       confirm('Are you sure you want to delete this item?') &&
         this.deleteProject(projectToDeleteID)
     }
-    // setProjectName() {
-    //   this.dialog = false
-    //   // this.updateProjectName(this.title)
-    //   this.$router.push({ name: 'projects-id', params: { id: Date.now() } })
-    // }
   }
 }
 </script>
