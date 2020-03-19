@@ -7,7 +7,7 @@
       <v-toolbar-title>{{ component.type | capitalize }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn dark text @click="getBack">Save</v-btn>
+        <v-btn dark text @click="saveComponentContent">Save</v-btn>
       </v-toolbar-items>
     </v-toolbar>
 
@@ -105,7 +105,12 @@ export default {
     }
   },
   methods: {
-    ...mapActions('components', ['fetchComponent']),
+    ...mapActions('components', ['fetchComponent', 'saveComponent']),
+    saveComponentContent() {
+      const editedComponent = { ...this.component, model: this.model }
+      this.saveComponent(editedComponent)
+      this.getBack()
+    },
     getBack() {
       this.$router.go(-1)
     },
