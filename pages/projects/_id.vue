@@ -26,7 +26,7 @@ export default {
     CustomPreset
   },
   created() {
-    this.fetchProject(+this.$route.params.id)
+    this.getProject(+this.$route.params.id)
   },
   provide() {
     return {
@@ -34,7 +34,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('project', ['fetchProject']),
+    ...mapActions('project', ['getProject']),
     addPreset() {
       return this.$refs.presets.open()
     },

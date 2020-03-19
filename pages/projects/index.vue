@@ -120,26 +120,19 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      projects: 'projects/filtered'
+    ...mapGetters('project', {
+      projects: 'filtered'
     }),
     isDisabled() {
       return this.title.length > 25 || this.title.length < 6
     }
   },
   created() {
-    this.fetch()
+    this.getProjects()
   },
   methods: {
-    ...mapActions({
-      fetch: 'projects/getAllProjects',
-      addProject: 'projects/addProject',
-      deleteProject: 'projects/deleteProject'
-    }),
-    ...mapMutations({
-      remove: 'projects/remove',
-      updateProjectName: 'project/updateProjectName'
-    }),
+    ...mapActions('project', ['getProjects', 'addProject', 'deleteProject']),
+    ...mapMutations('project', ['updateProjectName']),
     createProject() {
       this.newProject.id = Date.now()
       this.newProject.created = new Date().toISOString()

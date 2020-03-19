@@ -77,7 +77,7 @@
         </v-breadcrumbs-item>
       </v-breadcrumbs>
       <v-spacer />
-      <v-btn text style="width: 100px; margin-right: 0;" @click="save">
+      <v-btn text style="width: 100px; margin-right: 0;" @click="saveProject">
         <v-icon>mdi-save</v-icon>
         save
       </v-btn>
@@ -119,10 +119,7 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-const { mapGetters, mapMutations, mapActions } = createNamespacedHelpers(
-  'project'
-)
+import { mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   directives: {
@@ -169,18 +166,16 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      name: 'getProjectName'
+    ...mapGetters('project', {
+      name: 'projectName'
     })
   },
   methods: {
-    ...mapActions(['save']),
+    ...mapActions('project', ['saveProject']),
     getLink(item) {
       return item.text !== 'projectID' ? item.href : null
     },
-    ...mapMutations({
-      updateProjectName: 'updateProjectName'
-    })
+    ...mapMutations('project', ['updateProjectName'])
   }
 }
 </script>

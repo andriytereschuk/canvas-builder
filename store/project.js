@@ -1,5 +1,6 @@
 import ProjectService from './../services/ProjectService'
 import { steps } from '~/config/steps.config'
+
 const defaultProjectState = {
   id: null,
   name: '',
@@ -12,19 +13,24 @@ const defaultProjectState = {
 }
 
 export const state = () => ({
+  projects: [],
   project: defaultProjectState,
-  step: steps.desktop
+  step: steps.desktop,
+  projectsPerPage: 100,
+  projectsPage: 1,
+  componentsPerPage: 100,
+  componentsPage: 1
 })
 
 export const actions = {
-  async fetchProject({ commit, state }, id) {
+  async getProject({ commit, state }, id) {
     let res
 
     // return if project is already in the store
     if (state.project.id && state.project.id === id) return Promise.resolve()
 
     // clean up the state
-    commit('addFetchedProject', defaultProjectState)
+    commit('addFetchedProjectToStore', defaultProjectState)
 
     // fetch the project
     try {
@@ -32,18 +38,52 @@ export const actions = {
     } catch (e) {}
 
     if (res) {
-      commit('addFetchedProject', res.data)
+      commit('addFetchedProjectToStore', res.data)
     }
   },
-  async save() {
+  async addProject(state, project) {
+    try {
+      await ProjectService.postProject(project)
+    } catch (e) {}
+
+    state.commit('addProjectToProjects', project)
+  },
+  async saveProject() {
     try {
       await ProjectService.saveProject(this.state.project.project)
     } catch (e) {}
+  },
+  async deleteProject(state, projectID) {
+    try {
+      await ProjectService.deleteProject(projectID)
+    } catch (e) {}
+
+    state.commit('deleteProjectFromStore', projectID)
+  },
+  async getProjects({ commit, projectsPerPage, page }) {
+    let projects
+
+    try {
+      projects = await ProjectService.getProjects(projectsPerPage, page)
+    } catch (e) {}
+
+    if (projects) commit('addProjectsToStore', projects.data)
   }
 }
 
 export const mutations = {
-  addFetchedProject(state, project) {
+  addProjectToProjects(state, project) {
+    state.projects = [...state.projects, project]
+  },
+  addProjectsToStore(state, projects) {
+    state.projects = projects
+  },
+  deleteProjectFromStore(state, projectID) {
+    state.projects = [...state.projects].filter(
+      (project) => project.id !== projectID
+    )
+  },
+  addFetchedProjectToStore(state, project) {
     state.project = project
   },
   addSection(state, section) {
@@ -113,7 +153,13 @@ export const getters = {
   sections(state) {
     return state.project[state.step].rows
   },
-  getProjectName(state) {
+  projectName(state) {
     return state.project.name
+  },
+  filtered(state) {
+    const { projects } = state
+    return [...projects].sort((prev, next) => {
+      return new Date(prev.date) - new Date(next.date)
+    })
   }
 }
