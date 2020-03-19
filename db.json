@@ -607,6 +607,60 @@
         "autoplay": true,
         "items": []
       }
+    },
+    {
+      "id": 1584637755234,
+      "category": "store",
+      "type": "productCard",
+      "model": {
+        "title": "",
+        "subtitle": "",
+        "description": "",
+        "image": "https://www.thebristolarms.com.au/wp-content/uploads/2018/03/img-not-found.png",
+        "price": "",
+        "rating": true,
+        "actionIcons": {
+          "wishList": true,
+          "bookmark": true,
+          "share": true
+        }
+      }
+    },
+    {
+      "id": 1584637911035,
+      "category": "store",
+      "type": "productCard",
+      "model": {
+        "title": "",
+        "subtitle": "",
+        "description": "",
+        "image": "",
+        "price": "",
+        "rating": true,
+        "actionIcons": {
+          "wishList": true,
+          "bookmark": true,
+          "share": true
+        }
+      }
+    },
+    {
+      "id": 1584637997362,
+      "category": "store",
+      "type": "productCard",
+      "model": {
+        "title": "Product",
+        "subtitle": "",
+        "description": "",
+        "image": "",
+        "price": "100",
+        "rating": false,
+        "actionIcons": {
+          "wishList": true,
+          "bookmark": false,
+          "share": true
+        }
+      }
     }
   ]
 }
