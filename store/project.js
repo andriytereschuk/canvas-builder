@@ -40,11 +40,10 @@ export const actions = {
     }
   },
   async createProject(state, project) {
+    state.commit('addProjectToProjects', project)
     try {
       await ProjectService.postProject(project)
     } catch (e) {}
-
-    state.commit('addProjectToProjects', project)
   },
   async saveProject() {
     try {
