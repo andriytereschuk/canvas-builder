@@ -29,14 +29,16 @@
               </v-card-text>
               <v-card-actions>
                 <v-row justify="center">
-                  <v-btn
-                    :disabled="isDisabled"
-                    color="primary"
-                    rounded
-                    @click="createProject"
-                  >
-                    Create Project
-                  </v-btn>
+                  <nuxt-link :to="`projects/${newProject.id.toString()}`">
+                    <v-btn
+                      :disabled="isDisabled"
+                      color="primary"
+                      rounded
+                      @click="createProject"
+                    >
+                      Create Project
+                    </v-btn>
+                  </nuxt-link>
                 </v-row>
               </v-card-actions>
             </v-card>
@@ -145,7 +147,6 @@ export default {
       this.newProject.name = this.title
       this.addProject(this.newProject)
       this.dialog = false
-      this.$router.push({ name: 'projects-id', params: { id: Date.now() } })
     },
     getProjectID(item) {
       const index = this.projects.indexOf(item)
