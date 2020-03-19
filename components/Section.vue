@@ -10,6 +10,7 @@
     >
       <Item :zone="zone" draggable />
     </div>
+    <v-icon class="delete-icon">mdi-delete</v-icon>
   </div>
 </template>
 
@@ -116,5 +117,15 @@ export default {
 .position {
   box-sizing: border-box;
   padding: 2px;
+}
+
+.delete-icon {
+  position: absolute;
+  right: -25px;
+  color: palevioletred;
+
+  &:hover {
+    color: red;
+  }
 }
 </style>

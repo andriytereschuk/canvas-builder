@@ -85,8 +85,7 @@ export default {
       'updateColumns',
       'updateRows',
       'resetGrid',
-      'adjustArr',
-      'project/addSection'
+      'adjustArr'
     ]),
     ...mapMutations('project', ['addSection']),
     ApplyPreset() {
