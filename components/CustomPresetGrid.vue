@@ -48,12 +48,8 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
+import { mapGetters, mapState, mapMutations } from 'vuex'
 import { createZone, parseToObject, isIntersect } from '~/utils/helpers'
-
-const { mapGetters, mapState, mapMutations } = createNamespacedHelpers(
-  'customPreset'
-)
 
 export default {
   data() {
@@ -62,26 +58,22 @@ export default {
     }
   },
   computed: {
-    ...mapState({
-      colArr: 'colArr',
-      rowArr: 'rowArr',
-      columns: 'columns',
-      rows: 'rows',
-      zones: 'zones',
-      previewZone: 'previewZone'
-    }),
-    ...mapGetters({
-      rowTemplate: 'rowTemplate',
-      colTemplate: 'colTemplate',
-      divNum: 'divNum'
-    })
+    ...mapState('customPreset', [
+      'colArr',
+      'rowArr',
+      'columns',
+      'rows',
+      'zones',
+      'previewZone'
+    ]),
+    ...mapGetters('customPreset', ['rowTemplate', 'colTemplate', 'divNum'])
   },
   methods: {
-    ...mapMutations({
-      addZoneItem: 'addZoneItem',
-      removeZoneItem: 'removeZoneItem',
-      updateZonePreview: 'updateZonePreview'
-    }),
+    ...mapMutations('customPreset', [
+      'addZoneItem',
+      'removeZoneItem',
+      'updateZonePreview'
+    ]),
     placeZone(item, startendhover) {
       if (
         startendhover === 'hover' &&

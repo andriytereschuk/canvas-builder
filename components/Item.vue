@@ -38,7 +38,7 @@ export default {
   },
   inject: ['openComponentMenu'],
   computed: {
-    ...mapGetters('components', ['getComponentById']),
+    ...mapGetters('component', ['getComponentById']),
     component() {
       return this.getComponentById(this.zone.componentId)
     }
@@ -47,8 +47,8 @@ export default {
     this.fetchComponent(this.zone.componentId)
   },
   methods: {
-    ...mapActions('components', ['attach', 'detach', 'fetchComponent']),
-    ...mapMutations('components', ['addComponent']),
+    ...mapActions('component', ['attach', 'detach', 'fetchComponent']),
+    ...mapMutations('component', ['addComponent']),
     async attachComponent() {
       if (!this.component) {
         // open dialog and wait for picking the item

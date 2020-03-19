@@ -10,6 +10,9 @@
     >
       <Item :zone="zone" draggable />
     </div>
+    <v-btn icon class="delete-icon-btn" @click="deleteSection(section.id)">
+      <v-icon class="delete-icon">mdi-delete</v-icon>
+    </v-btn>
   </div>
 </template>
 
@@ -35,7 +38,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('project', ['changeZonesOrder']),
+    ...mapMutations('project', ['changeZonesOrder', 'deleteSection']),
     getZone(e, fromZone) {
       e.dataTransfer.effectAllowed = 'move'
       e.dataTransfer.dropEffect = 'move'
@@ -116,5 +119,17 @@ export default {
 .position {
   box-sizing: border-box;
   padding: 2px;
+}
+
+.delete-icon-btn {
+  position: absolute;
+  right: -35px;
+}
+
+.delete-icon {
+  &:hover {
+    color: red;
+    cursor: pointer;
+  }
 }
 </style>

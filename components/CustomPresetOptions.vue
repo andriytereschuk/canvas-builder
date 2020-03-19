@@ -57,6 +57,7 @@
 <script>
 import { mapState, mapMutations } from 'vuex'
 import { parseToObject } from '~/utils/helpers'
+
 export default {
   computed: {
     ...mapState('customPreset', ['columns', 'rows', 'zones'])
@@ -84,8 +85,7 @@ export default {
       'updateColumns',
       'updateRows',
       'resetGrid',
-      'adjustArr',
-      'projects/addSection'
+      'adjustArr'
     ]),
     ...mapMutations('project', ['addSection']),
     ApplyPreset() {

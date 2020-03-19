@@ -85,7 +85,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('components', ['getComponentById']),
+    ...mapGetters('component', ['getComponentById']),
     ...mapState('project', ['project']),
     schema() {
       const { category, type } = this.component
@@ -105,7 +105,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('components', ['fetchComponent', 'saveComponent']),
+    ...mapActions('component', ['fetchComponent', 'saveComponent']),
     saveComponentContent() {
       const editedComponent = { ...this.component, model: this.model }
       this.saveComponent(editedComponent)

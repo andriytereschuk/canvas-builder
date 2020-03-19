@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
+import { mapMutations } from 'vuex'
 import CustomPresetGrid from './CustomPresetGrid'
 import CustomPresetOptions from './CustomPresetOptions'
-const { mapMutations } = createNamespacedHelpers('customPreset')
+
 export default {
   components: {
     CustomPresetOptions,
@@ -45,9 +45,7 @@ export default {
     this.initialArrIndex()
   },
   methods: {
-    ...mapMutations({
-      initialArrIndex: 'initialArrIndex'
-    }),
+    ...mapMutations('customPreset', ['initialArrIndex']),
     open() {
       this.dialog = true
     },
