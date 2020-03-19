@@ -1,7 +1,9 @@
-import ComponentService from '../services/ComponentService'
+import ComponentService from '~/services/ComponentService'
 
 export const state = () => ({
-  components: []
+  components: [],
+  componentsPerPage: 100,
+  componentsPage: 1
 })
 
 export const actions = {

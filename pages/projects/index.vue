@@ -37,7 +37,7 @@
                       :disabled="isDisabled"
                       color="primary"
                       rounded
-                      @click="createProject"
+                      @click="createNewProject"
                     >
                       Create Project
                     </v-btn>
@@ -134,14 +134,14 @@ export default {
     this.getProjects()
   },
   methods: {
-    ...mapActions('project', ['getProjects', 'addProject', 'deleteProject']),
+    ...mapActions('project', ['getProjects', 'createProject', 'deleteProject']),
     ...mapMutations('project', ['updateProjectName']),
-    createProject() {
+    createNewProject() {
       this.newProject.id = Date.now()
       this.newProject.created = new Date().toISOString()
       this.newProject.modified = new Date().toISOString()
       this.newProject.name = this.title
-      this.addProject(this.newProject)
+      this.createProject(this.newProject)
       this.dialog = false
     },
     getProjectID(item) {
