@@ -145,7 +145,7 @@ export const componentConfig = {
         title: '',
         subtitle: '',
         description: '',
-        image: '',
+        image: ``,
         price: '',
         rating: true,
         actionIcons: {
