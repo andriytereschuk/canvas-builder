@@ -131,15 +131,17 @@ export const mutations = {
   },
   changeZonesOrder(state, dragData) {
     const { selectedSection, fromZone, toZoneID, componentIdToMove } = dragData
-    const newZonesSet = selectedSection.zones.map((zone) => {
-      if (zone.id === toZoneID) {
-        fromZone.componentId = zone.componentId
-        zone.componentId = componentIdToMove
-      }
-      return zone
-    })
+    if (componentIdToMove) {
+      const newZonesSet = selectedSection.zones.map((zone) => {
+        if (zone.id === toZoneID) {
+          fromZone.componentId = zone.componentId
+          zone.componentId = componentIdToMove
+        }
+        return zone
+      })
 
-    selectedSection.zones = newZonesSet
+      selectedSection.zones = newZonesSet
+    }
   },
   setStep(state, step) {
     state.step = step

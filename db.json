@@ -488,6 +488,15 @@
         "autoplay": false,
         "items": []
       }
+    },
+    {
+      "id": 1584616129289,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
     }
   ]
 }
