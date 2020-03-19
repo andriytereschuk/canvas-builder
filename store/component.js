@@ -1,4 +1,4 @@
-import ComponentService from './../services/ComponentService'
+import ComponentService from '../services/ComponentService'
 
 export const state = () => ({
   components: []

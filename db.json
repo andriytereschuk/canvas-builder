@@ -368,6 +368,40 @@
       "mobile": {
         "rows": []
       }
+    },
+    {
+      "id": 1584611629555,
+      "name": "sadasdasdasd",
+      "created": "2020-03-19T09:53:49.556Z",
+      "modified": "2020-03-19T09:53:49.556Z",
+      "desktop": {
+        "rows": [
+          {
+            "zones": [
+              {
+                "id": "zone-0-1584611631742",
+                "componentId": 1584611634081,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 2
+                  }
+                }
+              }
+            ],
+            "columns": 1,
+            "rows": 1,
+            "id": "row-1584611631743"
+          }
+        ]
+      },
+      "mobile": {
+        "rows": []
+      }
     }
   ],
   "components": [
@@ -610,6 +644,15 @@
       "model": {
         "autoplay": true,
         "items": []
+      }
+    },
+    {
+      "id": 1584611634081,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "title": "asda",
+        "subtitle": "asdadsa"
       }
     }
   ]
