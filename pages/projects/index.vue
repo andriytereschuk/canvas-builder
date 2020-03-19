@@ -10,12 +10,38 @@
         <v-toolbar-title>All projects</v-toolbar-title>
         <v-divider class="mx-4" inset vertical></v-divider>
         <v-spacer></v-spacer>
-        <nuxt-link
-          :to="{ name: 'projects-id', params: { id: Date.now() } }"
-          class="projects-link"
-        >
-          <v-btn color="primary">New project</v-btn>
-        </nuxt-link>
+        <template>
+          <v-dialog v-model="dialog" max-width="350">
+            <template v-slot:activator="{ on }">
+              <v-btn color="primary" v-on="on">New project</v-btn>
+            </template>
+            <v-card>
+              <v-card-title class="headline">New Project</v-card-title>
+              <v-card-text>
+                <v-col>
+                  <v-text-field
+                    v-model="title"
+                    :rules="rules"
+                    counter="25"
+                    label="Enter a valid project name"
+                  ></v-text-field>
+                </v-col>
+              </v-card-text>
+              <v-card-actions>
+                <v-row justify="center">
+                  <v-btn
+                    :disabled="isDisabled"
+                    color="primary"
+                    rounded
+                    @click="createProject"
+                  >
+                    Create Project
+                  </v-btn>
+                </v-row>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </template>
       </v-toolbar>
     </template>
 
@@ -39,16 +65,29 @@
 </template>
 
 <script>
-import { createNamespacedHelpers } from 'vuex'
-
-const { mapGetters, mapActions, mapMutations } = createNamespacedHelpers(
-  'projects'
-)
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
   data: () => {
     return {
       dialog: false,
+      title: '',
+      rules: [
+        (v) =>
+          (v.length <= 25 && v.length >= 6) || 'Min 6 and max 25 characters'
+      ],
+      newProject: {
+        id: Date.now(),
+        name: '',
+        created: '',
+        modified: '',
+        desktop: {
+          rows: []
+        },
+        mobile: {
+          rows: []
+        }
+      },
       headers: [
         {
           text: 'Name',
@@ -80,19 +119,34 @@ export default {
   },
   computed: {
     ...mapGetters({
-      projects: 'filtered'
-    })
+      projects: 'projects/filtered'
+    }),
+    isDisabled() {
+      return this.title.length > 25 || this.title.length < 6
+    }
   },
-  mounted() {
+  created() {
     this.fetch()
   },
   methods: {
     ...mapActions({
-      fetch: 'get'
+      fetch: 'projects/getAllProjects',
+      addProject: 'projects/addProject',
+      deleteProject: 'projects/deleteProject'
     }),
     ...mapMutations({
-      remove: 'remove'
+      remove: 'projects/remove',
+      updateProjectName: 'project/updateProjectName'
     }),
+    createProject() {
+      this.newProject.id = Date.now()
+      this.newProject.created = new Date().toISOString()
+      this.newProject.modified = new Date().toISOString()
+      this.newProject.name = this.title
+      this.addProject(this.newProject)
+      this.dialog = false
+      this.$router.push({ name: 'projects-id', params: { id: Date.now() } })
+    },
     getProjectID(item) {
       const index = this.projects.indexOf(item)
       return this.projects[index].id.toString()
@@ -107,7 +161,7 @@ export default {
       const projectToDeleteID = this.projects[index].id
 
       confirm('Are you sure you want to delete this item?') &&
-        this.remove(projectToDeleteID)
+        this.deleteProject(projectToDeleteID)
     }
   }
 }

@@ -1,42 +1,49 @@
+import ProjectService from './../services/ProjectService'
 import { steps } from '~/config/steps.config'
+const defaultProjectState = {
+  id: null,
+  name: '',
+  desktop: {
+    rows: []
+  },
+  mobile: {
+    rows: []
+  }
+}
 
 export const state = () => ({
-  project: {
-    id: null,
-    desktop: {
-      rows: []
-    },
-    mobile: {
-      rows: []
-    }
-  },
+  project: defaultProjectState,
   step: steps.desktop
 })
 
 export const actions = {
-  async get({ commit }, { id }) {
-    let project
+  async fetchProject({ commit, state }, id) {
+    let res
 
+    // return if project is already in the store
+    if (state.project.id && state.project.id === id) return Promise.resolve()
+
+    // clean up the state
+    commit('addFetchedProject', defaultProjectState)
+
+    // fetch the project
     try {
-      project = await this.$axios.$get(`/api/projects/${id}`)
+      res = await ProjectService.getProject(id)
     } catch (e) {}
 
-    if (project) {
-      commit('add', {
-        id: `p-${Date.now()}`,
-        desktop: {
-          rows: []
-        },
-        mobile: {
-          rows: []
-        }
-      })
+    if (res) {
+      commit('addFetchedProject', res.data)
     }
+  },
+  async save() {
+    try {
+      await ProjectService.saveProject(this.state.project.project)
+    } catch (e) {}
   }
 }
 
 export const mutations = {
-  add(state, project) {
+  addFetchedProject(state, project) {
     state.project = project
   },
   addSection(state, section) {
@@ -96,11 +103,17 @@ export const mutations = {
   },
   setStep(state, step) {
     state.step = step
+  },
+  updateProjectName(state, newName) {
+    state.project.name = newName
   }
 }
 
 export const getters = {
   sections(state) {
     return state.project[state.step].rows
+  },
+  getProjectName(state) {
+    return state.project.name
   }
 }

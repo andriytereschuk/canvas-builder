@@ -1,13 +1,13 @@
 .json-theme {
-  background: #111111;
-  color: #ffffff;
+  background: transparent;
+  color: #fff;
   white-space: nowrap;
   font-size: 14px;
   font-family: Consolas, Menlo, Courier, monospace;
- 
+
   .jv-ellipsis {
-    color: #ffffff;
-    background-color: #111111;
+    color: #fff;
+    background-color: transparent;
     display: inline-block;
     line-height: 0.9;
     font-size: 0.9em;
@@ -18,13 +18,13 @@
     user-select: none;
   }
   .jv-button { color: #49b3ff }
-  .jv-key { color: #ffffff }
+  .jv-key { color: #fff }
   .jv-item {
-    &.jv-array { color: #111111 }
+    &.jv-array { color: #fff }
     &.jv-boolean { color: #fc1e70 }
     &.jv-function { color: #fc1e70 }
     &.jv-number { color: #e08331 }
-    &.jv-object { color: #ffffff }
+    &.jv-object { color: #fff }
     &.jv-undefined { color: #067bca }
     &.jv-string {
       color: #42b983;
@@ -40,7 +40,7 @@
       }
       &:hover {
         &:before {
-          background: #ffffff;
+          background: #fff;
         }
       }
     }

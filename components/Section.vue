@@ -91,6 +91,10 @@ export default {
   max-width: 1200px;
   margin: 0 auto;
 
+  &:last-child {
+    margin-bottom: 30px;
+  }
+
   & + & {
     margin-top: 30px;
   }
