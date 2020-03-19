@@ -100,6 +100,11 @@ export const mutations = {
 
     state.project[state.step].rows = [...state.project[state.step].rows, row]
   },
+  deleteSection(state, sectionId) {
+    state.project[state.step].rows = state.project[state.step].rows.filter(
+      ({ id }) => id !== sectionId
+    )
+  },
   attachComponent(state, payload) {
     const rows = state.project[state.step].rows.map((section) => {
       return {
