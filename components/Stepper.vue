@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     ...mapMutations('project', ['setStep']),
-    ...mapActions('project', ['save']),
+    ...mapActions('project', ['saveProject']),
     add() {
       return this.$refs.presets.open()
     },
@@ -89,7 +89,7 @@ export default {
       this.stepNumber = stepNumber
 
       if (step === steps.finish) {
-        this.save()
+        this.saveProject()
         return
       }
 

@@ -9,6 +9,7 @@
             type="text"
             :value="name"
             class="project-name"
+            style="font-size: 1.25rem"
             @blur="
               setProjectName($event.target.value)
               edit = false
@@ -26,9 +27,7 @@
             </template>
             <span>Rename</span>
           </v-tooltip>
-
           <v-spacer></v-spacer>
-
           <v-tooltip top>
             <template v-slot:activator="{ on }">
               <v-btn icon @click="save" v-on="on">
@@ -49,7 +48,7 @@
         </v-toolbar>
       </v-card>
     </template>
-    <Stepper style="marginBottom: 20 + 'px'">
+    <Stepper>
       <ComponentsMenu ref="componentsMenu" />
       <Workspace @addPreset="addPreset" />
       <PresetList ref="presets" @openCustomPreset="openCustomPreset" />
@@ -88,11 +87,11 @@ export default {
   },
   computed: {
     ...mapGetters('project', {
-      name: 'getProjectName'
+      name: 'projectName'
     })
   },
   created() {
-    this.fetchProject(+this.$route.params.id)
+    this.getProject(+this.$route.params.id)
   },
   provide() {
     return {
@@ -100,7 +99,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('project', ['fetchProject', 'save']),
+    ...mapActions('project', ['getProject', 'save']),
     ...mapMutations('project', ['updateProjectName']),
     addPreset() {
       return this.$refs.presets.open()
