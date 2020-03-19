@@ -1,5 +1,6 @@
 export const state = () => ({
-  components: []
+  components: [],
+  editable: []
 })
 
 export const actions = {
@@ -27,6 +28,15 @@ export const actions = {
       { root: true }
     )
     commit('remove', component.id)
+  },
+  setEditableModel({ state, commit }, _component) {
+    const isPresent = state.editable.find(
+      (component) => component.id === _component.id
+    )
+
+    if (!isPresent) {
+      commit('addToEditable', _component)
+    }
   }
 }
 
@@ -36,10 +46,29 @@ export const mutations = {
   },
   remove(state, _id) {
     state.components = state.components.filter(({ id }) => id !== _id)
-  }
+  },
+  addToEditable(state, component) {
+    state.editable.push(JSON.parse(JSON.stringify(component)))
+  },
+  addSubitemToEditable(state, subitems) {
+    subitems.push({ componentId: null })
+  },
+  changeEditableModel(state, { id, model }) {
+    state.editable = state.editable.map((component) =>
+      component.id === id
+        ? { model: JSON.parse(JSON.stringify(model)), ...component }
+        : component
+    )
+  },
+  attachToParentComponent(state) {}
 }
 
 export const getters = {
   getComponentById: (state) => (id) =>
-    state.components.find((component) => component.id === id)
+    state.components.find((component) => component.id === id),
+  getEditableModelById: (state) => (id) => {
+    const comp = state.editable.find((component) => component.id === id)
+
+    return comp && comp.model
+  }
 }

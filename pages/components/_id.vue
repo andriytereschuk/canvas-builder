@@ -1,5 +1,5 @@
 <template>
-  <div v-if="component">
+  <div v-if="component && model">
     <v-toolbar dark :style="componentBgColor">
       <v-btn icon dark @click="getBack">
         <v-icon>mdi-close</v-icon>
@@ -35,7 +35,7 @@
                   :key="index"
                   :zone="item"
                 />
-                <Add @add="addItem" />
+                <Add @add="addSubitemToEditable(model.items)" />
               </div>
             </article>
           </v-card>
@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapActions, mapGetters, mapState, mapMutations } from 'vuex'
 import { componentConfig } from '~/config/component.config'
 import { filtersMixin } from '~/mixins/filters.mixins'
 import { componentMixin } from '~/mixins/component.mixin'
@@ -76,7 +76,6 @@ export default {
   data: () => {
     return {
       component: null,
-      model: null,
       formOptions: {
         validateAfterLoad: true,
         validateAfterChanged: true,
@@ -85,12 +84,20 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('components', ['getComponentById']),
+    ...mapGetters('components', ['getComponentById', 'getEditableModelById']),
     ...mapState('project', ['project']),
     schema() {
       const { category, type } = this.component
 
       return componentConfig[category][type].schema
+    },
+    model: {
+      get() {
+        return this.getEditableModelById(+this.$route.params.id)
+      },
+      set(model) {
+        this.changeEditableModel({ id: +this.$route.params.id, model })
+      }
     }
   },
   provide() {
@@ -100,17 +107,19 @@ export default {
   },
   created() {
     this.component = this.getComponentById(+this.$route.params.id)
+
     if (this.component) {
-      this.model = JSON.parse(JSON.stringify(this.component.model))
+      this.setEditableModel(this.component)
     }
   },
   methods: {
-    ...mapActions('components', ['fetchComponent']),
+    ...mapActions('components', ['fetchComponent', 'setEditableModel']),
+    ...mapMutations('components', [
+      'changeEditableModel',
+      'addSubitemToEditable'
+    ]),
     getBack() {
       this.$router.go(-1)
-    },
-    addItem() {
-      this.model.items.push({ componentId: null })
     }
   }
 }

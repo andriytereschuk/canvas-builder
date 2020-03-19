@@ -44,7 +44,11 @@ export default {
     }
   },
   methods: {
-    ...mapActions('components', ['attach', 'detach']),
+    ...mapActions('components', [
+      'attach',
+      'detach',
+      'attachToParentComponent'
+    ]),
     ...mapMutations('components', ['add']),
     async attachComponent() {
       if (!this.component) {
@@ -52,14 +56,12 @@ export default {
         const componentInitialData = await this.openComponentMenu()
         const component = { id: Date.now(), ...componentInitialData }
 
-        if (this.zone.id)
-          return this.attach({
-            id: this.zone.id,
-            component
-          })
-
-        this.zone.componentId = component.id
-        return this.add(component)
+        return this.zone.id
+          ? this.attach({
+              id: this.zone.id,
+              component
+            })
+          : this.attachToParentComponent({ component })
       }
     },
     detachComponent() {
