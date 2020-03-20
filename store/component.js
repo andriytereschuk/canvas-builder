@@ -15,6 +15,8 @@ export const actions = {
     } catch (e) {}
 
     if (component) commit('addComponent', component.data)
+
+    return component.data
   },
   async attach({ commit }, { id, component }) {
     commit('addComponent', component)

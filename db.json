@@ -196,18 +196,6 @@
       "mobile": {
         "rows": []
       }
-    },
-    {
-      "id": 1584627849753,
-      "name": "sdfdsgsdfgdf",
-      "created": "2020-03-19T14:24:09.753Z",
-      "modified": "2020-03-19T14:24:09.753Z",
-      "desktop": {
-        "rows": []
-      },
-      "mobile": {
-        "rows": []
-      }
     }
   ],
   "components": [
@@ -560,15 +548,6 @@
       }
     },
     {
-      "id": 1584626105276,
-      "category": "galleries",
-      "type": "slideshow",
-      "model": {
-        "autoplay": true,
-        "items": []
-      }
-    },
-    {
       "id": 1584626106902,
       "category": "galleries",
       "type": "carousel",
@@ -606,6 +585,24 @@
       "model": {
         "autoplay": true,
         "items": []
+      }
+    },
+    {
+      "id": 1584635574295,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": false,
+        "items": []
+      }
+    },
+    {
+      "id": 1584635587736,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "title": "",
+        "subtitle": ""
       }
     }
   ]

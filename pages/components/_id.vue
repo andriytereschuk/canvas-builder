@@ -99,17 +99,25 @@ export default {
     }
   },
   created() {
-    this.component = this.getComponentById(+this.$route.params.id)
-    if (this.component) {
-      this.model = JSON.parse(JSON.stringify(this.component.model))
+    const componentFromStore = this.getComponentById(+this.$route.params.id)
+    if (!componentFromStore) {
+      try {
+        this.component = this.fetchComponent(this.$route.params.id)
+      } catch (e) {
+        console.log(e)
+      }
+    } else {
+      this.component = componentFromStore
     }
+
+    console.log(this.component)
+    this.model = JSON.parse(JSON.stringify(this.component.model))
   },
   methods: {
     ...mapActions('component', ['fetchComponent', 'saveComponent']),
     saveComponentContent() {
       const editedComponent = { ...this.component, model: this.model }
       this.saveComponent(editedComponent)
-      this.getBack()
     },
     getBack() {
       this.$router.go(-1)

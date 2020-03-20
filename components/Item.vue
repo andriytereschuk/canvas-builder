@@ -13,7 +13,7 @@
         class="mx-2"
         :to="{ name: 'components-id', params: { id: component.id } }"
       >
-        <v-btn fab small color="primary">
+        <v-btn fab small color="primary" @click="saveComponent(component)">
           <v-icon>mdi-cog-outline</v-icon>
         </v-btn>
       </nuxt-link>
@@ -47,7 +47,12 @@ export default {
     this.fetchComponent(this.zone.componentId)
   },
   methods: {
-    ...mapActions('component', ['attach', 'detach', 'fetchComponent']),
+    ...mapActions('component', [
+      'attach',
+      'detach',
+      'fetchComponent',
+      'saveComponent'
+    ]),
     ...mapMutations('component', ['addComponent']),
     async attachComponent() {
       if (!this.component) {
