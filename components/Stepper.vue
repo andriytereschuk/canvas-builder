@@ -105,7 +105,7 @@ export default {
   margin: auto;
 }
 .stepper-content__wrapper {
-  padding: 20px;
+  padding: 40px;
 }
 
 button {

@@ -64,7 +64,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import { componentConfig } from '~/config/component.config'
 import { filtersMixin } from '~/mixins/filters.mixins'
 import { componentMixin } from '~/mixins/component.mixin'
@@ -79,8 +79,7 @@ export default {
   mixins: [filtersMixin, componentMixin],
   data: () => {
     return {
-      component: null,
-      model: null,
+      model: {},
       formOptions: {
         validateAfterLoad: true,
         validateAfterChanged: true,
@@ -89,12 +88,25 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('component', ['getComponentById']),
     ...mapState('project', ['project']),
     schema() {
       const { category, type } = this.component
-
-      return componentConfig[category][type].schema
+      const schema = category && type && componentConfig[category][type].schema
+      return schema || {}
+    }
+  },
+  asyncComputed: {
+    component: {
+      get() {
+        return this.getComponentById(+this.$route.params.id).then((res) => {
+          if (res) {
+            this.model = JSON.parse(JSON.stringify(res.model))
+            return res
+          }
+          return {}
+        })
+      },
+      default: {}
     }
   },
   provide() {
@@ -102,14 +114,12 @@ export default {
       openComponentMenu: () => this.$refs.componentsMenu.open()
     }
   },
-  created() {
-    this.component = this.getComponentById(+this.$route.params.id)
-    if (this.component) {
-      this.model = JSON.parse(JSON.stringify(this.component.model))
-    }
-  },
   methods: {
-    ...mapActions('component', ['fetchComponent', 'saveComponent']),
+    ...mapActions('component', [
+      'fetchComponent',
+      'saveComponent',
+      'getComponentById'
+    ]),
     saveComponentContent() {
       const editedComponent = { ...this.component, model: this.model }
       this.saveComponent(editedComponent)

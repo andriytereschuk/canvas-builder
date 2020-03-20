@@ -99,10 +99,73 @@
       "desktop": {
         "rows": [
           {
+            "columns": 4,
+            "rows": 2,
+            "zones": [
+              {
+                "id": "zone-0-1584721745127",
+                "componentId": null,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 2
+                  }
+                }
+              },
+              {
+                "id": "zone-1-1584721745128",
+                "componentId": null,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 2
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 3
+                  }
+                }
+              },
+              {
+                "id": "zone-2-1584721745128",
+                "componentId": null,
+                "coords": {
+                  "start": {
+                    "x": 2,
+                    "y": 1
+                  },
+                  "end": {
+                    "x": 3,
+                    "y": 3
+                  }
+                }
+              },
+              {
+                "id": "zone-3-1584721745128",
+                "componentId": null,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 3
+                  },
+                  "end": {
+                    "x": 3,
+                    "y": 5
+                  }
+                }
+              }
+            ],
+            "id": "row-1584721745128"
+          },
+          {
             "zones": [
               {
                 "id": "zone-0-1584453361767",
-                "componentId": 1584453363456,
+                "componentId": 1584721358334,
                 "coords": {
                   "start": {
                     "x": 1,
@@ -116,7 +179,7 @@
               },
               {
                 "id": "zone-1-1584453361768",
-                "componentId": null,
+                "componentId": 1584721359564,
                 "coords": {
                   "start": {
                     "x": 1,
@@ -132,11 +195,96 @@
             "columns": 2,
             "rows": 1,
             "id": "row-1584453361768"
+          },
+          {
+            "columns": 3,
+            "rows": 2,
+            "zones": [
+              {
+                "id": "zone-0-1584721742847",
+                "componentId": null,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "end": {
+                    "x": 3,
+                    "y": 3
+                  }
+                }
+              },
+              {
+                "id": "zone-1-1584721742847",
+                "componentId": null,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 3
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 4
+                  }
+                }
+              },
+              {
+                "id": "zone-2-1584721742847",
+                "componentId": null,
+                "coords": {
+                  "start": {
+                    "x": 2,
+                    "y": 3
+                  },
+                  "end": {
+                    "x": 3,
+                    "y": 4
+                  }
+                }
+              }
+            ],
+            "id": "row-1584721742847"
           }
         ]
       },
       "mobile": {
-        "rows": []
+        "rows": [
+          {
+            "columns": 2,
+            "rows": 1,
+            "zones": [
+              {
+                "id": "zone-0-1584721753363",
+                "componentId": null,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 2
+                  }
+                }
+              },
+              {
+                "id": "zone-1-1584721753363",
+                "componentId": null,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 2
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 3
+                  }
+                }
+              }
+            ],
+            "id": "row-1584721753363"
+          }
+        ]
       }
     },
     {
@@ -561,7 +709,7 @@
       "category": "galleries",
       "type": "carousel",
       "model": {
-        "autoplay": true,
+        "autoplay": false,
         "items": []
       }
     },
@@ -648,6 +796,123 @@
           "bookmark": false,
           "share": true
         }
+      }
+    },
+    {
+      "id": 1584717721427,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584717737795,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "title": "",
+        "subtitle": ""
+      }
+    },
+    {
+      "id": 1584717856276,
+      "category": "galleries",
+      "type": "carousel",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584718629972,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584720308263,
+      "category": "store",
+      "type": "productCard",
+      "model": {
+        "title": "",
+        "subtitle": "",
+        "description": "",
+        "image": "",
+        "price": "",
+        "rating": true,
+        "actionIcons": {
+          "wishList": true,
+          "bookmark": true,
+          "share": true
+        }
+      }
+    },
+    {
+      "id": 1584720911654,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584720912982,
+      "category": "galleries",
+      "type": "carousel",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584720914212,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584721004467,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584721005729,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584721358334,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": false,
+        "items": []
+      }
+    },
+    {
+      "id": 1584721359564,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
       }
     }
   ]

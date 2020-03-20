@@ -48,24 +48,28 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   data: () => {
     return {
-      component: null,
       model: null
     }
   },
-  computed: {
-    ...mapGetters('component', ['getComponentById'])
-  },
-  created() {
-    this.component = this.getComponentById(+this.$route.params.id)
-
-    if (this.component) {
-      this.model = JSON.parse(JSON.stringify(this.component.model))
+  asyncComputed: {
+    component: {
+      get() {
+        return this.getComponentById(+this.$route.params.id).then((res) => {
+          if (res) {
+            return res
+          }
+        })
+      },
+      default: {}
     }
+  },
+  methods: {
+    ...mapActions('component', ['getComponentById'])
   }
 }
 </script>
