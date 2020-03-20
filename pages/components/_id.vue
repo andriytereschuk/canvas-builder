@@ -41,16 +41,7 @@
         </v-col>
         <v-col class="preview">
           <v-card height="100%">
-            <div v-if="component.type === 'productCard'">
-              <ProductCard></ProductCard>
-            </div>
-            <json-viewer
-              v-else
-              :value="model"
-              theme="json-theme"
-              :expand-depth="6"
-              copyable
-            ></json-viewer>
+            <component :is="previewLoader"></component>
           </v-card>
         </v-col>
       </v-row>
@@ -71,11 +62,14 @@ import { componentMixin } from '~/mixins/component.mixin'
 import Item from '~/components/Item'
 import Add from '~/components/Add'
 import ComponentsMenu from '~/components/ComponentsMenu'
-import ProductCard from '~/components/preview/ProductCard'
 
 export default {
   layout: 'simple',
-  components: { Item, Add, ComponentsMenu, ProductCard },
+  components: {
+    Item,
+    Add,
+    ComponentsMenu
+  },
   mixins: [filtersMixin, componentMixin],
   data: () => {
     return {
@@ -85,7 +79,8 @@ export default {
         validateAfterLoad: true,
         validateAfterChanged: true,
         validateAsync: true
-      }
+      },
+      previewComponent: null
     }
   },
   computed: {
@@ -95,6 +90,10 @@ export default {
       const { category, type } = this.component
 
       return componentConfig[category][type].schema
+    },
+
+    previewLoader() {
+      return () => import(`~/components/preview/${this.previewComponent}`)
     }
   },
   provide() {
@@ -104,8 +103,13 @@ export default {
   },
   created() {
     this.component = this.getComponentById(+this.$route.params.id)
+
     if (this.component) {
       this.model = JSON.parse(JSON.stringify(this.component.model))
+
+      this.previewComponent =
+        this.component.type.slice(0, 1).toUpperCase() +
+        this.component.type.slice(1)
     }
   },
   methods: {
