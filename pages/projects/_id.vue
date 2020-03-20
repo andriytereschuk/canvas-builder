@@ -31,7 +31,7 @@
           <v-tooltip top>
             <template v-slot:activator="{ on }">
               <v-btn icon @click="save" v-on="on">
-                <v-icon>fas fa-save</v-icon>
+                <v-icon>mdi-content-save</v-icon>
               </v-btn>
             </template>
             <span>Save</span>
@@ -40,7 +40,7 @@
           <v-tooltip top>
             <template v-slot:activator="{ on }">
               <v-btn icon v-on="on">
-                <v-icon>far fa-eye</v-icon>
+                <v-icon>mdi-eye</v-icon>
               </v-btn>
             </template>
             <span>Preview</span>
