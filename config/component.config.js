@@ -143,20 +143,65 @@ export const componentConfig = {
       color: '#9e94e1',
       model: {
         title: '',
-        subtitle: ''
+        subtitle: '',
+        description: '',
+        image: '',
+        price: '',
+        rating: true,
+        actionIcons: {
+          wishList: true,
+          bookmark: true,
+          share: true
+        }
       },
       schema: {
         fields: [
           {
             type: 'text',
             title: 'Title',
-            model: 'title',
-            styleClasses: 'form-field--inline'
+            model: 'title'
           },
           {
             type: 'text',
             title: 'Subtitle',
-            model: 'subtitle',
+            model: 'subtitle'
+          },
+          {
+            type: 'text',
+            title: 'Description',
+            model: 'description'
+          },
+          {
+            type: 'text',
+            title: 'Image url',
+            model: 'image'
+          },
+          {
+            type: 'text',
+            title: 'Price',
+            model: 'price'
+          },
+          {
+            type: 'toggle',
+            title: 'Rating',
+            model: 'rating'
+          },
+          {
+            type: 'toggle',
+            title: 'Wish',
+            model: 'actionIcons.wishList',
+            styleClasses: 'form-field--inline'
+          },
+          {
+            type: 'toggle',
+            title: 'Bookmark',
+            model: 'actionIcons.bookmark',
+            styleClasses: 'form-field--inline'
+          },
+          {
+            type: 'toggle',
+            title: 'Share',
+            model: 'actionIcons.share',
             styleClasses: 'form-field--inline'
           }
         ]

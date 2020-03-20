@@ -17,7 +17,6 @@
           <v-card height="100%">
             <article>
               <v-subheader>General</v-subheader>
-
               <vue-form-generator
                 :schema="schema"
                 :model="model"
@@ -42,7 +41,11 @@
         </v-col>
         <v-col class="preview">
           <v-card height="100%">
+            <div v-if="component.type === 'productCard'">
+              <ProductCard></ProductCard>
+            </div>
             <json-viewer
+              v-else
               :value="model"
               theme="json-theme"
               :expand-depth="6"
@@ -68,10 +71,11 @@ import { componentMixin } from '~/mixins/component.mixin'
 import Item from '~/components/Item'
 import Add from '~/components/Add'
 import ComponentsMenu from '~/components/ComponentsMenu'
+import ProductCard from '~/components/preview/ProductCard'
 
 export default {
   layout: 'simple',
-  components: { Item, Add, ComponentsMenu },
+  components: { Item, Add, ComponentsMenu, ProductCard },
   mixins: [filtersMixin, componentMixin],
   data: () => {
     return {
