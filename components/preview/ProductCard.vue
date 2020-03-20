@@ -1,45 +1,45 @@
 <template>
   <div class="product__wrapper">
     <v-card class="product-card" raised>
-      <v-rating
-        v-if="component.model.rating"
-        class="product__raiting"
-        background-color="red lighten-2"
-        color="red accent-4"
-        size="25"
-        hover
-        dense
-      ></v-rating>
-
       <v-img
-        :src="component.model.image"
+        :src="model.image"
         class="align-end product-card__image"
         gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
       >
-        <v-card-title v-text="component.model.title"></v-card-title>
+        <v-rating
+          v-if="model.rating"
+          class="product__raiting"
+          background-color="red lighten-2"
+          color="red accent-4"
+          size="22"
+          hover
+          dense
+        ></v-rating>
+
+        <v-card-title v-text="model.title"></v-card-title>
       </v-img>
 
       <v-card-subtitle class="pb-0">
-        {{ component.model.subtitle }}
+        {{ model.subtitle }}
       </v-card-subtitle>
 
       <v-card-text class="text--primary">
-        <div>{{ component.model.description }}</div>
-        <p class="product-card__price">$ {{ component.model.price }}</p>
+        <div>{{ model.description }}</div>
+        <p class="product-card__price">$ {{ model.price }}</p>
       </v-card-text>
 
       <v-card-actions>
         <v-spacer></v-spacer>
 
-        <v-btn v-if="component.model.actionIcons.wishList" icon>
+        <v-btn v-if="model.actionIcons.wishList" icon>
           <v-icon>mdi-heart</v-icon>
         </v-btn>
 
-        <v-btn v-if="component.model.actionIcons.bookmark" icon>
+        <v-btn v-if="model.actionIcons.bookmark" icon>
           <v-icon>mdi-bookmark</v-icon>
         </v-btn>
 
-        <v-btn v-if="component.model.actionIcons.share" icon>
+        <v-btn v-if="model.actionIcons.share" icon>
           <v-icon>mdi-share-variant</v-icon>
         </v-btn>
       </v-card-actions>
@@ -49,23 +49,32 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { componentMixin } from '~/mixins/component.mixin'
 
 export default {
-  mixins: [componentMixin],
+  data: () => {
+    return {
+      component: null,
+      model: null
+    }
+  },
   computed: {
-    ...mapGetters('component', ['getComponentById']),
-    component() {
-      return this.getComponentById(+this.$route.params.id)
+    ...mapGetters('component', ['getComponentById'])
+  },
+  created() {
+    this.component = this.getComponentById(+this.$route.params.id)
+
+    if (this.component) {
+      this.model = JSON.parse(JSON.stringify(this.component.model))
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 .product__wrapper {
   display: flex;
   justify-content: center;
+  padding: 20px;
 }
 
 .product-card {
@@ -75,8 +84,8 @@ export default {
 
 .product-card__image {
   height: 370px;
-  background: url('https://www.thebristolarms.com.au/wp-content/uploads/2018/03/img-not-found.png')
-    center / cover no-repeat;
+  background: url('../../assets/images/img-not-found.png') center / cover
+    no-repeat;
 }
 
 .product-card__price {
@@ -86,6 +95,9 @@ export default {
 }
 
 .product__raiting {
+  position: absolute;
+  top: 10px;
+  right: 10px;
   display: flex;
   justify-content: flex-end;
 }
