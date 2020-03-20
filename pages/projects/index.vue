@@ -30,6 +30,7 @@
               <v-card-actions>
                 <v-row justify="center">
                   <nuxt-link
+                    style="text-decoration: none"
                     :event="isDisabled ? '' : 'click'"
                     :to="`projects/${newProject.id.toString()}`"
                   >
