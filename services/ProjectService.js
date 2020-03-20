@@ -11,8 +11,10 @@ const apiClient = axios.create({
 })
 
 export default {
-  getProjects(perPage, page) {
-    return apiClient.get('/projects?_limit=' + perPage + '&_page=' + page)
+  getProjects(projectsPerPage, projectsPage) {
+    return apiClient.get(
+      '/projects?_limit=' + projectsPerPage + '&_page=' + projectsPage
+    )
   },
   getProject(id) {
     return apiClient.get('/projects/' + id)

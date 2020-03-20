@@ -29,14 +29,20 @@
               </v-card-text>
               <v-card-actions>
                 <v-row justify="center">
-                  <v-btn
-                    :disabled="isDisabled"
-                    color="primary"
-                    rounded
-                    @click="createProject"
+                  <nuxt-link
+                    style="text-decoration: none"
+                    :event="isDisabled ? '' : 'click'"
+                    :to="`projects/${newProject.id.toString()}`"
                   >
-                    Create Project
-                  </v-btn>
+                    <v-btn
+                      :disabled="isDisabled"
+                      color="primary"
+                      rounded
+                      @click="createNewProject"
+                    >
+                      Create Project
+                    </v-btn>
+                  </nuxt-link>
                 </v-row>
               </v-card-actions>
             </v-card>
@@ -118,34 +124,26 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      projects: 'projects/filtered'
+    ...mapGetters('project', {
+      projects: 'filtered'
     }),
     isDisabled() {
       return this.title.length > 25 || this.title.length < 6
     }
   },
   created() {
-    this.fetch()
+    this.getProjects()
   },
   methods: {
-    ...mapActions({
-      fetch: 'projects/getAllProjects',
-      addProject: 'projects/addProject',
-      deleteProject: 'projects/deleteProject'
-    }),
-    ...mapMutations({
-      remove: 'projects/remove',
-      updateProjectName: 'project/updateProjectName'
-    }),
-    createProject() {
+    ...mapActions('project', ['getProjects', 'createProject', 'deleteProject']),
+    ...mapMutations('project', ['updateProjectName']),
+    createNewProject() {
       this.newProject.id = Date.now()
       this.newProject.created = new Date().toISOString()
       this.newProject.modified = new Date().toISOString()
       this.newProject.name = this.title
-      this.addProject(this.newProject)
+      this.createProject(this.newProject)
       this.dialog = false
-      this.$router.push({ name: 'projects-id', params: { id: Date.now() } })
     },
     getProjectID(item) {
       const index = this.projects.indexOf(item)
