@@ -76,13 +76,17 @@ export default {
         validateAsync: true
       },
       schema: {},
-      previewComponent: {}
+      previewComponent: ''
     }
   },
   computed: {
     ...mapState('project', ['project']),
     previewLoader() {
-      return () => import(`~/components/preview/${this.previewComponent}`)
+      return () => {
+        if (this.previewComponent) {
+          return import(`~/components/preview/${this.previewComponent}`)
+        }
+      }
     }
   },
   asyncComputed: {

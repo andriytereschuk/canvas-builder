@@ -10,7 +10,6 @@ export const actions = {
   async fetchComponent({ commit }, id) {
     const component = await ComponentService.getComponent(id)
     if (component) {
-      console.log('component.data', component.data)
       commit('addComponent', component.data)
       return component.data
     }

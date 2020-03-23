@@ -53,7 +53,9 @@ import { mapActions } from 'vuex'
 export default {
   data: () => {
     return {
-      model: null
+      model: {
+        actionIcons: {}
+      }
     }
   },
   asyncComputed: {
@@ -61,6 +63,7 @@ export default {
       get() {
         return this.getComponentById(+this.$route.params.id).then((res) => {
           if (res) {
+            this.model = JSON.parse(JSON.stringify(res.model))
             return res
           }
         })
