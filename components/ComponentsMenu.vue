@@ -20,15 +20,12 @@
       </v-card>
       <v-card class="components-menu__components-wrapper">
         <v-card flat class="components-menu__heading">
-          <v-card-text
-            v-if="selectedCategory === 'storage'"
-            class="title"
-            size="18px"
-          >
-            Add from {{ selectedCategory }}
-          </v-card-text>
-          <v-card-text v-else class="title" size="18px">
-            Add {{ selectedCategory }}
+          <v-card-text class="title" size="18px">
+            {{
+              selectedCategory === 'storage'
+                ? `Add from ${selectedCategory}`
+                : `Add ${selectedCategory}`
+            }}
           </v-card-text>
           <v-btn
             class="components-menu__btn"
@@ -41,38 +38,28 @@
           </v-btn>
         </v-card>
         <v-divider></v-divider>
-        <v-card v-if="selectedCategory === 'storage'" flat>
+        <v-card flat>
           <v-card-actions class="components-menu__btn-container">
             <v-btn
               v-for="component in selectedCategoryItems"
-              :key="component.id"
+              :key="selectedCategory === 'storage' ? component.id : component"
               height="120px"
               width="120px"
               class="components-menu__category-btn"
               :color="
-                getComponentColor({
-                  category: component.category,
-                  type: component.type
-                })
+                selectedCategory === 'storage'
+                  ? getComponentColor({
+                      category: component.category,
+                      type: component.type
+                    })
+                  : getComponentColor({
+                      category: selectedCategory,
+                      type: component
+                    })
               "
-              @click="selectComponentFromStorage(component)"
+              @click="selectComponent(component)"
             >
-              {{ component.type }}
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-        <v-card v-else flat>
-          <v-card-actions class="components-menu__btn-container">
-            <v-btn
-              v-for="type in selectedCategoryItems"
-              :key="type"
-              height="120px"
-              width="120px"
-              class="components-menu__category-btn"
-              :color="getComponentColor({ category: selectedCategory, type })"
-              @click="selectComponent(type)"
-            >
-              {{ type }}
+              {{ selectedCategory === 'storage' ? component.type : component }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -124,10 +111,6 @@ export default {
     ...mapActions('component', ['fetchComponents']),
     selectCategory(category) {
       this.selectedCategory = category
-    },
-    selectComponentFromStorage(component) {
-      this.selectedComponent = component
-      this.agree()
     },
     selectComponent(type) {
       this.selectedComponent = type

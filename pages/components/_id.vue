@@ -129,7 +129,11 @@ export default {
       this.$router.go(-1)
     },
     addItem() {
-      this.model.items.push({ componentId: null })
+      this.model.items.push({
+        componentId: null
+      })
+      const editedComponent = { ...this.component, model: this.model }
+      this.saveComponent(editedComponent)
     }
   }
 }
