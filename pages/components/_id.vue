@@ -41,16 +41,7 @@
         </v-col>
         <v-col class="preview">
           <v-card height="100%">
-            <div v-if="component.type === 'productCard'">
-              <ProductCard></ProductCard>
-            </div>
-            <json-viewer
-              v-else
-              :value="model"
-              theme="json-theme"
-              :expand-depth="6"
-              copyable
-            ></json-viewer>
+            <component :is="previewLoader"></component>
           </v-card>
         </v-col>
       </v-row>
@@ -71,11 +62,10 @@ import { componentMixin } from '~/mixins/component.mixin'
 import Item from '~/components/Item'
 import Add from '~/components/Add'
 import ComponentsMenu from '~/components/ComponentsMenu'
-import ProductCard from '~/components/preview/ProductCard'
 
 export default {
   layout: 'simple',
-  components: { Item, Add, ComponentsMenu, ProductCard },
+  components: { Item, Add, ComponentsMenu },
   mixins: [filtersMixin, componentMixin],
   data: () => {
     return {
@@ -84,15 +74,15 @@ export default {
         validateAfterLoad: true,
         validateAfterChanged: true,
         validateAsync: true
-      }
+      },
+      schema: {},
+      previewComponent: {}
     }
   },
   computed: {
     ...mapState('project', ['project']),
-    schema() {
-      const { category, type } = this.component
-      const schema = category && type && componentConfig[category][type].schema
-      return schema || {}
+    previewLoader() {
+      return () => import(`~/components/preview/${this.previewComponent}`)
     }
   },
   asyncComputed: {
@@ -101,6 +91,9 @@ export default {
         return this.getComponentById(+this.$route.params.id).then((res) => {
           if (res) {
             this.model = JSON.parse(JSON.stringify(res.model))
+            this.schema = componentConfig[res.category][res.type].schema
+            this.previewComponent =
+              res.type.slice(0, 1).toUpperCase() + res.type.slice(1)
             return res
           }
           return {}
@@ -129,9 +122,7 @@ export default {
       this.$router.go(-1)
     },
     addItem() {
-      this.model.items.push({
-        componentId: null
-      })
+      this.model.items.push({ componentId: null })
       const editedComponent = { ...this.component, model: this.model }
       this.saveComponent(editedComponent)
     }

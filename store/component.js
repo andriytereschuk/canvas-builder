@@ -10,6 +10,7 @@ export const actions = {
   async fetchComponent({ commit }, id) {
     const component = await ComponentService.getComponent(id)
     if (component) {
+      console.log('component.data', component.data)
       commit('addComponent', component.data)
       return component.data
     }
@@ -48,7 +49,7 @@ export const actions = {
   },
   getComponentById({ state, dispatch }, id) {
     if (!state.components.length) {
-      dispatch('fetchComponent', id).then((res) => {
+      return dispatch('fetchComponent', id).then((res) => {
         return res
       })
     } else {
