@@ -9,8 +9,20 @@ export const state = () => ({
 export const actions = {
   async fetchComponent({ commit }, id) {
     const component = await ComponentService.getComponent(id)
-    if (component) commit('addComponent', component.data)
-    return component.data
+    if (component) {
+      commit('addComponent', component.data)
+      return component.data
+    }
+  },
+  async fetchComponents({ state, commit }) {
+    const components = await ComponentService.getComponents(
+      state.componentsPerPage,
+      state.componentsPage
+    )
+    if (components) {
+      commit('addComponents', components.data)
+      return components.data
+    }
   },
   async attach({ commit }, { id, component }) {
     commit('addComponent', component)
@@ -48,6 +60,10 @@ export const actions = {
 export const mutations = {
   addComponent(state, component) {
     state.components.push(component)
+  },
+  addComponents(state, components) {
+    state.components.push(components)
+    state.components = [...new Set(state.components)]
   },
   remove(state, _id) {
     state.components = state.components.filter(({ id }) => id !== _id)

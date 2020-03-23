@@ -1,11 +1,18 @@
 <template>
   <v-dialog v-model="isComponentsMenuOpen" max-width="470px">
     <v-card class="components-menu__wrapper">
-      <v-card>
+      <v-card class="components-menu__categories-list">
+        <v-list-item
+          class="list-item--accented"
+          @click="selectCategory('storage')"
+        >
+          <v-icon class="list-item__icon">mdi-folder</v-icon>
+          STORAGE
+        </v-list-item>
         <v-list-item
           v-for="category in categories"
           :key="category"
-          class="components-menu__categories-list-item"
+          class="components-menu__categories-list__item"
           @click="selectCategory(category)"
         >
           {{ category }}
@@ -13,7 +20,14 @@
       </v-card>
       <v-card class="components-menu__components-wrapper">
         <v-card flat class="components-menu__heading">
-          <v-card-text class="title" size="18px">
+          <v-card-text
+            v-if="selectedCategory === 'storage'"
+            class="title"
+            size="18px"
+          >
+            Add from {{ selectedCategory }}
+          </v-card-text>
+          <v-card-text v-else class="title" size="18px">
             Add {{ selectedCategory }}
           </v-card-text>
           <v-btn
@@ -27,7 +41,27 @@
           </v-btn>
         </v-card>
         <v-divider></v-divider>
-        <v-card flat>
+        <v-card v-if="selectedCategory === 'storage'" flat>
+          <v-card-actions class="components-menu__btn-container">
+            <v-btn
+              v-for="component in selectedCategoryItems"
+              :key="component.id"
+              height="120px"
+              width="120px"
+              class="components-menu__category-btn"
+              :color="
+                getComponentColor({
+                  category: component.category,
+                  type: component.type
+                })
+              "
+              @click="selectComponentFromStorage(component)"
+            >
+              {{ component.type }}
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+        <v-card v-else flat>
           <v-card-actions class="components-menu__btn-container">
             <v-btn
               v-for="type in selectedCategoryItems"
@@ -48,6 +82,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { componentConfig } from '~/config/component.config'
 import { componentMixin } from '~/mixins/component.mixin'
 
@@ -61,17 +96,38 @@ export default {
       componentConfig
     }
   },
+  asyncComputed: {
+    storageComponents: {
+      get() {
+        return this.fetchComponents().then((res) => {
+          if (res) {
+            return res
+          }
+        })
+      },
+      default: []
+    }
+  },
   computed: {
     categories() {
       return Object.keys(componentConfig)
     },
     selectedCategoryItems() {
-      return Object.keys(componentConfig[this.selectedCategory])
+      if (this.selectedCategory !== 'storage') {
+        return Object.keys(componentConfig[this.selectedCategory])
+      } else {
+        return this.storageComponents || 'The storage is empty'
+      }
     }
   },
   methods: {
+    ...mapActions('component', ['fetchComponents']),
     selectCategory(category) {
       this.selectedCategory = category
+    },
+    selectComponentFromStorage(component) {
+      this.selectedComponent = component
+      this.agree()
     },
     selectComponent(type) {
       this.selectedComponent = type
@@ -88,12 +144,23 @@ export default {
       })
     },
     agree() {
-      this.resolve({
-        category: this.selectedCategory,
-        type: this.selectedComponent,
-        model:
-          componentConfig[this.selectedCategory][this.selectedComponent].model
-      })
+      if (this.selectedCategory === 'storage') {
+        this.resolve({
+          category: this.selectedComponent.category,
+          type: this.selectedComponent.type,
+          model:
+            componentConfig[this.selectedComponent.category][
+              this.selectedComponent.type
+            ].model
+        })
+      } else {
+        this.resolve({
+          category: this.selectedCategory,
+          type: this.selectedComponent,
+          model:
+            componentConfig[this.selectedCategory][this.selectedComponent].model
+        })
+      }
       this.closeMenu()
     },
     cancel() {
@@ -122,8 +189,12 @@ export default {
     width: 300px;
   }
 
-  &__categories-list-item {
-    text-transform: uppercase;
+  &__categories-list {
+    padding-top: 10px;
+
+    &__item {
+      text-transform: uppercase;
+    }
   }
 
   &__icon {
@@ -152,5 +223,19 @@ export default {
 
 .v-btn:not(.v-btn--round).v-size--default {
   padding: 0;
+}
+
+.list-item--accented {
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.list-item__icon {
+  margin-right: 5px;
+  margin-bottom: 4px;
 }
 </style>

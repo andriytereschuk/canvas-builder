@@ -62,6 +62,27 @@
             "columns": 2,
             "rows": 1,
             "id": "row-1584453495747"
+          },
+          {
+            "zones": [
+              {
+                "id": "zone-0-1584956045605",
+                "componentId": 1584961000581,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 2
+                  }
+                }
+              }
+            ],
+            "columns": 1,
+            "rows": 1,
+            "id": "row-1584956045606"
           }
         ]
       },
@@ -910,6 +931,86 @@
       "id": 1584721359564,
       "category": "galleries",
       "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584956716863,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584957892177,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584958045418,
+      "category": "videos",
+      "type": "youtube",
+      "model": {
+        "url": ""
+      }
+    },
+    {
+      "id": 1584958090773,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584960812327,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584960890257,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584960934513,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1584961000581,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": false,
+        "items": []
+      }
+    },
+    {
+      "id": 1584961008553,
+      "category": "galleries",
+      "type": "carousel",
       "model": {
         "autoplay": true,
         "items": []

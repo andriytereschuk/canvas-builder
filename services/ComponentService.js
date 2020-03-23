@@ -13,11 +13,13 @@ const apiClient = axios.create({
 export default {
   getComponents(componentsPerPage, componentsPage) {
     return apiClient.get(
-      '/projects?_limit=' + componentsPerPage + '&_page=' + componentsPage
+      '/components?_limit=' + componentsPerPage + '&_page=' + componentsPage
     )
   },
   getComponent(id) {
-    return apiClient.get('/components/' + id)
+    if (id) {
+      return apiClient.get('/components/' + id)
+    }
   },
   saveComponent(component) {
     return apiClient.put('/components/' + component.id, component)
