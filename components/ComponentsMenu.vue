@@ -2,10 +2,7 @@
   <v-dialog v-model="isComponentsMenuOpen" max-width="470px">
     <v-card class="components-menu__wrapper">
       <v-card class="components-menu__categories-list">
-        <v-list-item
-          class="list-item--accented"
-          @click="selectCategory('storage')"
-        >
+        <v-list-item class="list-item--accented" @click="getStorageComponents">
           <v-icon class="list-item__icon">mdi-folder</v-icon>
           STORAGE
         </v-list-item>
@@ -69,7 +66,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapGetters } from 'vuex'
 import { componentConfig } from '~/config/component.config'
 import { componentMixin } from '~/mixins/component.mixin'
 
@@ -83,19 +80,8 @@ export default {
       componentConfig
     }
   },
-  asyncComputed: {
-    storageComponents: {
-      get() {
-        return this.fetchComponents().then((res) => {
-          if (res) {
-            return res
-          }
-        })
-      },
-      default: []
-    }
-  },
   computed: {
+    ...mapGetters('component', ['components']),
     categories() {
       return Object.keys(componentConfig)
     },
@@ -103,12 +89,16 @@ export default {
       if (this.selectedCategory !== 'storage') {
         return Object.keys(componentConfig[this.selectedCategory])
       } else {
-        return this.storageComponents || 'The storage is empty'
+        return this.components || 'The storage is empty'
       }
     }
   },
   methods: {
     ...mapActions('component', ['fetchComponents']),
+    getStorageComponents() {
+      this.selectCategory('storage')
+      this.fetchComponents()
+    },
     selectCategory(category) {
       this.selectedCategory = category
     },

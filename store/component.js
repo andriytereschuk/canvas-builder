@@ -62,8 +62,7 @@ export const mutations = {
     state.components.push(component)
   },
   addComponents(state, components) {
-    state.components.push(components)
-    state.components = [...new Set(state.components)]
+    state.components = components
   },
   remove(state, _id) {
     state.components = state.components.filter(({ id }) => id !== _id)
@@ -72,5 +71,14 @@ export const mutations = {
     state.components = state.components.map((component) => {
       return component.id === componentToSave.id ? componentToSave : component
     })
+  }
+}
+
+export const getters = {
+  storeComponent: (state) => (id) => {
+    return state.components.find((component) => component.id === id)
+  },
+  components: (state) => {
+    return state.components
   }
 }

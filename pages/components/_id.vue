@@ -29,11 +29,7 @@
               <v-subheader>Items</v-subheader>
 
               <div class="items">
-                <Item
-                  v-for="(item, index) in model.items"
-                  :key="index"
-                  :zone="item"
-                />
+                <Item v-for="item in model.items" :key="item.id" :zone="item" />
                 <Add @add="addItem" />
               </div>
             </article>
@@ -55,7 +51,7 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import { componentConfig } from '~/config/component.config'
 import { filtersMixin } from '~/mixins/filters.mixins'
 import { componentMixin } from '~/mixins/component.mixin'
@@ -81,30 +77,25 @@ export default {
   },
   computed: {
     ...mapState('project', ['project']),
+    ...mapGetters('component', ['storeComponent']),
     previewLoader() {
       return () => {
         if (this.previewComponent) {
           return import(`~/components/preview/${this.previewComponent}`)
         }
       }
+    },
+    component() {
+      return this.storeComponent(+this.$route.params.id)
     }
   },
-  asyncComputed: {
-    component: {
-      get() {
-        return this.getComponentById(+this.$route.params.id).then((res) => {
-          if (res) {
-            this.model = JSON.parse(JSON.stringify(res.model))
-            this.schema = componentConfig[res.category][res.type].schema
-            this.previewComponent =
-              res.type.slice(0, 1).toUpperCase() + res.type.slice(1)
-            return res
-          }
-          return {}
-        })
-      },
-      default: {}
-    }
+  created() {
+    this.model = JSON.parse(JSON.stringify(this.component.model))
+    this.schema =
+      componentConfig[this.component.category][this.component.type].schema
+    this.previewComponent =
+      this.component.type.slice(0, 1).toUpperCase() +
+      this.component.type.slice(1)
   },
   provide() {
     return {
@@ -112,11 +103,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('component', [
-      'fetchComponent',
-      'saveComponent',
-      'getComponentById'
-    ]),
+    ...mapActions('component', ['fetchComponent', 'saveComponent']),
     saveComponentContent() {
       const editedComponent = { ...this.component, model: this.model }
       this.saveComponent(editedComponent)

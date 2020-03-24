@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions, mapMutations, mapGetters } from 'vuex'
 import { componentMixin } from '~/mixins/component.mixin'
 
 export default {
@@ -37,28 +37,22 @@ export default {
     }
   },
   inject: ['openComponentMenu'],
-  asyncComputed: {
-    component: {
-      get() {
-        return this.getComponentById(this.zone.componentId).then((res) => {
-          if (res) {
-            return res
-          }
-        })
-      },
-      default: {}
+  computed: {
+    ...mapGetters('component', ['storeComponent']),
+    component() {
+      return this.storeComponent(this.zone.componentId)
     }
   },
-  created() {
-    this.fetchComponent(this.zone.componentId)
+  serverPrefetch() {
+    return this.fetchComponent(this.zone.componentId)
+  },
+  mounted() {
+    if (!this.component && this.zone.componentId) {
+      this.fetchComponent(this.zone.componentId)
+    }
   },
   methods: {
-    ...mapActions('component', [
-      'attach',
-      'detach',
-      'fetchComponent',
-      'getComponentById'
-    ]),
+    ...mapActions('component', ['attach', 'detach', 'fetchComponent']),
     ...mapMutations('component', ['addComponent']),
     async attachComponent() {
       if (!this.component) {

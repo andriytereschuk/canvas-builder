@@ -48,31 +48,27 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
+import { mapGetters, mapActions } from 'vuex'
 export default {
   data: () => {
     return {
-      model: {
-        actionIcons: {}
-      }
+      model: {}
     }
   },
-  asyncComputed: {
-    component: {
-      get() {
-        return this.getComponentById(+this.$route.params.id).then((res) => {
-          if (res) {
-            this.model = JSON.parse(JSON.stringify(res.model))
-            return res
-          }
-        })
-      },
-      default: {}
+  computed: {
+    ...mapGetters('component', ['storeComponent']),
+    component() {
+      return this.storeComponent(+this.$route.params.id)
     }
+  },
+  created() {
+    if (!this.component) {
+      this.fetchComponent(+this.$route.params.id)
+    }
+    this.model = JSON.parse(JSON.stringify(this.component.model))
   },
   methods: {
-    ...mapActions('component', ['getComponentById'])
+    ...mapActions('component', ['fetchComponent'])
   }
 }
 </script>
@@ -83,24 +79,20 @@ export default {
   justify-content: center;
   padding: 20px;
 }
-
 .product-card {
   min-width: 300px;
   max-width: 400px;
 }
-
 .product-card__image {
   height: 370px;
   background: url('../../assets/images/img-not-found.png') center / cover
     no-repeat;
 }
-
 .product-card__price {
   margin: 10px 0;
   font-size: 1.2rem;
   font-weight: 600;
 }
-
 .product__raiting {
   position: absolute;
   top: 10px;
