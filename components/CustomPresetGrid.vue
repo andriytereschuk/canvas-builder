@@ -58,14 +58,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('customPreset', [
-      'colArr',
-      'rowArr',
-      'columns',
-      'rows',
-      'zones',
-      'previewZone'
-    ]),
+    ...mapState('customPreset', ['columns', 'zones', 'previewZone']),
     ...mapGetters('customPreset', ['rowTemplate', 'colTemplate', 'divNum'])
   },
   methods: {

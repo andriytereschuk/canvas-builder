@@ -41,7 +41,7 @@
         </v-col>
         <v-col class="preview">
           <v-card height="100%">
-            <component :is="previewLoader"></component>
+            <component :is="previewLoader" :model="model"></component>
           </v-card>
         </v-col>
       </v-row>

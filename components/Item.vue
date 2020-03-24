@@ -54,6 +54,7 @@ export default {
         // open dialog and wait for picking the item
         const componentInitialData = await this.openComponentMenu()
         const component = { id: Date.now(), ...componentInitialData }
+        console.log(componentInitialData, 'data')
 
         if (this.zone.id)
           return this.attach({

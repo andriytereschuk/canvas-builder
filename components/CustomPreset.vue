@@ -44,8 +44,11 @@ export default {
   created() {
     this.initialArrIndex()
   },
+  beforeDestroy() {
+    this.resetState()
+  },
   methods: {
-    ...mapMutations('customPreset', ['initialArrIndex']),
+    ...mapMutations('customPreset', ['initialArrIndex', 'resetState']),
     open() {
       this.dialog = true
     },

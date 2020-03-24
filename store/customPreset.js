@@ -54,6 +54,13 @@ export const mutations = {
     state.zones = []
     state.rows = 2
     state.columns = 4
+  },
+  resetState(state) {
+    state.rows = 2
+    state.columns = 4
+    state.colArr = []
+    state.rowArr = []
+    state.zones = []
   }
 }
 

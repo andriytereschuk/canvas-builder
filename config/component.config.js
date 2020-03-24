@@ -3,7 +3,11 @@ export const componentConfig = {
     slideshow: {
       color: '#ff0000',
       model: {
-        autoplay: true,
+        cycle: true,
+        hideDelimiters: false,
+        reverse: false,
+        showArrows: true,
+        showArrowsOnHover: false,
         items: []
       },
       schema: {
@@ -12,7 +16,27 @@ export const componentConfig = {
           {
             type: 'toggle',
             title: 'Autoplay',
-            model: 'autoplay'
+            model: 'cycle'
+          },
+          {
+            type: 'toggle',
+            title: 'Reverse Play',
+            model: 'reverse'
+          },
+          {
+            type: 'toggle',
+            title: 'Show Arrows On Hover',
+            model: 'showArrowsOnHover'
+          },
+          {
+            type: 'toggle',
+            title: 'Hide Bullets',
+            model: 'hideDelimiters'
+          },
+          {
+            type: 'toggle',
+            title: 'Show Arrows',
+            model: 'showArrows'
           }
         ]
       }
