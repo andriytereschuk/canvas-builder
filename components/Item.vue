@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapMutations } from 'vuex'
+import { mapActions, mapMutations, mapGetters } from 'vuex'
 import { componentMixin } from '~/mixins/component.mixin'
 
 export default {
@@ -43,8 +43,13 @@ export default {
       return this.getComponentById(this.zone.componentId)
     }
   },
-  created() {
-    this.fetchComponent(this.zone.componentId)
+  serverPrefetch() {
+    return this.fetchComponent(this.zone.componentId)
+  },
+  mounted() {
+    if (!this.component && this.zone.componentId) {
+      this.fetchComponent(this.zone.componentId)
+    }
   },
   methods: {
     ...mapActions('component', ['attach', 'detach', 'fetchComponent']),
@@ -54,7 +59,6 @@ export default {
         // open dialog and wait for picking the item
         const componentInitialData = await this.openComponentMenu()
         const component = { id: Date.now(), ...componentInitialData }
-
         if (this.zone.id)
           return this.attach({
             id: this.zone.id,

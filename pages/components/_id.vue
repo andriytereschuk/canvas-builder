@@ -29,11 +29,7 @@
               <v-subheader>Items</v-subheader>
 
               <div class="items">
-                <Item
-                  v-for="(item, index) in model.items"
-                  :key="index"
-                  :zone="item"
-                />
+                <Item v-for="item in model.items" :key="item.id" :zone="item" />
                 <Add @add="addItem" />
               </div>
             </article>
@@ -55,7 +51,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import { componentConfig } from '~/config/component.config'
 import { filtersMixin } from '~/mixins/filters.mixins'
 import { componentMixin } from '~/mixins/component.mixin'
@@ -65,51 +61,45 @@ import ComponentsMenu from '~/components/ComponentsMenu'
 
 export default {
   layout: 'simple',
-  components: {
-    Item,
-    Add,
-    ComponentsMenu
-  },
+  components: { Item, Add, ComponentsMenu },
   mixins: [filtersMixin, componentMixin],
   data: () => {
     return {
-      component: null,
-      model: null,
+      model: {},
       formOptions: {
         validateAfterLoad: true,
         validateAfterChanged: true,
         validateAsync: true
       },
-      previewComponent: null
+      schema: {},
+      previewComponent: ''
     }
   },
   computed: {
-    ...mapGetters('component', ['getComponentById']),
     ...mapState('project', ['project']),
-    schema() {
-      const { category, type } = this.component
-
-      return componentConfig[category][type].schema
-    },
-
+    ...mapGetters('component', ['getComponentById']),
     previewLoader() {
-      return () => import(`~/components/preview/${this.previewComponent}`)
+      return () => {
+        if (this.previewComponent) {
+          return import(`~/components/preview/${this.previewComponent}`)
+        }
+      }
+    },
+    component() {
+      return this.getComponentById(+this.$route.params.id)
     }
+  },
+  created() {
+    this.model = JSON.parse(JSON.stringify(this.component.model))
+    this.schema =
+      componentConfig[this.component.category][this.component.type].schema
+    this.previewComponent =
+      this.component.type.slice(0, 1).toUpperCase() +
+      this.component.type.slice(1)
   },
   provide() {
     return {
       openComponentMenu: () => this.$refs.componentsMenu.open()
-    }
-  },
-  created() {
-    this.component = this.getComponentById(+this.$route.params.id)
-
-    if (this.component) {
-      this.model = JSON.parse(JSON.stringify(this.component.model))
-
-      this.previewComponent =
-        this.component.type.slice(0, 1).toUpperCase() +
-        this.component.type.slice(1)
     }
   },
   methods: {
@@ -124,6 +114,8 @@ export default {
     },
     addItem() {
       this.model.items.push({ componentId: null })
+      const editedComponent = { ...this.component, model: this.model }
+      this.saveComponent(editedComponent)
     }
   }
 }
