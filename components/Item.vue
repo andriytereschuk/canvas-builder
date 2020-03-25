@@ -6,7 +6,7 @@
     @click="attachComponent"
   >
     <div v-if="component" class="content">
-      {{ component.type }}
+      {{ formatName(component.type) }}
     </div>
     <div v-if="component" class="actions">
       <nuxt-link
@@ -27,6 +27,7 @@
 <script>
 import { mapActions, mapMutations, mapGetters } from 'vuex'
 import { componentMixin } from '~/mixins/component.mixin'
+import { splitUppercase } from '~/helpers/splitUppercase.js'
 
 export default {
   mixins: [componentMixin],
@@ -71,6 +72,9 @@ export default {
     },
     detachComponent() {
       this.detach({ id: this.zone.id, component: this.component })
+    },
+    formatName(name) {
+      return splitUppercase(name)
     }
   }
 }

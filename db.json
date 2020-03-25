@@ -1175,6 +1175,33 @@
       "model": {
         "url": ""
       }
+    },
+    {
+      "id": 1585132824680,
+      "category": "galleries",
+      "type": "carousel",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1585132828020,
+      "category": "store",
+      "type": "productCard",
+      "model": {
+        "title": "",
+        "subtitle": "",
+        "description": "",
+        "image": "",
+        "price": "",
+        "rating": true,
+        "actionIcons": {
+          "wishList": true,
+          "bookmark": true,
+          "share": true
+        }
+      }
     }
   ]
 }

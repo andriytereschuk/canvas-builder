@@ -41,7 +41,7 @@
               v-for="component in selectedCategoryItems"
               :key="selectedCategory === 'storage' ? component.id : component"
               height="120px"
-              width="120px"
+              min-width="120px"
               class="components-menu__category-btn"
               :color="
                 selectedCategory === 'storage'
@@ -56,7 +56,11 @@
               "
               @click="selectComponent(component)"
             >
-              {{ selectedCategory === 'storage' ? component.type : component }}
+              {{
+                selectedCategory === 'storage'
+                  ? formatName(component.type)
+                  : formatName(component)
+              }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -69,6 +73,7 @@
 import { mapActions, mapGetters } from 'vuex'
 import { componentConfig } from '~/config/component.config'
 import { componentMixin } from '~/mixins/component.mixin'
+import { splitUppercase } from '~/helpers/splitUppercase.js'
 
 export default {
   mixins: [componentMixin],
@@ -139,6 +144,9 @@ export default {
     cancel() {
       this.reject(false)
       this.closeMenu()
+    },
+    formatName(name) {
+      return splitUppercase(name)
     }
   }
 }
@@ -190,6 +198,7 @@ export default {
   }
 
   &__category-btn {
+    padding: 5px !important;
     margin: 10px;
   }
 }

@@ -4,7 +4,7 @@
       <v-btn icon dark @click="getBack">
         <v-icon>mdi-close</v-icon>
       </v-btn>
-      <v-toolbar-title>{{ component.type | capitalize }}</v-toolbar-title>
+      <v-toolbar-title>{{ formatName(component.type) }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn dark text @click="saveComponentContent">Save</v-btn>
@@ -55,6 +55,7 @@ import { mapActions, mapState, mapGetters } from 'vuex'
 import { componentConfig } from '~/config/component.config'
 import { filtersMixin } from '~/mixins/filters.mixins'
 import { componentMixin } from '~/mixins/component.mixin'
+import { splitUppercase } from '~/helpers/splitUppercase.js'
 import Item from '~/components/Item'
 import Add from '~/components/Add'
 import ComponentsMenu from '~/components/ComponentsMenu'
@@ -116,6 +117,9 @@ export default {
       this.model.items.push({ componentId: null })
       const editedComponent = { ...this.component, model: this.model }
       this.saveComponent(editedComponent)
+    },
+    formatName(name) {
+      return splitUppercase(name)
     }
   }
 }
