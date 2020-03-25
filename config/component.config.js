@@ -91,48 +91,19 @@ export const componentConfig = {
     }
   },
   advertisements: {
-    promo: {
+    sponsoredItems: {
       color: '#4b0082',
       model: {
-        title: '',
-        subtitle: ''
+        autoplay: true,
+        items: []
       },
       schema: {
+        hasChildren: true,
         fields: [
           {
-            type: 'text',
-            title: 'Title',
-            model: 'title',
-            styleClasses: 'form-field--inline'
-          },
-          {
-            type: 'text',
-            title: 'Subtitle',
-            model: 'subtitle',
-            styleClasses: 'form-field--inline'
-          }
-        ]
-      }
-    },
-    offer: {
-      color: '#ee82ee',
-      model: {
-        title: '',
-        subtitle: ''
-      },
-      schema: {
-        fields: [
-          {
-            type: 'text',
-            title: 'Title',
-            model: 'title',
-            styleClasses: 'form-field--inline'
-          },
-          {
-            type: 'text',
-            title: 'Subtitle',
-            model: 'subtitle',
-            styleClasses: 'form-field--inline'
+            type: 'toggle',
+            title: 'Autoplay',
+            model: 'autoplay'
           }
         ]
       }
