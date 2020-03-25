@@ -1,11 +1,15 @@
 <template>
   <v-dialog v-model="isComponentsMenuOpen" max-width="470px">
     <v-card class="components-menu__wrapper">
-      <v-card>
+      <v-card class="components-menu__categories-list">
+        <v-list-item class="list-item--accented" @click="getStorageComponents">
+          <v-icon class="list-item__icon">mdi-folder</v-icon>
+          STORAGE
+        </v-list-item>
         <v-list-item
           v-for="category in categories"
           :key="category"
-          class="components-menu__categories-list-item"
+          class="components-menu__categories-list__item"
           @click="selectCategory(category)"
         >
           {{ category }}
@@ -14,7 +18,11 @@
       <v-card class="components-menu__components-wrapper">
         <v-card flat class="components-menu__heading">
           <v-card-text class="title" size="18px">
-            Add {{ selectedCategory }}
+            {{
+              selectedCategory === 'storage'
+                ? `Add from ${selectedCategory}`
+                : `Add ${selectedCategory}`
+            }}
           </v-card-text>
           <v-btn
             class="components-menu__btn"
@@ -30,15 +38,29 @@
         <v-card flat>
           <v-card-actions class="components-menu__btn-container">
             <v-btn
-              v-for="type in selectedCategoryItems"
-              :key="type"
+              v-for="component in selectedCategoryItems"
+              :key="selectedCategory === 'storage' ? component.id : component"
               height="120px"
-              width="120px"
+              min-width="120px"
               class="components-menu__category-btn"
-              :color="getComponentColor({ category: selectedCategory, type })"
-              @click="selectComponent(type)"
+              :color="
+                selectedCategory === 'storage'
+                  ? getComponentColor({
+                      category: component.category,
+                      type: component.type
+                    })
+                  : getComponentColor({
+                      category: selectedCategory,
+                      type: component
+                    })
+              "
+              @click="selectComponent(component)"
             >
-              {{ type }}
+              {{
+                selectedCategory === 'storage'
+                  ? formatName(component.type)
+                  : formatName(component)
+              }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -48,8 +70,10 @@
 </template>
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import { componentConfig } from '~/config/component.config'
 import { componentMixin } from '~/mixins/component.mixin'
+import { splitUppercase } from '~/helpers/splitUppercase.js'
 
 export default {
   mixins: [componentMixin],
@@ -62,14 +86,24 @@ export default {
     }
   },
   computed: {
+    ...mapGetters('component', ['components']),
     categories() {
       return Object.keys(componentConfig)
     },
     selectedCategoryItems() {
-      return Object.keys(componentConfig[this.selectedCategory])
+      if (this.selectedCategory !== 'storage') {
+        return Object.keys(componentConfig[this.selectedCategory])
+      } else {
+        return this.components || 'The storage is empty'
+      }
     }
   },
   methods: {
+    ...mapActions('component', ['fetchComponents']),
+    getStorageComponents() {
+      this.selectCategory('storage')
+      this.fetchComponents()
+    },
     selectCategory(category) {
       this.selectedCategory = category
     },
@@ -88,17 +122,31 @@ export default {
       })
     },
     agree() {
-      this.resolve({
-        category: this.selectedCategory,
-        type: this.selectedComponent,
-        model:
-          componentConfig[this.selectedCategory][this.selectedComponent].model
-      })
+      if (this.selectedCategory === 'storage') {
+        this.resolve({
+          category: this.selectedComponent.category,
+          type: this.selectedComponent.type,
+          model:
+            componentConfig[this.selectedComponent.category][
+              this.selectedComponent.type
+            ].model
+        })
+      } else {
+        this.resolve({
+          category: this.selectedCategory,
+          type: this.selectedComponent,
+          model:
+            componentConfig[this.selectedCategory][this.selectedComponent].model
+        })
+      }
       this.closeMenu()
     },
     cancel() {
       this.reject(false)
       this.closeMenu()
+    },
+    formatName(name) {
+      return splitUppercase(name)
     }
   }
 }
@@ -122,8 +170,12 @@ export default {
     width: 300px;
   }
 
-  &__categories-list-item {
-    text-transform: uppercase;
+  &__categories-list {
+    padding-top: 10px;
+
+    &__item {
+      text-transform: uppercase;
+    }
   }
 
   &__icon {
@@ -146,11 +198,26 @@ export default {
   }
 
   &__category-btn {
+    padding: 5px !important;
     margin: 10px;
   }
 }
 
 .v-btn:not(.v-btn--round).v-size--default {
   padding: 0;
+}
+
+.list-item--accented {
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.list-item__icon {
+  margin-right: 5px;
+  margin-bottom: 4px;
 }
 </style>

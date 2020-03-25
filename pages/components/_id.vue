@@ -4,7 +4,7 @@
       <v-btn icon dark @click="getBack">
         <v-icon>mdi-close</v-icon>
       </v-btn>
-      <v-toolbar-title>{{ component.type | capitalize }}</v-toolbar-title>
+      <v-toolbar-title>{{ formatName(component.type) }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
         <v-btn dark text @click="saveComponentContent">Save</v-btn>
@@ -29,11 +29,7 @@
               <v-subheader>Items</v-subheader>
 
               <div class="items">
-                <Item
-                  v-for="(item, index) in model.items"
-                  :key="index"
-                  :zone="item"
-                />
+                <Item v-for="item in model.items" :key="item.id" :zone="item" />
                 <Add @add="addItem" />
               </div>
             </article>
@@ -41,16 +37,7 @@
         </v-col>
         <v-col class="preview">
           <v-card height="100%">
-            <div v-if="component.type === 'productCard'">
-              <ProductCard></ProductCard>
-            </div>
-            <json-viewer
-              v-else
-              :value="model"
-              theme="json-theme"
-              :expand-depth="6"
-              copyable
-            ></json-viewer>
+            <component :is="previewLoader"></component>
           </v-card>
         </v-col>
       </v-row>
@@ -64,48 +51,56 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
 import { componentConfig } from '~/config/component.config'
 import { filtersMixin } from '~/mixins/filters.mixins'
 import { componentMixin } from '~/mixins/component.mixin'
+import { splitUppercase } from '~/helpers/splitUppercase.js'
 import Item from '~/components/Item'
 import Add from '~/components/Add'
 import ComponentsMenu from '~/components/ComponentsMenu'
-import ProductCard from '~/components/preview/ProductCard'
 
 export default {
   layout: 'simple',
-  components: { Item, Add, ComponentsMenu, ProductCard },
+  components: { Item, Add, ComponentsMenu },
   mixins: [filtersMixin, componentMixin],
   data: () => {
     return {
-      component: null,
-      model: null,
+      model: {},
       formOptions: {
         validateAfterLoad: true,
         validateAfterChanged: true,
         validateAsync: true
-      }
+      },
+      schema: {},
+      previewComponent: ''
     }
   },
   computed: {
-    ...mapGetters('component', ['getComponentById']),
     ...mapState('project', ['project']),
-    schema() {
-      const { category, type } = this.component
-
-      return componentConfig[category][type].schema
+    ...mapGetters('component', ['getComponentById']),
+    previewLoader() {
+      return () => {
+        if (this.previewComponent) {
+          return import(`~/components/preview/${this.previewComponent}`)
+        }
+      }
+    },
+    component() {
+      return this.getComponentById(+this.$route.params.id)
     }
+  },
+  created() {
+    this.model = JSON.parse(JSON.stringify(this.component.model))
+    this.schema =
+      componentConfig[this.component.category][this.component.type].schema
+    this.previewComponent =
+      this.component.type.slice(0, 1).toUpperCase() +
+      this.component.type.slice(1)
   },
   provide() {
     return {
       openComponentMenu: () => this.$refs.componentsMenu.open()
-    }
-  },
-  created() {
-    this.component = this.getComponentById(+this.$route.params.id)
-    if (this.component) {
-      this.model = JSON.parse(JSON.stringify(this.component.model))
     }
   },
   methods: {
@@ -120,6 +115,11 @@ export default {
     },
     addItem() {
       this.model.items.push({ componentId: null })
+      const editedComponent = { ...this.component, model: this.model }
+      this.saveComponent(editedComponent)
+    },
+    formatName(name) {
+      return splitUppercase(name)
     }
   }
 }

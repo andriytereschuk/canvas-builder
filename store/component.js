@@ -8,13 +8,21 @@ export const state = () => ({
 
 export const actions = {
   async fetchComponent({ commit }, id) {
-    let component
-
-    try {
-      component = await ComponentService.getComponent(id)
-    } catch (e) {}
-
-    if (component) commit('addComponent', component.data)
+    const component = await ComponentService.getComponent(id)
+    if (component) {
+      commit('addComponent', component.data)
+      return component.data
+    }
+  },
+  async fetchComponents({ state, commit }) {
+    const components = await ComponentService.getComponents(
+      state.componentsPerPage,
+      state.componentsPage
+    )
+    if (components) {
+      commit('addComponents', components.data)
+      return components.data
+    }
   },
   async attach({ commit }, { id, component }) {
     commit('addComponent', component)
@@ -23,9 +31,7 @@ export const actions = {
       { id, componentId: component.id },
       { root: true }
     )
-    try {
-      component = await ComponentService.postComponent(component)
-    } catch (e) {}
+    component = await ComponentService.postComponent(component)
   },
   async detach({ commit }, { id, component }) {
     commit(
@@ -34,21 +40,20 @@ export const actions = {
       { root: true }
     )
     commit('remove', component.id)
-    try {
-      component = await ComponentService.deleteComponent(component.id)
-    } catch (e) {}
+    component = await ComponentService.deleteComponent(component.id)
   },
   async saveComponent({ commit }, component) {
     commit('saveComponentToStore', component)
-    try {
-      component = await ComponentService.saveComponent(component)
-    } catch (e) {}
+    component = await ComponentService.saveComponent(component)
   }
 }
 
 export const mutations = {
   addComponent(state, component) {
     state.components.push(component)
+  },
+  addComponents(state, components) {
+    state.components = components
   },
   remove(state, _id) {
     state.components = state.components.filter(({ id }) => id !== _id)
@@ -61,6 +66,10 @@ export const mutations = {
 }
 
 export const getters = {
-  getComponentById: (state) => (id) =>
-    state.components.find((component) => component.id === id)
+  getComponentById: (state) => (id) => {
+    return state.components.find((component) => component.id === id)
+  },
+  components: (state) => {
+    return state.components
+  }
 }

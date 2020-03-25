@@ -30,7 +30,7 @@
           <v-spacer></v-spacer>
           <v-tooltip top>
             <template v-slot:activator="{ on }">
-              <v-btn icon @click="save" v-on="on">
+              <v-btn icon @click="saveProject" v-on="on">
                 <v-icon>mdi-content-save</v-icon>
               </v-btn>
             </template>
@@ -99,7 +99,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('project', ['getProject', 'save']),
+    ...mapActions('project', ['getProject', 'saveProject']),
     ...mapMutations('project', ['updateProjectName']),
     addPreset() {
       return this.$refs.presets.open()
