@@ -27,6 +27,27 @@
             "columns": 1,
             "rows": 1,
             "id": "row-1585320043711"
+          },
+          {
+            "zones": [
+              {
+                "id": "zone-0-1585570672793",
+                "componentId": "1760ca485d8c5",
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 2
+                  }
+                }
+              }
+            ],
+            "columns": 1,
+            "rows": 1,
+            "id": "row-1585570672793"
           }
         ]
       },
@@ -80,6 +101,26 @@
         "url": ""
       },
       "parentId": "e75377728d396"
+    },
+    {
+      "id": "1760ca485d8c5",
+      "type": "youtube",
+      "category": "videos",
+      "model": {
+        "videoId": "https://www.youtube.com/watch?v=0J4h0xdY78A&t=1263s",
+        "fullscreen": true
+      },
+      "parentId": null
+    },
+    {
+      "id": "86847cc43d887",
+      "type": "embedded",
+      "category": "videos",
+      "model": {
+        "url": "https://media.istockphoto.com/videos/aerial-view-of-pedestrians-walking-across-with-crowded-traffic-video-id1140364351",
+        "fullscreen": true
+      },
+      "parentId": null
     }
   ]
 }

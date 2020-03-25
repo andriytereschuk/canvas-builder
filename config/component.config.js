@@ -63,15 +63,22 @@ export const componentConfig = {
     youtube: {
       color: '#008000',
       model: {
-        url: ''
+        videoId: '',
+        fullscreen: true
       },
       schema: {
         hasChildren: false,
         fields: [
           {
             type: 'text',
-            title: 'Url',
-            model: 'url'
+            title: 'Video Url',
+            model: 'videoId',
+            placeholder: 'https://www.youtube.com/watch?v=0J4h0xdY78A'
+          },
+          {
+            type: 'toggle',
+            title: 'Allow Fullscreen',
+            model: 'fullscreen'
           }
         ]
       }
@@ -79,7 +86,8 @@ export const componentConfig = {
     embedded: {
       color: '#0000ff',
       model: {
-        url: ''
+        url: '',
+        fullscreen: true
       },
       schema: {
         hasChildren: false,
@@ -87,8 +95,15 @@ export const componentConfig = {
         fields: [
           {
             type: 'text',
-            title: 'Url',
-            model: 'url'
+            title: 'Video Url',
+            model: 'url',
+            placeholder:
+              'https://media.istockphoto.com/videos/aerial-view-of-pedestrians-walking-across-with-crowded-traffic-video-id1140364351'
+          },
+          {
+            type: 'toggle',
+            title: 'Allow Fullscreen',
+            model: 'fullscreen'
           }
         ]
       }
