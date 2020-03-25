@@ -45,15 +45,6 @@ export const actions = {
   async saveComponent({ commit }, component) {
     commit('saveComponentToStore', component)
     component = await ComponentService.saveComponent(component)
-  },
-  getComponentById({ state, dispatch }, id) {
-    if (!state.components.length) {
-      return dispatch('fetchComponent', id).then((res) => {
-        return res
-      })
-    } else {
-      return state.components.find((component) => component.id === id)
-    }
   }
 }
 
@@ -75,7 +66,7 @@ export const mutations = {
 }
 
 export const getters = {
-  storeComponent: (state) => (id) => {
+  getComponentById: (state) => (id) => {
     return state.components.find((component) => component.id === id)
   },
   components: (state) => {

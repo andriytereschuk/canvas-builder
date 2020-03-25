@@ -38,9 +38,9 @@ export default {
   },
   inject: ['openComponentMenu'],
   computed: {
-    ...mapGetters('component', ['storeComponent']),
+    ...mapGetters('component', ['getComponentById']),
     component() {
-      return this.storeComponent(this.zone.componentId)
+      return this.getComponentById(this.zone.componentId)
     }
   },
   serverPrefetch() {

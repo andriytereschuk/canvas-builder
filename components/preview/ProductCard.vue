@@ -56,9 +56,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('component', ['storeComponent']),
+    ...mapGetters('component', ['getComponentById']),
     component() {
-      return this.storeComponent(+this.$route.params.id)
+      return this.getComponentById(+this.$route.params.id)
     }
   },
   created() {

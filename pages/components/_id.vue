@@ -77,7 +77,7 @@ export default {
   },
   computed: {
     ...mapState('project', ['project']),
-    ...mapGetters('component', ['storeComponent']),
+    ...mapGetters('component', ['getComponentById']),
     previewLoader() {
       return () => {
         if (this.previewComponent) {
@@ -86,7 +86,7 @@ export default {
       }
     },
     component() {
-      return this.storeComponent(+this.$route.params.id)
+      return this.getComponentById(+this.$route.params.id)
     }
   },
   created() {

@@ -365,6 +365,74 @@
       "mobile": {
         "rows": []
       }
+    },
+    {
+      "id": 1585070731936,
+      "name": "вапвавапва",
+      "created": "2020-03-24T17:25:31.936Z",
+      "modified": "2020-03-24T17:25:31.936Z",
+      "desktop": {
+        "rows": []
+      },
+      "mobile": {
+        "rows": []
+      }
+    },
+    {
+      "id": 1585126732057,
+      "name": "dgsdfgfhfg",
+      "created": "2020-03-25T08:58:52.057Z",
+      "modified": "2020-03-25T08:58:52.057Z",
+      "desktop": {
+        "rows": [
+          {
+            "zones": [
+              {
+                "id": "zone-0-1585126734078",
+                "componentId": 1585126736963,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 2
+                  }
+                }
+              }
+            ],
+            "columns": 1,
+            "rows": 1,
+            "id": "row-1585126734079"
+          }
+        ]
+      },
+      "mobile": {
+        "rows": [
+          {
+            "zones": [
+              {
+                "id": "zone-0-1585126746062",
+                "componentId": 1585126748981,
+                "coords": {
+                  "start": {
+                    "x": 1,
+                    "y": 1
+                  },
+                  "end": {
+                    "x": 2,
+                    "y": 2
+                  }
+                }
+              }
+            ],
+            "columns": 1,
+            "rows": 1,
+            "id": "row-1585126746062"
+          }
+        ]
+      }
     }
   ],
   "components": [
@@ -1004,7 +1072,11 @@
       "type": "slideshow",
       "model": {
         "autoplay": false,
-        "items": []
+        "items": [
+          {
+            "componentId": null
+          }
+        ]
       }
     },
     {
@@ -1014,6 +1086,94 @@
       "model": {
         "autoplay": true,
         "items": []
+      }
+    },
+    {
+      "id": 1585070661221,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1585070693447,
+      "category": "galleries",
+      "type": "carousel",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1585070702319,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1585070712440,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": []
+      }
+    },
+    {
+      "id": 1585070735505,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": [
+          {
+            "componentId": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585124231983,
+      "category": "store",
+      "type": "productCard",
+      "model": {
+        "title": "",
+        "subtitle": "",
+        "description": "",
+        "image": "",
+        "price": "",
+        "rating": true,
+        "actionIcons": {
+          "wishList": true,
+          "bookmark": true,
+          "share": true
+        }
+      }
+    },
+    {
+      "id": 1585126736963,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": [
+          {
+            "componentId": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585126748981,
+      "category": "videos",
+      "type": "youtube",
+      "model": {
+        "url": ""
       }
     }
   ]
