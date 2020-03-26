@@ -74,13 +74,20 @@ import { mapActions, mapGetters } from 'vuex'
 import { componentConfig } from '~/config/component.config'
 import { componentMixin } from '~/mixins/component.mixin'
 import { splitUppercase } from '~/helpers/splitUppercase.js'
+import { filterObject } from '~/utils/helpers'
 
 export default {
   mixins: [componentMixin],
+  props: {
+    insideComponent: {
+      type: Boolean,
+      required: false
+    }
+  },
   data: () => {
     return {
       isComponentsMenuOpen: false,
-      selectedCategory: 'galleries',
+      selectedCategory: '',
       selectedComponent: '',
       componentConfig
     }
@@ -88,7 +95,12 @@ export default {
   computed: {
     ...mapGetters('component', ['components']),
     categories() {
-      return Object.keys(componentConfig)
+      let components = componentConfig
+      if (this.insideComponent) {
+        components = filterObject(componentConfig, 'hasChildren', false)
+      }
+
+      return Object.keys(components)
     },
     selectedCategoryItems() {
       if (this.selectedCategory !== 'storage') {
@@ -97,6 +109,9 @@ export default {
         return this.components || 'The storage is empty'
       }
     }
+  },
+  created() {
+    this.selectedCategory = this.categories[0]
   },
   methods: {
     ...mapActions('component', ['fetchComponents']),

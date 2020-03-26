@@ -26,6 +26,21 @@ export const actions = {
   },
   async attach({ commit }, { id, component }) {
     commit('addComponent', component)
+    if (component.parentId) {
+      const parentComponent = state.components.find(
+        (component) => component.id === id
+      )
+
+      const changedComponent = {
+        items: [component.id, ...parentComponent.model.items],
+        ...parentComponent
+      }
+      commit('saveComponentToStore', changedComponent)
+
+      await ComponentService.saveComponent(component)
+
+      await ComponentService.postComponent(parentComponent)
+    }
     commit(
       'project/attachComponent',
       { id, componentId: component.id },

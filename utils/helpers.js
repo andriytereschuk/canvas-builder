@@ -81,3 +81,22 @@ export const createInitialArr = (direction, arr) => {
     arr.push({ unit: '1fr' })
   }
 }
+
+export const filterObject = (obj, filter, filterValue) =>
+  Object.keys(obj).reduce(
+    (categories, category) =>
+      Object.keys(obj[category]).reduce(
+        (components, component) =>
+          obj[category][component].schema[filter] === filterValue
+            ? {
+                ...categories,
+                [category]: {
+                  ...obj[category],
+                  [component]: obj[category][component]
+                }
+              }
+            : categories,
+        {}
+      ),
+    {}
+  )

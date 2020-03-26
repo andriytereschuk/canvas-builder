@@ -29,7 +29,12 @@
               <v-subheader>Items</v-subheader>
 
               <div class="items">
-                <Item v-for="item in model.items" :key="item.id" :zone="item" />
+                <Item
+                  v-for="item in model.items"
+                  :key="item.id"
+                  :zone="item"
+                  :parent-id="$route.params.id"
+                />
                 <Add @add="addItem" />
               </div>
             </article>
@@ -43,7 +48,7 @@
       </v-row>
     </v-container>
 
-    <ComponentsMenu ref="componentsMenu" />
+    <ComponentsMenu ref="componentsMenu" :inside-component="true" />
   </div>
   <v-overlay v-else>
     <v-progress-circular indeterminate size="64"></v-progress-circular>
@@ -114,8 +119,13 @@ export default {
       this.$router.go(-1)
     },
     addItem() {
-      this.model.items.push({ componentId: null })
-      const editedComponent = { ...this.component, model: this.model }
+      this.model.items.push({
+        componentId: null,
+        type: '',
+        category: '',
+        model: {}
+      })
+      const editedComponent = { model: this.model, ...this.component }
       this.saveComponent(editedComponent)
     },
     formatName(name) {

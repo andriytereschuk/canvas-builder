@@ -35,6 +35,11 @@ export default {
     zone: {
       type: Object,
       required: true
+    },
+    parentId: {
+      type: Number,
+      required: false,
+      default: null
     }
   },
   inject: ['openComponentMenu'],
@@ -60,13 +65,24 @@ export default {
         // open dialog and wait for picking the item
         const componentInitialData = await this.openComponentMenu()
         const component = { id: Date.now(), ...componentInitialData }
-        if (this.zone.id)
+
+        if (this.zone.id) {
           return this.attach({
             id: this.zone.id,
+            parentId: this.parentId,
             component
           })
+        }
+
+        this.attach({
+          parentId: this.parentId,
+          component
+        })
 
         this.zone.componentId = component.id
+        this.zone.type = component.type
+        this.zone.category = component.category
+        this.zone.model = component.model
         return this.addComponent(component)
       }
     },
