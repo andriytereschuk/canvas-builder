@@ -6,7 +6,7 @@
     @click="attachComponent"
   >
     <div v-if="component" class="content">
-      {{ formatName(component.type) }}
+      {{ component.type }}
     </div>
     <div v-if="component" class="actions">
       <nuxt-link
@@ -27,7 +27,7 @@
 <script>
 import { mapActions, mapMutations, mapGetters } from 'vuex'
 import { componentMixin } from '~/mixins/component.mixin'
-import { splitUppercase } from '~/helpers/splitUppercase.js'
+import ComponentModel from '~/models/component.model'
 
 export default {
   mixins: [componentMixin],
@@ -35,6 +35,15 @@ export default {
     zone: {
       type: Object,
       required: true
+    },
+    index: {
+      type: Number,
+      default: 0
+    },
+    parentId: {
+      type: String,
+      required: false,
+      default: null
     }
   },
   inject: ['openComponentMenu'],
@@ -43,9 +52,6 @@ export default {
     component() {
       return this.getComponentById(this.zone.componentId)
     }
-  },
-  serverPrefetch() {
-    return this.fetchComponent(this.zone.componentId)
   },
   mounted() {
     if (!this.component && this.zone.componentId) {
@@ -58,23 +64,26 @@ export default {
     async attachComponent() {
       if (!this.component) {
         // open dialog and wait for picking the item
-        const componentInitialData = await this.openComponentMenu()
-        const component = { id: Date.now(), ...componentInitialData }
-        if (this.zone.id)
-          return this.attach({
-            id: this.zone.id,
-            component
-          })
-
-        this.zone.componentId = component.id
-        return this.addComponent(component)
+        const { type, category, model } = await this.openComponentMenu()
+        const component = new ComponentModel(
+          type,
+          category,
+          model,
+          this.parentId
+        )
+        this.attach({
+          id: this.zone.id,
+          index: this.index,
+          component
+        })
       }
     },
     detachComponent() {
-      this.detach({ id: this.zone.id, component: this.component })
-    },
-    formatName(name) {
-      return splitUppercase(name)
+      this.detach({
+        id: this.zone.id,
+        index: this.index,
+        component: this.component
+      })
     }
   }
 }

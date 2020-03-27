@@ -43,6 +43,7 @@ export const componentConfig = {
         subtitle: ''
       },
       schema: {
+        hasChildren: false,
         fields: [
           {
             type: 'text',
@@ -65,6 +66,7 @@ export const componentConfig = {
         url: ''
       },
       schema: {
+        hasChildren: false,
         fields: [
           {
             type: 'text',
@@ -80,6 +82,8 @@ export const componentConfig = {
         url: ''
       },
       schema: {
+        hasChildren: false,
+        insertable: true,
         fields: [
           {
             type: 'text',
@@ -94,8 +98,32 @@ export const componentConfig = {
     sponsoredItems: {
       color: '#4b0082',
       model: {
-        autoplay: true,
-        items: []
+        title: '',
+        subtitle: ''
+      },
+      schema: {
+        hasChildren: true,
+        fields: [
+          {
+            type: 'text',
+            title: 'Title',
+            model: 'title',
+            styleClasses: 'form-field--inline'
+          },
+          {
+            type: 'text',
+            title: 'Subtitle',
+            model: 'subtitle',
+            styleClasses: 'form-field--inline'
+          }
+        ]
+      }
+    },
+    offer: {
+      color: '#ee82ee',
+      model: {
+        title: '',
+        subtitle: ''
       },
       schema: {
         hasChildren: true,
@@ -126,6 +154,7 @@ export const componentConfig = {
         }
       },
       schema: {
+        hasChildren: true,
         fields: [
           {
             type: 'text',

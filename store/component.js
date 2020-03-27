@@ -24,27 +24,43 @@ export const actions = {
       return components.data
     }
   },
-  async attach({ commit }, { id, component }) {
+  async attach({ commit }, { id, index, component }) {
+    await ComponentService.postComponent(component)
     commit('addComponent', component)
-    commit(
-      'project/attachComponent',
-      { id, componentId: component.id },
-      { root: true }
-    )
-    component = await ComponentService.postComponent(component)
+
+    return id
+      ? commit(
+          'project/attachComponent',
+          { id, componentId: component.id },
+          { root: true }
+        )
+      : commit('attachComponentToComponent', {
+          index,
+          componentId: component.id,
+          parentId: component.parentId
+        })
   },
-  async detach({ commit }, { id, component }) {
-    commit(
-      'project/detachComponent',
-      { id, componentId: component.id },
-      { root: true }
-    )
+  async detach({ commit }, { id, index, component }) {
+    if (id) {
+      commit(
+        'project/detachComponent',
+        { id, componentId: component.id },
+        { root: true }
+      )
+    } else {
+      commit('detachComponentFromComponent', {
+        index,
+        componentId: component.id,
+        parentId: component.parentId
+      })
+    }
+
     commit('remove', component.id)
     component = await ComponentService.deleteComponent(component.id)
   },
   async saveComponent({ commit }, component) {
-    commit('saveComponentToStore', component)
     component = await ComponentService.saveComponent(component)
+    commit('saveComponentToStore', component)
   }
 }
 
@@ -62,6 +78,23 @@ export const mutations = {
     state.components = state.components.map((component) => {
       return component.id === componentToSave.id ? componentToSave : component
     })
+  },
+  addSubComponent(state, component) {
+    component.model.items.push({ componentId: null })
+  },
+  attachComponentToComponent(state, { index, componentId, parentId }) {
+    const parentComponent = state.components.find(
+      (component) => component.id === parentId
+    )
+
+    parentComponent.model.items[index].componentId = componentId
+  },
+  detachComponentFromComponent(state, { index, componentId, parentId }) {
+    const parentComponent = state.components.find(
+      (component) => component.id === parentId
+    )
+
+    parentComponent.model.items[index].componentId = null
   }
 }
 
