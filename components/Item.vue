@@ -27,7 +27,8 @@
 <script>
 import { mapActions, mapMutations, mapGetters } from 'vuex'
 import { componentMixin } from '~/mixins/component.mixin'
-import { splitUppercase } from '~/helpers/splitUppercase.js'
+import { splitUppercase } from '~/utils/helpers'
+import ComponentModel from '~/models/component.model'
 
 export default {
   mixins: [componentMixin],
@@ -63,27 +64,17 @@ export default {
     async attachComponent() {
       if (!this.component) {
         // open dialog and wait for picking the item
-        const componentInitialData = await this.openComponentMenu()
-        const component = { id: Date.now(), ...componentInitialData }
-
-        if (this.zone.id) {
-          return this.attach({
-            id: this.zone.id,
-            parentId: this.parentId,
-            component
-          })
-        }
-
+        const { type, category, model } = await this.openComponentMenu()
+        const component = new ComponentModel(
+          type,
+          category,
+          model,
+          this.parentId
+        )
         this.attach({
-          parentId: this.parentId,
+          zoneId: this.zone && this.zone.id,
           component
         })
-
-        this.zone.componentId = component.id
-        this.zone.type = component.type
-        this.zone.category = component.category
-        this.zone.model = component.model
-        return this.addComponent(component)
       }
     },
     detachComponent() {
