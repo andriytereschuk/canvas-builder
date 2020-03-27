@@ -18,8 +18,8 @@
       <v-card class="components-menu__components-wrapper">
         <v-card flat class="components-menu__heading">
           <v-card-text class="title" size="18px"
-            >Add {{ selected.category === 'storage' && 'from' }}
-            {{ selected.category }}
+            >Add {{ isStorage ? 'from' : '' }}
+            {{ selectedCategory }}
           </v-card-text>
           <v-btn
             class="components-menu__btn"
@@ -35,6 +35,7 @@
         <v-card flat>
           <v-card-actions class="components-menu__btn-container">
             <!-- TODO: for storage components need to make a separate v-for -->
+            <p v-if="isStorage">Storage is empty...</p>
             <v-btn
               v-for="type in types"
               :key="type"
@@ -43,13 +44,13 @@
               class="components-menu__category-btn"
               :color="
                 getComponentColor({
-                  category: selected.category,
+                  category: selectedCategory,
                   type
                 })
               "
               @click="selectType(type)"
             >
-              {{ formatName(item) }}
+              {{ type }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -62,7 +63,6 @@
 import { mapActions, mapGetters } from 'vuex'
 import { componentConfig } from '~/config/component.config'
 import { componentMixin } from '~/mixins/component.mixin'
-import { splitUppercase } from '~/utils/helpers'
 
 export default {
   mixins: [componentMixin],
@@ -75,26 +75,25 @@ export default {
   data: () => {
     return {
       dialog: false,
-      selected: {
-        category: '',
-        component: ''
-      }
+      selectedCategory: ''
     }
   },
   computed: {
     ...mapGetters('component', ['components']),
+    isStorage() {
+      return this.selectedCategory === 'storage'
+    },
     categories() {
       return Object.keys(componentConfig)
     },
     types() {
-      return Object.keys(componentConfig[this.selected.category])
-    },
-    isStorage() {
-      return this.selected.category === 'storage'
+      return this.isStorage
+        ? []
+        : Object.keys(componentConfig[this.selectedCategory])
     }
   },
   created() {
-    this.selected.category = this.categories[0]
+    this.selectedCategory = this.categories[0]
   },
   methods: {
     ...mapActions('component', ['fetchComponents']),
@@ -103,10 +102,10 @@ export default {
       this.fetchComponents()
     },
     selectCategory(category) {
-      this.selected.category = category
+      this.selectedCategory = category
     },
     selectType(type) {
-      const category = this.selected.category
+      const category = this.selectedCategory
       const meta = componentConfig[category][type]
       const { model } = meta
       const data = {
@@ -136,9 +135,6 @@ export default {
     cancel() {
       this.reject(false)
       this.close()
-    },
-    formatName(name) {
-      return splitUppercase(name)
     }
   }
 }

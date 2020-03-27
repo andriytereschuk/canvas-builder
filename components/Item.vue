@@ -6,7 +6,7 @@
     @click="attachComponent"
   >
     <div v-if="component" class="content">
-      {{ formatName(component.type) }}
+      {{ component.type }}
     </div>
     <div v-if="component" class="actions">
       <nuxt-link
@@ -27,7 +27,6 @@
 <script>
 import { mapActions, mapMutations, mapGetters } from 'vuex'
 import { componentMixin } from '~/mixins/component.mixin'
-import { splitUppercase } from '~/utils/helpers'
 import ComponentModel from '~/models/component.model'
 
 export default {
@@ -37,8 +36,12 @@ export default {
       type: Object,
       required: true
     },
-    parentId: {
+    index: {
       type: Number,
+      default: 0
+    },
+    parentId: {
+      type: String,
       required: false,
       default: null
     }
@@ -49,9 +52,6 @@ export default {
     component() {
       return this.getComponentById(this.zone.componentId)
     }
-  },
-  serverPrefetch() {
-    return this.fetchComponent(this.zone.componentId)
   },
   mounted() {
     if (!this.component && this.zone.componentId) {
@@ -72,16 +72,18 @@ export default {
           this.parentId
         )
         this.attach({
-          zoneId: this.zone && this.zone.id,
+          id: this.zone.id,
+          index: this.index,
           component
         })
       }
     },
     detachComponent() {
-      this.detach({ id: this.zone.id, component: this.component })
-    },
-    formatName(name) {
-      return splitUppercase(name)
+      this.detach({
+        id: this.zone.id,
+        index: this.index,
+        component: this.component
+      })
     }
   }
 }

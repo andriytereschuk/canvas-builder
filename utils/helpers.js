@@ -3,13 +3,6 @@ export const uuid = () =>
     .toString(16)
     .slice(2)
 
-export const splitUppercase = (str) => {
-  return str
-    .split(/(?=[A-Z])/)
-    .join(' ')
-    .toUpperCase()
-}
-
 export const getFractions = (count) =>
   Array.from(new Array(count))
     .map(() => '1fr')
