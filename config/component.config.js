@@ -39,20 +39,64 @@ export const componentConfig = {
     banner: {
       color: '#9eb20b',
       model: {
-        title: '',
-        subtitle: ''
+        imageURL: '',
+        imageAlt: '',
+        content: '',
+        textblock: [
+          {
+            id: '',
+            type: 'text',
+            content: '',
+            linkURL: '',
+            fontSize: '',
+            fontFamily: '',
+            fontColor: '',
+            fontWeight: '',
+            position: {}
+          },
+          {
+            id: '',
+            type: 'button',
+            content: '',
+            linkURL: '',
+            fontSize: '',
+            fontFamily: '',
+            fontColor: '',
+            fontWeight: '',
+            backgroundColor: '',
+            border: '',
+            width: '',
+            height: '',
+            position: {}
+          }
+        ]
       },
       schema: {
         fields: [
           {
             type: 'text',
-            title: 'Title',
-            model: 'title'
+            title: 'imageURL',
+            model: 'imageURL'
           },
           {
             type: 'text',
-            title: 'Subtitle',
-            model: 'subtitle'
+            title: 'imageDescription',
+            model: 'imageDescription'
+          },
+          {
+            type: 'text',
+            title: 'text',
+            model: 'content'
+          },
+          {
+            type: 'text',
+            title: 'linkURL',
+            model: 'linkURL'
+          },
+          {
+            type: 'text',
+            title: 'button',
+            model: 'button'
           }
         ]
       }

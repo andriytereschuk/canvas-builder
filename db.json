@@ -365,74 +365,6 @@
       "mobile": {
         "rows": []
       }
-    },
-    {
-      "id": 1585070731936,
-      "name": "вапвавапва",
-      "created": "2020-03-24T17:25:31.936Z",
-      "modified": "2020-03-24T17:25:31.936Z",
-      "desktop": {
-        "rows": []
-      },
-      "mobile": {
-        "rows": []
-      }
-    },
-    {
-      "id": 1585126732057,
-      "name": "dgsdfgfhfg",
-      "created": "2020-03-25T08:58:52.057Z",
-      "modified": "2020-03-25T08:58:52.057Z",
-      "desktop": {
-        "rows": [
-          {
-            "zones": [
-              {
-                "id": "zone-0-1585126734078",
-                "componentId": 1585126736963,
-                "coords": {
-                  "start": {
-                    "x": 1,
-                    "y": 1
-                  },
-                  "end": {
-                    "x": 2,
-                    "y": 2
-                  }
-                }
-              }
-            ],
-            "columns": 1,
-            "rows": 1,
-            "id": "row-1585126734079"
-          }
-        ]
-      },
-      "mobile": {
-        "rows": [
-          {
-            "zones": [
-              {
-                "id": "zone-0-1585126746062",
-                "componentId": 1585126748981,
-                "coords": {
-                  "start": {
-                    "x": 1,
-                    "y": 1
-                  },
-                  "end": {
-                    "x": 2,
-                    "y": 2
-                  }
-                }
-              }
-            ],
-            "columns": 1,
-            "rows": 1,
-            "id": "row-1585126746062"
-          }
-        ]
-      }
     }
   ],
   "components": [
@@ -785,33 +717,6 @@
       }
     },
     {
-      "id": 1584626105276,
-      "category": "galleries",
-      "type": "slideshow",
-      "model": {
-        "autoplay": true,
-        "items": []
-      }
-    },
-    {
-      "id": 1584626106902,
-      "category": "galleries",
-      "type": "carousel",
-      "model": {
-        "autoplay": false,
-        "items": []
-      }
-    },
-    {
-      "id": 1584626108438,
-      "category": "galleries",
-      "type": "slideshow",
-      "model": {
-        "autoplay": true,
-        "items": []
-      }
-    },
-    {
       "id": 1584626125104,
       "category": "galleries",
       "type": "slideshow",
@@ -1067,19 +972,6 @@
       }
     },
     {
-      "id": 1584961000581,
-      "category": "galleries",
-      "type": "slideshow",
-      "model": {
-        "autoplay": false,
-        "items": [
-          {
-            "componentId": null
-          }
-        ]
-      }
-    },
-    {
       "id": 1584961008553,
       "category": "galleries",
       "type": "carousel",
@@ -1201,6 +1093,137 @@
           "bookmark": true,
           "share": true
         }
+      }
+    },
+    {
+      "id": 1585217583132,
+      "category": "galleries",
+      "type": "slideshow",
+      "model": {
+        "autoplay": true,
+        "items": [
+          {
+            "componentId": null
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585218200372,
+      "category": "store",
+      "type": "productCard",
+      "model": {
+        "title": "",
+        "subtitle": "",
+        "description": "",
+        "image": "",
+        "price": "",
+        "rating": true,
+        "actionIcons": {
+          "wishList": true,
+          "bookmark": true,
+          "share": true
+        }
+      }
+    },
+    {
+      "id": 1585218213297,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "title": "",
+        "subtitle": ""
+      }
+    },
+    {
+      "id": 1585230517870,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "title": "",
+        "subtitle": ""
+      }
+    },
+    {
+      "id": 1585230623210,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "",
+        "text": "",
+        "button": "",
+        "link": ""
+      }
+    },
+    {
+      "id": 1585231114228,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "image": "",
+        "imageAlt": "",
+        "textblock": [
+          {
+            "type": "text",
+            "content": "",
+            "linkURL": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "position": {}
+          },
+          {
+            "type": "button",
+            "content": "",
+            "linkURL": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "width": "",
+            "height": "",
+            "position": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585231410365,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "",
+        "imageAlt": "",
+        "content": "vnvbnvb",
+        "textblock": [
+          {
+            "type": "text",
+            "content": "",
+            "linkURL": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "position": {}
+          },
+          {
+            "type": "button",
+            "content": "",
+            "linkURL": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "width": "",
+            "height": "",
+            "position": {}
+          }
+        ]
       }
     }
   ]
