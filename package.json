@@ -28,6 +28,7 @@
     "@chenfengyuan/vue-number-input": "^1.2.1",
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.0",
+    "draggable-vue-directive": "^2.1.0",
     "nuxt": "^2.0.0",
     "vue-form-generator": "^2.3.4",
     "vue-json-viewer": "^2.2.8",

@@ -11,7 +11,7 @@
             "zones": [
               {
                 "id": "zone-0-1584453377256",
-                "componentId": 1584626105276,
+                "componentId": 1585319216260,
                 "coords": {
                   "start": {
                     "x": 1,
@@ -1221,6 +1221,534 @@
             "border": "",
             "width": "",
             "height": "",
+            "position": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585298127094,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "",
+        "imageAlt": "",
+        "content": "",
+        "textblock": [
+          {
+            "id": "",
+            "type": "text",
+            "content": "",
+            "linkURL": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "position": {}
+          },
+          {
+            "id": "",
+            "type": "button",
+            "content": "",
+            "linkURL": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "width": "",
+            "height": "",
+            "position": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585299571072,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "",
+        "imageAlt": "",
+        "content": "",
+        "textblock": [
+          {
+            "id": "",
+            "type": "text",
+            "content": "",
+            "linkURL": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "position": {}
+          },
+          {
+            "id": "",
+            "type": "button",
+            "content": "",
+            "linkURL": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "width": "",
+            "height": "",
+            "position": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585300571778,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "https://www.pixelstalk.net/wp-content/uploads/2016/05/Light-Pink-Backgrounds.jpg",
+        "imageAlt": "Sample banner image",
+        "content": "enot",
+        "textblock": [
+          {
+            "id": "1",
+            "type": "text",
+            "content": "Sample content 1",
+            "linkURL": "https://pastebin.com/",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "green",
+            "fontWeight": "bold",
+            "position": {}
+          },
+          {
+            "id": "2",
+            "type": "button",
+            "content": "Sample 2",
+            "linkURL": "https://github.com/myrosvas?tab=repositories",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "red",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "height": "30px",
+            "position": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585300706566,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "https://www.pixelstalk.net/wp-content/uploads/2016/05/Light-Pink-Backgrounds.jpg",
+        "imageAlt": "Sample banner image",
+        "content": "enot",
+        "height": "500px",
+        "textblock": [
+          {
+            "id": "1",
+            "type": "text",
+            "content": "Sample content 1",
+            "linkURL": "https://pastebin.com/",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "green",
+            "fontWeight": "bold",
+            "position": {}
+          },
+          {
+            "id": "2",
+            "type": "button",
+            "content": "Sample 2",
+            "linkURL": "https://github.com/myrosvas?tab=repositories",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "red",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "height": "30px",
+            "position": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585301161048,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "https://www.pixelstalk.net/wp-content/uploads/2016/05/Light-Pink-Backgrounds.jpg",
+        "imageAlt": "Sample banner image",
+        "height": "500px",
+        "textblock": [
+          {
+            "id": "1",
+            "type": "text",
+            "content": "Sample content 1",
+            "linkURL": "https://pastebin.com/",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "green",
+            "fontWeight": "bold",
+            "position": {}
+          },
+          {
+            "id": "2",
+            "type": "button",
+            "content": "Sample 2",
+            "linkURL": "https://github.com/myrosvas?tab=repositories",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "red",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "height": "30px",
+            "position": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585309584357,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "https://www.pixelstalk.net/wp-content/uploads/2016/05/Light-Pink-Backgrounds.jpg",
+        "imageAlt": "Sample banner image",
+        "height": "500px",
+        "textblock": [
+          {
+            "id": "1",
+            "type": "text",
+            "content": "Sample content 1",
+            "link": "https://pastebin.com/",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "green",
+            "fontWeight": "bold",
+            "position": {}
+          },
+          {
+            "id": "2",
+            "type": "button",
+            "content": "Sample 2",
+            "link": "https://github.com/myrosvas?tab=repositories",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "red",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "height": "30px",
+            "position": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585309607122,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "https://www.pixelstalk.net/wp-content/uploads/2016/05/Light-Pink-Backgrounds.jpg",
+        "imageAlt": "Sample banner image",
+        "height": "500px",
+        "textblock": [
+          {
+            "id": "1",
+            "type": "text",
+            "content": "Sample content 1",
+            "link": "https://pastebin.com/",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "green",
+            "fontWeight": "bold",
+            "position": {}
+          },
+          {
+            "id": "2",
+            "type": "button",
+            "content": "Sample 2",
+            "link": "https://github.com/myrosvas?tab=repositories",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "red",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "height": "30px",
+            "position": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585316152432,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "https://www.pixelstalk.net/wp-content/uploads/2016/05/Light-Pink-Backgrounds.jpg",
+        "imageAlt": "Sample banner image",
+        "height": "500px",
+        "textblock": [
+          {
+            "id": "1",
+            "type": "text",
+            "content": "Sample content 1",
+            "link": "https://pastebin.com/",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "green",
+            "fontWeight": "bold",
+            "position": {}
+          },
+          {
+            "id": "2",
+            "type": "button",
+            "content": "Sample 2",
+            "link": "https://github.com/myrosvas?tab=repositories",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "red",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "height": "30px",
+            "position": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585317795421,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "https://www.pixelstalk.net/wp-content/uploads/2016/05/Light-Pink-Backgrounds.jpg",
+        "imageAlt": "Sample banner image",
+        "height": "500px",
+        "textblock": [
+          {
+            "id": "1",
+            "type": "text",
+            "content": "Sample content 1",
+            "link": "https://pastebin.com/",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "green",
+            "fontWeight": "bold",
+            "position": {}
+          },
+          {
+            "id": "2",
+            "type": "button",
+            "content": "Sample 2",
+            "link": "https://github.com/myrosvas?tab=repositories",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "red",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "height": "30px",
+            "position": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585318845080,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "https://www.pixelstalk.net/wp-content/uploads/2016/05/Light-Pink-Backgrounds.jpg",
+        "imageAlt": "Sample banner image",
+        "height": "500px",
+        "textblock": [
+          {
+            "id": "1",
+            "type": "text",
+            "content": "Sample link",
+            "link": "https://pastebin.com/",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "green",
+            "fontWeight": "bold",
+            "position": {}
+          },
+          {
+            "id": "2",
+            "type": "button",
+            "content": "Sample button",
+            "link": "https://github.com/myrosvas?tab=repositories",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "red",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "height": "30px",
+            "position": {}
+          },
+          {
+            "id": "1",
+            "type": "text",
+            "content": "Sample text",
+            "link": "",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "violet",
+            "fontWeight": "bold",
+            "position": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585318908338,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "https://www.pixelstalk.net/wp-content/uploads/2016/05/Light-Pink-Backgrounds.jpg",
+        "imageAlt": "Sample banner image",
+        "height": "500px",
+        "textblock": [
+          {
+            "id": "1",
+            "type": "text",
+            "content": "Sample link",
+            "link": "https://pastebin.com/",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "green",
+            "fontWeight": "bold",
+            "position": {}
+          },
+          {
+            "id": "2",
+            "type": "button",
+            "content": "Sample button",
+            "link": "https://github.com/myrosvas?tab=repositories",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "red",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "height": "30px",
+            "position": {}
+          },
+          {
+            "id": "3",
+            "type": "text",
+            "content": "Sample text",
+            "link": "",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "violet",
+            "fontWeight": "bold",
+            "position": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585319143423,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "https://www.pixelstalk.net/wp-content/uploads/2016/05/Light-Pink-Backgrounds.jpg",
+        "imageAlt": "Sample banner image",
+        "height": "500px",
+        "textblock": [
+          {
+            "id": "1",
+            "type": "text",
+            "content": "Sample link",
+            "link": "https://pastebin.com/",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "green",
+            "fontWeight": "bold",
+            "position": {}
+          },
+          {
+            "id": "2",
+            "type": "button",
+            "content": "Sample button",
+            "link": "https://github.com/myrosvas?tab=repositories",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "red",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "height": "30px",
+            "position": {}
+          },
+          {
+            "id": "3",
+            "type": "text",
+            "content": "Sample text",
+            "link": "",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "violet",
+            "fontWeight": "bold",
+            "position": {}
+          }
+        ]
+      }
+    },
+    {
+      "id": 1585319216260,
+      "category": "banners",
+      "type": "banner",
+      "model": {
+        "imageURL": "https://www.pixelstalk.net/wp-content/uploads/2016/05/Light-Pink-Backgrounds.jpg",
+        "imageAlt": "Sample banner image",
+        "height": "500px",
+        "textblock": [
+          {
+            "id": "1",
+            "type": "text",
+            "content": "Sample link",
+            "link": "https://pastebin.com/",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "green",
+            "fontWeight": "bold",
+            "position": {}
+          },
+          {
+            "id": "2",
+            "type": "button",
+            "content": "Sample button",
+            "link": "https://github.com/myrosvas?tab=repositories",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "red",
+            "fontWeight": "",
+            "backgroundColor": "",
+            "border": "",
+            "height": "30px",
+            "position": {}
+          },
+          {
+            "id": "3",
+            "type": "text",
+            "content": "Sample text",
+            "link": "",
+            "fontSize": "14px",
+            "fontFamily": "",
+            "fontColor": "violet",
+            "fontWeight": "bold",
             "position": {}
           }
         ]

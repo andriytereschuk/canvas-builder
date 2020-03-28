@@ -39,34 +39,45 @@ export const componentConfig = {
     banner: {
       color: '#9eb20b',
       model: {
-        imageURL: '',
-        imageAlt: '',
-        content: '',
+        imageURL:
+          'https://www.pixelstalk.net/wp-content/uploads/2016/05/Light-Pink-Backgrounds.jpg',
+        imageAlt: 'Sample banner image',
+        height: '500px',
         textblock: [
           {
-            id: '',
+            id: '1',
             type: 'text',
-            content: '',
-            linkURL: '',
-            fontSize: '',
+            content: 'Sample link',
+            link: 'https://pastebin.com/',
+            fontSize: '14px',
             fontFamily: '',
-            fontColor: '',
-            fontWeight: '',
+            fontColor: 'green',
+            fontWeight: 'bold',
             position: {}
           },
           {
-            id: '',
+            id: '2',
             type: 'button',
-            content: '',
-            linkURL: '',
-            fontSize: '',
+            content: 'Sample button',
+            link: 'https://github.com/myrosvas?tab=repositories',
+            fontSize: '14px',
             fontFamily: '',
-            fontColor: '',
+            fontColor: 'red',
             fontWeight: '',
             backgroundColor: '',
             border: '',
-            width: '',
-            height: '',
+            height: '30px',
+            position: {}
+          },
+          {
+            id: '3',
+            type: 'text',
+            content: 'Sample text',
+            link: '',
+            fontSize: '14px',
+            fontFamily: '',
+            fontColor: 'violet',
+            fontWeight: 'bold',
             position: {}
           }
         ]
