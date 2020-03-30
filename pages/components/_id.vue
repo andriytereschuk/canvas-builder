@@ -1,5 +1,5 @@
 <template>
-  <div v-if="component">
+  <div v-if="component && formModel">
     <v-toolbar dark :style="componentBgColor">
       <v-btn icon dark @click="getBack">
         <v-icon>mdi-close</v-icon>
@@ -19,9 +19,10 @@
               <v-subheader>General</v-subheader>
               <vue-form-generator
                 :schema="schema"
-                :model="component.model"
+                :model="formModel"
                 :options="formOptions"
                 tag="div"
+                @model-updated="onFormUpdated"
               ></vue-form-generator>
             </article>
 
@@ -43,7 +44,7 @@
         </v-col>
         <v-col class="preview">
           <v-card height="100%">
-            <component :is="previewLoader" :model="component.model"></component>
+            <!-- <component :is="previewLoader" :model="component.model"></component> -->
           </v-card>
         </v-col>
       </v-row>
@@ -71,6 +72,7 @@ export default {
   mixins: [filtersMixin, componentMixin],
   data: () => {
     return {
+      formModel: null,
       formOptions: {
         validateAfterLoad: true,
         validateAfterChanged: true,
@@ -89,14 +91,8 @@ export default {
         import(`~/components/preview/${this.previewComponent}`)
       return this.previewComponent && componentToImport
     },
-    component: {
-      get() {
-        return this.getComponentById(this.id)
-      },
-      set(component) {
-        console.log('newComponent', component)
-        this.mapMutations({ id: this.id, component })
-      }
+    component() {
+      return this.getComponentById(this.id)
     },
     schema() {
       return (
@@ -112,10 +108,19 @@ export default {
       )
     }
   },
+  watch: {
+    component(value) {
+      if (value && !this.formModel) {
+        this.setupFormModel()
+      }
+    }
+  },
   mounted() {
     if (!this.component) {
-      this.fetchComponent(this.id)
+      return this.fetchComponent(this.id)
     }
+
+    this.setupFormModel()
   },
   provide() {
     return {
@@ -124,10 +129,24 @@ export default {
   },
   methods: {
     ...mapActions('component', ['fetchComponent', 'saveComponent']),
-    ...mapMutations('component', ['addSubComponent', 'saveComponentToStore']),
+    ...mapMutations('component', [
+      'addSubComponent',
+      'saveComponentToStore',
+      'saveModel'
+    ]),
     save() {
       this.saveComponent(this.component)
       this.getBack()
+    },
+    setupFormModel() {
+      const model = JSON.parse(JSON.stringify(this.component.model))
+
+      delete model.items
+
+      this.formModel = model
+    },
+    onFormUpdated() {
+      this.saveModel({ component: this.component, model: this.formModel })
     },
     getBack() {
       this.$router.go(-1)
