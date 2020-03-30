@@ -42,10 +42,11 @@ export default {
     }
   },
   created() {
+    this.reset()
     this.initialArrIndex()
   },
   methods: {
-    ...mapMutations('customPreset', ['initialArrIndex']),
+    ...mapMutations('customPreset', ['initialArrIndex', 'reset']),
     open() {
       this.dialog = true
     },

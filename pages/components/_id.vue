@@ -87,9 +87,9 @@ export default {
       return this.$route.params.id
     },
     previewLoader() {
-      const componentToImport = () =>
+      return () =>
+        this.previewComponent &&
         import(`~/components/preview/${this.previewComponent}`)
-      return this.previewComponent && componentToImport
     },
     component() {
       return this.getComponentById(this.id)

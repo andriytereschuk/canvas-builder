@@ -1,58 +1,58 @@
 <template>
   <div>
-    <template>
-      <v-card color="grey lighten-4">
-        <v-toolbar dense>
-          <input
-            v-if="edit"
-            v-focus=""
-            type="text"
-            :value="name"
-            class="project-name"
-            style="font-size: 1.25rem"
-            @blur="
-              setProjectName($event.target.value)
-              edit = false
-            "
-            @keyup.enter="
-              setProjectName($event.target.value)
-              edit = false
-            "
-          />
-          <v-tooltip v-else top>
-            <template v-slot:activator="{ on }">
-              <v-toolbar-title @click="edit = true" v-on="on">
-                {{ name }}
-              </v-toolbar-title>
-            </template>
-            <span>Rename</span>
-          </v-tooltip>
-          <v-spacer></v-spacer>
-          <v-tooltip top>
-            <template v-slot:activator="{ on }">
-              <v-btn icon @click="saveProject" v-on="on">
-                <v-icon>mdi-content-save</v-icon>
-              </v-btn>
-            </template>
-            <span>Save</span>
-          </v-tooltip>
+    <v-toolbar dense color="grey darken-1">
+      <input
+        v-if="edit"
+        v-focus=""
+        type="text"
+        :value="name"
+        class="project-name"
+        style="font-size: 1.25rem"
+        @blur="
+          setProjectName($event.target.value)
+          edit = false
+        "
+        @keyup.enter="
+          setProjectName($event.target.value)
+          edit = false
+        "
+      />
+      <v-tooltip v-else top>
+        <template v-slot:activator="{ on }">
+          <v-toolbar-title @click="edit = true" v-on="on">
+            {{ name }}
+          </v-toolbar-title>
+        </template>
+        <span>Rename</span>
+      </v-tooltip>
+      <v-spacer></v-spacer>
+      <v-tooltip top>
+        <template v-slot:activator="{ on }">
+          <v-btn fab small text @click="saveProject" v-on="on">
+            <v-icon>mdi-content-save</v-icon>
+          </v-btn>
+        </template>
+        <span>Save</span>
+      </v-tooltip>
 
-          <v-tooltip top>
-            <template v-slot:activator="{ on }">
-              <v-btn icon v-on="on">
-                <v-icon>mdi-eye</v-icon>
-              </v-btn>
-            </template>
-            <span>Preview</span>
-          </v-tooltip>
-        </v-toolbar>
-      </v-card>
-    </template>
-    <Stepper>
-      <ComponentsMenu ref="componentsMenu" />
-      <Workspace @addPreset="addPreset" />
-      <PresetList ref="presets" @openCustomPreset="openCustomPreset" />
-    </Stepper>
+      <v-tooltip top>
+        <template v-slot:activator="{ on }">
+          <v-btn fab small text v-on="on">
+            <v-icon>mdi-eye</v-icon>
+          </v-btn>
+        </template>
+        <span>Preview</span>
+      </v-tooltip>
+    </v-toolbar>
+
+    <v-container>
+      <Stepper>
+        <ComponentsMenu ref="componentsMenu" />
+        <Workspace @addPreset="addPreset" />
+        <PresetList ref="presets" @openCustomPreset="openCustomPreset" />
+      </Stepper>
+    </v-container>
+
     <CustomPreset ref="customPreset" @closeCustomPreset="closeCustomPreset" />
   </div>
 </template>

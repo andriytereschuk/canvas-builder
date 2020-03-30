@@ -2,12 +2,17 @@
 
 .v-application {
   .logo {
-    color: #fff;
-    font-size: 20px;
     text-decoration: none;
 
+    img {
+      width: 42px;
+    }
+
     span {
-      font-size: 16px;
+      font-size: 18px;
+      color: #fff;
+      white-space: nowrap;
+      padding-left: 5px;
     }
   }
 

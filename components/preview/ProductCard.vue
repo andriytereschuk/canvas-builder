@@ -51,8 +51,8 @@
 export default {
   props: {
     model: {
-      type: Object,
-      required: true
+      type: () => Object,
+      default: {}
     }
   }
 }

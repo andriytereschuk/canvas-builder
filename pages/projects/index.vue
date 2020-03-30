@@ -1,73 +1,75 @@
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="projects"
-    sort-by="name"
-    class="elevation-1"
-  >
-    <template v-slot:top>
-      <v-toolbar flat>
-        <v-toolbar-title>All projects</v-toolbar-title>
-        <v-divider class="mx-4" inset vertical></v-divider>
-        <v-spacer></v-spacer>
-        <template>
-          <v-dialog v-model="dialog" max-width="350">
-            <template v-slot:activator="{ on }">
-              <v-btn color="primary" v-on="on">New project</v-btn>
-            </template>
-            <v-card>
-              <v-card-title class="headline">New Project</v-card-title>
-              <v-card-text>
-                <v-col>
-                  <v-text-field
-                    v-model="title"
-                    :rules="rules"
-                    counter="25"
-                    label="Enter a valid project name"
-                  ></v-text-field>
-                </v-col>
-              </v-card-text>
-              <v-card-actions>
-                <v-row justify="center">
-                  <nuxt-link
-                    style="text-decoration: none"
-                    :event="isDisabled ? '' : 'click'"
-                    :to="`projects/${newProject.id.toString()}`"
-                  >
-                    <v-btn
-                      :disabled="isDisabled"
-                      color="primary"
-                      rounded
-                      @click="createNewProject"
+  <v-container>
+    <v-data-table
+      :headers="headers"
+      :items="projects"
+      sort-by="name"
+      class="elevation-1"
+    >
+      <template v-slot:top>
+        <v-toolbar flat>
+          <v-toolbar-title>All projects</v-toolbar-title>
+          <v-divider class="mx-4" inset vertical></v-divider>
+          <v-spacer></v-spacer>
+          <template>
+            <v-dialog v-model="dialog" max-width="350">
+              <template v-slot:activator="{ on }">
+                <v-btn color="primary" v-on="on">New project</v-btn>
+              </template>
+              <v-card>
+                <v-card-title class="headline">New Project</v-card-title>
+                <v-card-text>
+                  <v-col>
+                    <v-text-field
+                      v-model="title"
+                      :rules="rules"
+                      counter="25"
+                      label="Enter a valid project name"
+                    ></v-text-field>
+                  </v-col>
+                </v-card-text>
+                <v-card-actions>
+                  <v-row justify="center">
+                    <nuxt-link
+                      style="text-decoration: none"
+                      :event="isDisabled ? '' : 'click'"
+                      :to="`projects/${newProject.id.toString()}`"
                     >
-                      Create Project
-                    </v-btn>
-                  </nuxt-link>
-                </v-row>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </template>
-      </v-toolbar>
-    </template>
+                      <v-btn
+                        :disabled="isDisabled"
+                        color="primary"
+                        rounded
+                        @click="createNewProject"
+                      >
+                        Create Project
+                      </v-btn>
+                    </nuxt-link>
+                  </v-row>
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </template>
+        </v-toolbar>
+      </template>
 
-    <template v-slot:item.created="{ item }">
-      <div>{{ convertDate(item.created) }}</div>
-    </template>
+      <template v-slot:item.created="{ item }">
+        <div>{{ convertDate(item.created) }}</div>
+      </template>
 
-    <template v-slot:item.modified="{ item }">
-      <div>{{ convertDate(item.modified) }}</div>
-    </template>
+      <template v-slot:item.modified="{ item }">
+        <div>{{ convertDate(item.modified) }}</div>
+      </template>
 
-    <template v-slot:item.action="{ item }">
-      <nuxt-link :to="`/projects/${getProjectID(item)}`" class="no-undeline">
-        <v-icon small class="mr-2">
-          mdi-pencil
-        </v-icon>
-      </nuxt-link>
-      <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
-    </template>
-  </v-data-table>
+      <template v-slot:item.action="{ item }">
+        <nuxt-link :to="`/projects/${getProjectID(item)}`" class="no-undeline">
+          <v-icon small class="mr-2">
+            mdi-pencil
+          </v-icon>
+        </nuxt-link>
+        <v-icon small @click="deleteItem(item)">mdi-delete</v-icon>
+      </template>
+    </v-data-table>
+  </v-container>
 </template>
 
 <script>

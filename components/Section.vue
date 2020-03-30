@@ -10,8 +10,15 @@
     >
       <Item :zone="zone" draggable />
     </div>
-    <v-btn icon class="delete-icon-btn" @click="deleteSection(section.id)">
-      <v-icon class="delete-icon">mdi-delete</v-icon>
+
+    <v-btn
+      fab
+      small
+      text
+      class="delete-section"
+      @click="deleteSection(section.id)"
+    >
+      <v-icon>mdi-close</v-icon>
     </v-btn>
   </div>
 </template>
@@ -121,15 +128,10 @@ export default {
   padding: 2px;
 }
 
-.delete-icon-btn {
+.delete-section {
   position: absolute;
-  right: -35px;
-}
-
-.delete-icon {
-  &:hover {
-    color: red;
-    cursor: pointer;
-  }
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 </style>
