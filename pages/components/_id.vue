@@ -43,7 +43,7 @@
         </v-col>
         <v-col class="preview">
           <v-card height="100%">
-            <!-- <component :is="previewLoader"></component> -->
+            <component :is="previewLoader"></component>
           </v-card>
         </v-col>
       </v-row>
@@ -85,10 +85,9 @@ export default {
       return this.$route.params.id
     },
     previewLoader() {
-      return (
+      return () =>
         this.previewComponent &&
         import(`~/components/preview/${this.previewComponent}`)
-      )
     },
     component: {
       get() {
