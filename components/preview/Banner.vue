@@ -4,7 +4,7 @@
     tile
     :style="{
       background: `url(${model.imageURL}) no-repeat center center fixed`,
-      height: model.height
+      height: model.height || '500px'
     }"
     :role="model.imageAlt"
   >
@@ -53,36 +53,49 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import { Draggable } from 'draggable-vue-directive'
 
 export default {
   directives: {
     Draggable
   },
+  props: {
+    model: {
+      type: Object,
+      required: true
+    }
+  },
   data: () => {
     return {
-      model: {},
       handleId: 'handle-id',
-      draggableValue: {}
+      draggableValue: {},
+      default: {
+        imageURL:
+          'https://louisvilledancealliance.com/wp-content/uploads/2017/08/1920x1080.jpg',
+        imageAlt: 'Orange background',
+        height: '500px',
+        textblock: [
+          {
+            id: '1',
+            type: 'text',
+            content: 'Sample text',
+            link: '',
+            fontSize: '14px',
+            fontFamily: 'sans-serif',
+            fontColor: 'red',
+            fontWeight: 'bold',
+            position: {
+              top: '10px',
+              left: '10px'
+            }
+          }
+        ]
+      }
     }
-  },
-  computed: {
-    ...mapGetters('component', ['getComponentById']),
-    component() {
-      return this.getComponentById(+this.$route.params.id)
-    }
-  },
-  created() {
-    console.log('this.component', this.component)
-    if (!this.component) {
-      this.fetchComponent(+this.$route.params.id)
-    }
-    this.model = JSON.parse(JSON.stringify(this.component.model))
-    console.log('this.model', this.model)
   },
   mounted() {
-    console.log(this.draggableValue)
+    console.log('banner/model', this.model)
     this.draggableValue.handle = this.$refs[this.handleId]
     this.draggableValue.onDragEnd = this.getPosition
   },

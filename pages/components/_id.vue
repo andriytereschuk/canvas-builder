@@ -43,7 +43,7 @@
         </v-col>
         <v-col class="preview">
           <v-card height="100%">
-            <!-- <component :is="previewLoader"></component> -->
+            <component :is="previewLoader" :model="component.model"></component>
           </v-card>
         </v-col>
       </v-row>
@@ -85,16 +85,16 @@ export default {
       return this.$route.params.id
     },
     previewLoader() {
-      return (
-        this.previewComponent &&
+      const componentToImport = () =>
         import(`~/components/preview/${this.previewComponent}`)
-      )
+      return this.previewComponent && componentToImport
     },
     component: {
       get() {
         return this.getComponentById(this.id)
       },
       set(component) {
+        console.log('newComponent', component)
         this.mapMutations({ id: this.id, component })
       }
     },
