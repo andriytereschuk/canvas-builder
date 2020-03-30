@@ -1,5 +1,10 @@
 <template>
-  <v-text-field v-model="value" :label="schema.title"></v-text-field>
+  <v-text-field
+    v-model="value"
+    :label="schema.title"
+    :placeholder="schema.placeholder ? schema.placeholder : null"
+  >
+  </v-text-field>
 </template>
 
 <script>
