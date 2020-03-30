@@ -63,7 +63,7 @@ export const componentConfig = {
     youtube: {
       color: '#008000',
       model: {
-        videoId: '',
+        url: '',
         fullscreen: true
       },
       schema: {
@@ -72,7 +72,7 @@ export const componentConfig = {
           {
             type: 'text',
             title: 'Video Url',
-            model: 'videoId',
+            model: 'url',
             placeholder: 'https://www.youtube.com/watch?v=0J4h0xdY78A'
           },
           {

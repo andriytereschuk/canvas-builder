@@ -1,9 +1,8 @@
 <template>
   <div class="iframe__container">
     <iframe
-      width="806"
-      height="453"
-      :src="transformLink(model.videoId)"
+      class="iframe__video"
+      :src="transformLink(model.url)"
       frameborder="0"
       allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
       :allowfullscreen="model.fullscreen"
@@ -41,8 +40,12 @@ export default {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  padding-top: 50px;
-  widows: 100%;
+  width: 100%;
   height: 100%;
+}
+
+.iframe__video {
+  width: inherit;
+  height: inherit;
 }
 </style>
