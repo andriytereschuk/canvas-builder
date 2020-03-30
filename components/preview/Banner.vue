@@ -1,10 +1,11 @@
 <template>
   <div
+    :ref="banner"
     class="banner"
     tile
     :style="{
       background: `url(${model.imageURL}) no-repeat center center fixed`,
-      height: model.height || '500px'
+      height: model.height
     }"
     :role="model.imageAlt"
   >
@@ -12,6 +13,7 @@
       v-for="item in model.textblock"
       :key="item.id"
       v-draggable="draggableValue"
+      :style="{ position: 'absolute', top: item.top, left: item.left }"
       class="item-wrapper"
     >
       <div :ref="handleId" class="drag-handle" />
@@ -60,19 +62,21 @@ export default {
   directives: {
     Draggable
   },
-  props: {
-    model: {
-      type: Object,
-      required: true
-    }
-  },
+  // props: {
+  //   model: {
+  //     type: Object,
+  //     required: true
+  //   }
+  // },
   data: () => {
     return {
       handleId: 'handle-id',
+      banner: 'banner',
       draggableValue: {},
-      default: {
+      newModel: {},
+      model: {
         imageURL:
-          'https://louisvilledancealliance.com/wp-content/uploads/2017/08/1920x1080.jpg',
+          'https://world.fantasticimago.com/wp-content/uploads/2013/12/Cool-Light-Grey-background-fantastic-imago-creative-studio-video-production.jpg',
         imageAlt: 'Orange background',
         height: '500px',
         textblock: [
@@ -83,12 +87,10 @@ export default {
             link: '',
             fontSize: '14px',
             fontFamily: 'sans-serif',
-            fontColor: 'red',
+            fontColor: 'black',
             fontWeight: 'bold',
-            position: {
-              top: '10px',
-              left: '10px'
-            }
+            top: '10%',
+            left: '30%'
           }
         ]
       }
@@ -98,12 +100,24 @@ export default {
     console.log('banner/model', this.model)
     this.draggableValue.handle = this.$refs[this.handleId]
     this.draggableValue.onDragEnd = this.getPosition
+    this.draggableValue.boundingElement = this.$refs[this.banner]
+    this.newModel = JSON.parse(JSON.stringify(this.model))
   },
   methods: {
     ...mapActions('component', ['fetchComponent']),
     getPosition(positionDiff, absolutePosition, event) {
-      console.log('left corner', absolutePosition.left)
-      console.log('top corner', absolutePosition.top)
+      console.log('banner', this.draggableValue.boundingElement.offsetLeft)
+      console.log(event.target.offsetLeft)
+      const draggedItem = event.target.parentNode.children[1].textContent.trim()
+      const left = absolutePosition.left
+      const top = absolutePosition.top
+
+      this.newModel.textblock.map((el) => {
+        if (draggedItem === el.content) {
+          el.left = left
+          el.top = top
+        }
+      })
     }
   }
 }
@@ -111,6 +125,7 @@ export default {
 
 <style lang="scss" scoped>
 .banner {
+  position: relative;
   background-size: cover;
   padding: 20px;
 }
