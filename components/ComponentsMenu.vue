@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="isComponentsMenuOpen" max-width="470px">
+  <v-dialog v-model="dialog" max-width="470px">
     <v-card class="components-menu__wrapper">
       <v-card class="components-menu__categories-list">
         <v-list-item class="list-item--accented" @click="getStorageComponents">
@@ -17,19 +17,16 @@
       </v-card>
       <v-card class="components-menu__components-wrapper">
         <v-card flat class="components-menu__heading">
-          <v-card-text class="title" size="18px">
-            {{
-              selectedCategory === 'storage'
-                ? `Add from ${selectedCategory}`
-                : `Add ${selectedCategory}`
-            }}
+          <v-card-text class="title" size="18px"
+            >Add {{ isStorage ? 'from' : '' }}
+            {{ selectedCategory }}
           </v-card-text>
           <v-btn
             class="components-menu__btn"
             color="transparent"
             min-width="20px"
             height="40px"
-            @click="closeMenu"
+            @click="close"
           >
             <v-icon class="components-menu__icon">mdi-close-circle</v-icon>
           </v-btn>
@@ -37,30 +34,23 @@
         <v-divider></v-divider>
         <v-card flat>
           <v-card-actions class="components-menu__btn-container">
+            <!-- TODO: for storage components need to make a separate v-for -->
+            <p v-if="isStorage">Storage is empty...</p>
             <v-btn
-              v-for="component in selectedCategoryItems"
-              :key="selectedCategory === 'storage' ? component.id : component"
+              v-for="type in types"
+              :key="type"
               height="120px"
               min-width="120px"
               class="components-menu__category-btn"
               :color="
-                selectedCategory === 'storage'
-                  ? getComponentColor({
-                      category: component.category,
-                      type: component.type
-                    })
-                  : getComponentColor({
-                      category: selectedCategory,
-                      type: component
-                    })
+                getComponentColor({
+                  category: selectedCategory,
+                  type
+                })
               "
-              @click="selectComponent(component)"
+              @click="selectType(type)"
             >
-              {{
-                selectedCategory === 'storage'
-                  ? formatName(component.type)
-                  : formatName(component)
-              }}
+              {{ type }}
             </v-btn>
           </v-card-actions>
         </v-card>
@@ -73,30 +63,37 @@
 import { mapActions, mapGetters } from 'vuex'
 import { componentConfig } from '~/config/component.config'
 import { componentMixin } from '~/mixins/component.mixin'
-import { splitUppercase } from '~/helpers/splitUppercase.js'
 
 export default {
   mixins: [componentMixin],
+  props: {
+    insideComponent: {
+      type: Boolean,
+      required: false
+    }
+  },
   data: () => {
     return {
-      isComponentsMenuOpen: false,
-      selectedCategory: 'galleries',
-      selectedComponent: '',
-      componentConfig
+      dialog: false,
+      selectedCategory: ''
     }
   },
   computed: {
     ...mapGetters('component', ['components']),
+    isStorage() {
+      return this.selectedCategory === 'storage'
+    },
     categories() {
       return Object.keys(componentConfig)
     },
-    selectedCategoryItems() {
-      if (this.selectedCategory !== 'storage') {
-        return Object.keys(componentConfig[this.selectedCategory])
-      } else {
-        return this.components || 'The storage is empty'
-      }
+    types() {
+      return this.isStorage
+        ? []
+        : Object.keys(componentConfig[this.selectedCategory])
     }
+  },
+  created() {
+    this.selectedCategory = this.categories[0]
   },
   methods: {
     ...mapActions('component', ['fetchComponents']),
@@ -107,46 +104,37 @@ export default {
     selectCategory(category) {
       this.selectedCategory = category
     },
-    selectComponent(type) {
-      this.selectedComponent = type
-      this.agree()
+    selectType(type) {
+      const category = this.selectedCategory
+      const meta = componentConfig[category][type]
+      const { model } = meta
+      const data = {
+        type,
+        category,
+        model
+      }
+      this.agree(data)
     },
-    closeMenu() {
-      this.isComponentsMenuOpen = false
+    selectComponent(component) {
+      this.agree(component)
+    },
+    close() {
+      this.dialog = false
     },
     open() {
-      this.isComponentsMenuOpen = true
+      this.dialog = true
       return new Promise((resolve, reject) => {
         this.resolve = resolve
         this.reject = reject
       })
     },
-    agree() {
-      if (this.selectedCategory === 'storage') {
-        this.resolve({
-          category: this.selectedComponent.category,
-          type: this.selectedComponent.type,
-          model:
-            componentConfig[this.selectedComponent.category][
-              this.selectedComponent.type
-            ].model
-        })
-      } else {
-        this.resolve({
-          category: this.selectedCategory,
-          type: this.selectedComponent,
-          model:
-            componentConfig[this.selectedCategory][this.selectedComponent].model
-        })
-      }
-      this.closeMenu()
+    agree(data) {
+      this.resolve(data)
+      this.close()
     },
     cancel() {
       this.reject(false)
-      this.closeMenu()
-    },
-    formatName(name) {
-      return splitUppercase(name)
+      this.close()
     }
   }
 }

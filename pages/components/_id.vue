@@ -4,10 +4,10 @@
       <v-btn icon dark @click="getBack">
         <v-icon>mdi-close</v-icon>
       </v-btn>
-      <v-toolbar-title>{{ formatName(component.type) }}</v-toolbar-title>
+      <v-toolbar-title>{{ component.type }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-toolbar-items>
-        <v-btn dark text @click="saveComponentContent">Save</v-btn>
+        <v-btn dark text @click="save">Save</v-btn>
       </v-toolbar-items>
     </v-toolbar>
 
@@ -19,7 +19,7 @@
               <v-subheader>General</v-subheader>
               <vue-form-generator
                 :schema="schema"
-                :model="model"
+                :model="component.model"
                 :options="formOptions"
                 tag="div"
               ></vue-form-generator>
@@ -29,21 +29,27 @@
               <v-subheader>Items</v-subheader>
 
               <div class="items">
-                <Item v-for="item in model.items" :key="item.id" :zone="item" />
-                <Add @add="addItem" />
+                <Item
+                  v-for="(item, index) in component.model.items"
+                  :key="index"
+                  :zone="item"
+                  :index="index"
+                  :parent-id="$route.params.id"
+                />
+                <Add @add="addSubComponent(component)" />
               </div>
             </article>
           </v-card>
         </v-col>
         <v-col class="preview">
           <v-card height="100%">
-            <component :is="previewLoader"></component>
+            <!-- <component :is="previewLoader"></component> -->
           </v-card>
         </v-col>
       </v-row>
     </v-container>
 
-    <ComponentsMenu ref="componentsMenu" />
+    <ComponentsMenu ref="componentsMenu" :inside-component="true" />
   </div>
   <v-overlay v-else>
     <v-progress-circular indeterminate size="64"></v-progress-circular>
@@ -51,11 +57,10 @@
 </template>
 
 <script>
-import { mapActions, mapState, mapGetters } from 'vuex'
+import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
 import { componentConfig } from '~/config/component.config'
 import { filtersMixin } from '~/mixins/filters.mixins'
 import { componentMixin } from '~/mixins/component.mixin'
-import { splitUppercase } from '~/helpers/splitUppercase.js'
 import Item from '~/components/Item'
 import Add from '~/components/Add'
 import ComponentsMenu from '~/components/ComponentsMenu'
@@ -66,37 +71,51 @@ export default {
   mixins: [filtersMixin, componentMixin],
   data: () => {
     return {
-      model: {},
       formOptions: {
         validateAfterLoad: true,
         validateAfterChanged: true,
         validateAsync: true
-      },
-      schema: {},
-      previewComponent: ''
+      }
     }
   },
   computed: {
     ...mapState('project', ['project']),
     ...mapGetters('component', ['getComponentById']),
+    id() {
+      return this.$route.params.id
+    },
     previewLoader() {
-      return () => {
-        if (this.previewComponent) {
-          return import(`~/components/preview/${this.previewComponent}`)
-        }
+      return (
+        this.previewComponent &&
+        import(`~/components/preview/${this.previewComponent}`)
+      )
+    },
+    component: {
+      get() {
+        return this.getComponentById(this.id)
+      },
+      set(component) {
+        this.mapMutations({ id: this.id, component })
       }
     },
-    component() {
-      return this.getComponentById(+this.$route.params.id)
+    schema() {
+      return (
+        this.component &&
+        componentConfig[this.component.category][this.component.type].schema
+      )
+    },
+    previewComponent() {
+      return (
+        this.component &&
+        this.component.type.slice(0, 1).toUpperCase() +
+          this.component.type.slice(1)
+      )
     }
   },
-  created() {
-    this.model = JSON.parse(JSON.stringify(this.component.model))
-    this.schema =
-      componentConfig[this.component.category][this.component.type].schema
-    this.previewComponent =
-      this.component.type.slice(0, 1).toUpperCase() +
-      this.component.type.slice(1)
+  mounted() {
+    if (!this.component) {
+      this.fetchComponent(this.id)
+    }
   },
   provide() {
     return {
@@ -105,21 +124,13 @@ export default {
   },
   methods: {
     ...mapActions('component', ['fetchComponent', 'saveComponent']),
-    saveComponentContent() {
-      const editedComponent = { ...this.component, model: this.model }
-      this.saveComponent(editedComponent)
+    ...mapMutations('component', ['addSubComponent', 'saveComponentToStore']),
+    save() {
+      this.saveComponent(this.component)
       this.getBack()
     },
     getBack() {
       this.$router.go(-1)
-    },
-    addItem() {
-      this.model.items.push({ componentId: null })
-      const editedComponent = { ...this.component, model: this.model }
-      this.saveComponent(editedComponent)
-    },
-    formatName(name) {
-      return splitUppercase(name)
     }
   }
 }
