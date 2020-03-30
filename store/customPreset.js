@@ -4,14 +4,16 @@ import {
   createInitialArr
 } from '../utils/helpers'
 
-export const state = () => ({
+const initialState = {
   columns: 4,
   rows: 2,
   colArr: [],
   rowArr: [],
   zones: [],
   previewZone: null
-})
+}
+
+export const state = () => initialState
 
 export const mutations = {
   initialArrIndex(state) {
@@ -50,7 +52,10 @@ export const mutations = {
   updateZonePreview(state, payload) {
     state.previewZone = payload
   },
-  resetGrid(state, payload) {
+  reset(state) {
+    state = initialState
+  },
+  resetGrid(state) {
     state.zones = []
     state.rows = 2
     state.columns = 4

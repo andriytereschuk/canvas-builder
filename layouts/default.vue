@@ -1,8 +1,9 @@
 <template>
   <v-app dark>
     <v-app-bar :clipped-left="clipped" fixed app>
-      <nuxt-link to="/">
-        <img class="logo" src="../assets/logo.png" alt="site-logo" />
+      <nuxt-link class="logo d-flex align-center" to="/">
+        <img src="../assets/logo.png" alt="logo" />
+        <span>Canvas Builder</span>
       </nuxt-link>
     </v-app-bar>
     <v-content>
