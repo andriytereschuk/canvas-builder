@@ -11,7 +11,7 @@
             "zones": [
               {
                 "id": "zone-0-1585320043711",
-                "componentId": "111a42622cef9",
+                "componentId": "cd5c4c0c0a0a1",
                 "coords": {
                   "start": {
                     "x": 1,
@@ -32,7 +32,7 @@
             "zones": [
               {
                 "id": "zone-0-1585570672793",
-                "componentId": "1760ca485d8c5",
+                "componentId": null,
                 "coords": {
                   "start": {
                     "x": 1,
@@ -86,149 +86,39 @@
       "parentId": "e75377728d396"
     },
     {
-<<<<<<< HEAD
-      "id": "3664c5531c27e",
-      "type": "sponsoredItems",
-      "category": "advertisements",
-      "model": {
-        "title": "",
-        "subtitle": ""
-=======
-      "id": "1760ca485d8c5",
-      "type": "youtube",
-      "category": "videos",
-      "model": {
-        "videoId": "https://www.youtube.com/watch?v=0J4h0xdY78A&t=1263s",
-        "fullscreen": true
->>>>>>> 4328b48e500f368f0a0b23735d9723f7e0fcec4f
-      },
-      "parentId": null
-    },
-    {
-<<<<<<< HEAD
-      "id": "1d04c2ebcabdd",
-      "type": "banner",
-      "category": "banners",
-      "model": {
-        "imageURL": "",
-        "imageAlt": "",
-        "height": "",
-        "textblock": [
-          {
-            "id": "",
-            "type": "",
-            "content": "",
-            "link": "",
-            "fontSize": "",
-            "fontFamily": "",
-            "fontColor": "",
-            "fontWeight": "",
-            "position": {
-              "top": "",
-              "left": ""
-            }
-          }
-        ]
-      },
-      "parentId": null
-    },
-    {
-      "id": "c117b8cca3151",
-      "type": "productCard",
-      "category": "store",
-      "model": {
-        "title": "",
-        "subtitle": "",
-        "description": "",
-        "image": "",
-        "price": "",
-        "rating": true,
-        "actionIcons": {
-          "wishList": true,
-          "bookmark": true,
-          "share": true
-        }
-      },
-      "parentId": null
-    },
-    {
-      "id": "e52d96963aa65",
-      "type": "productCard",
-      "category": "store",
-      "model": {
-        "title": "",
-        "subtitle": "",
-        "description": "",
-        "image": "",
-        "price": "",
-        "rating": true,
-        "actionIcons": {
-          "wishList": true,
-          "bookmark": true,
-          "share": true
-        }
-      },
-      "parentId": null
-    },
-    {
-      "id": "92a6c4a3107c",
-      "type": "banner",
-      "category": "banners",
-      "model": {
-        "imageURL": "",
-        "imageAlt": "",
-        "height": "",
-        "textblock": [
-          {
-            "id": "",
-            "type": "",
-            "content": "",
-            "link": "",
-            "fontSize": "",
-            "fontFamily": "",
-            "fontColor": "",
-            "fontWeight": "",
-            "position": {
-              "top": "",
-              "left": ""
-            }
-          }
-        ]
-      },
-      "parentId": null
-    },
-    {
-      "id": "111a42622cef9",
-      "type": "banner",
-      "category": "banners",
-      "model": {
-        "imageURL": "",
-        "imageAlt": "",
-        "height": "",
-        "textblock": [
-          {
-            "id": "",
-            "type": "",
-            "content": "",
-            "link": "",
-            "fontSize": "",
-            "fontFamily": "",
-            "fontColor": "",
-            "fontWeight": "",
-            "position": {
-              "top": "",
-              "left": ""
-            }
-          }
-        ]
-=======
       "id": "86847cc43d887",
       "type": "embedded",
       "category": "videos",
       "model": {
         "url": "https://media.istockphoto.com/videos/aerial-view-of-pedestrians-walking-across-with-crowded-traffic-video-id1140364351",
         "fullscreen": true
->>>>>>> 4328b48e500f368f0a0b23735d9723f7e0fcec4f
+      },
+      "parentId": null
+    },
+    {
+      "id": "cd5c4c0c0a0a1",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "imageURL": "",
+        "imageAlt": "",
+        "height": "",
+        "textblock": [
+          {
+            "id": "",
+            "type": "",
+            "content": "",
+            "link": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "position": {
+              "top": "",
+              "left": ""
+            }
+          }
+        ]
       },
       "parentId": null
     }

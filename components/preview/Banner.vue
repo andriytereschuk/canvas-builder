@@ -73,6 +73,7 @@ export default {
       handleId: 'handle-id',
       banner: 'banner',
       draggableValue: {},
+      draggedItem: '',
       newModel: {},
       model: {
         imageURL:
@@ -97,25 +98,38 @@ export default {
     }
   },
   mounted() {
-    console.log('banner/model', this.model)
     this.draggableValue.handle = this.$refs[this.handleId]
     this.draggableValue.onDragEnd = this.getPosition
+    this.draggableValue.onDragStart = this.getItem
     this.draggableValue.boundingElement = this.$refs[this.banner]
     this.newModel = JSON.parse(JSON.stringify(this.model))
   },
   methods: {
     ...mapActions('component', ['fetchComponent']),
+    getItem(positionDiff, absolutePosition, event) {
+      this.draggedItem =
+        event.target.getAttribute('class') === 'drag-handle'
+          ? event.target.parentNode.children[1].textContent.trim()
+          : event.target.textContent.trim()
+    },
     getPosition(positionDiff, absolutePosition, event) {
-      console.log('banner', this.draggableValue.boundingElement.offsetLeft)
-      console.log(event.target.offsetLeft)
-      const draggedItem = event.target.parentNode.children[1].textContent.trim()
-      const left = absolutePosition.left
-      const top = absolutePosition.top
-
+      const banner = this.$refs[this.banner]
+      const bannerTop = banner.getBoundingClientRect().top
+      const bannerLeft = banner.getBoundingClientRect().left
+      const itemLeft = absolutePosition.left - bannerLeft
+      const itemTop = absolutePosition.top - bannerTop
+      const modelLeft = `${(
+        (itemLeft * 100) /
+        banner.getBoundingClientRect().width
+      ).toFixed()}%`
+      const modelTop = `${(
+        (itemTop * 100) /
+        banner.getBoundingClientRect().height
+      ).toFixed()}%`
       this.newModel.textblock.map((el) => {
-        if (draggedItem === el.content) {
-          el.left = left
-          el.top = top
+        if (this.draggedItem === el.content) {
+          el.left = modelLeft
+          el.top = modelTop
         }
       })
     }
@@ -128,10 +142,6 @@ export default {
   position: relative;
   background-size: cover;
   padding: 20px;
-}
-
-.item-wrapper {
-  position: relative;
 }
 
 .drag-handle::after {
