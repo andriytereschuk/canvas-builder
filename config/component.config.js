@@ -64,28 +64,18 @@ export const componentConfig = {
         fields: [
           {
             type: 'text',
-            title: 'imageURL',
+            title: 'Image URL',
             model: 'imageURL'
           },
           {
             type: 'text',
-            title: 'imageDescription',
+            title: 'Description for visually impaired people',
             model: 'imageDescription'
           },
           {
             type: 'text',
-            title: 'text',
-            model: 'content'
-          },
-          {
-            type: 'text',
-            title: 'linkURL',
-            model: 'linkURL'
-          },
-          {
-            type: 'text',
-            title: 'button',
-            model: 'button'
+            title: 'Banner height in pixels (e.g. 300px)',
+            model: 'height'
           }
         ]
       }

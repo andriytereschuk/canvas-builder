@@ -100,9 +100,9 @@
       "type": "banner",
       "category": "banners",
       "model": {
-        "imageURL": "",
+        "imageURL": "https://images.unsplash.com/photo-1454117096348-e4abbeba002c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
         "imageAlt": "",
-        "height": "",
+        "height": "300px",
         "textblock": [
           {
             "id": "",
@@ -118,7 +118,8 @@
               "left": ""
             }
           }
-        ]
+        ],
+        "imageDescription": "A banner sample with grey background"
       },
       "parentId": null
     }
