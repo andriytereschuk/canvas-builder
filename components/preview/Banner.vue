@@ -9,6 +9,7 @@
     }"
     :role="model.imageAlt"
   >
+    <TextEditor />
     <div
       v-for="item in model.textblock"
       :key="item.id"
@@ -57,10 +58,14 @@
 <script>
 import { mapActions } from 'vuex'
 import { Draggable } from 'draggable-vue-directive'
+import TextEditor from '~/components/TextEditor'
 
 export default {
   directives: {
     Draggable
+  },
+  components: {
+    TextEditor
   },
   // props: {
   //   model: {
@@ -70,6 +75,7 @@ export default {
   // },
   data: () => {
     return {
+      editor: null,
       handleId: 'handle-id',
       banner: 'banner',
       draggableValue: {},
