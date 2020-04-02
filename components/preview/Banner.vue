@@ -1,5 +1,5 @@
 <template>
-  <div class="banner" tile :style="{ height: model.height }">
+  <div class="banner" :style="{ height: model.height }">
     <div
       class="background-image"
       :style="{
@@ -12,7 +12,7 @@
       class="content"
       :style="{
         backgroundColor: `rgba(${model.overlayColor})`,
-        height: model.height || defaultBanner.bannerHeight
+        height: model.height
       }"
     >
       <span
@@ -23,8 +23,9 @@
           color: model.textColor,
           fontSize: model.textSize
         }"
-        >{{ model.text }}</span
       >
+        {{ model.text }}
+      </span>
       <a
         :href="model.linkURL"
         :style="{
@@ -43,6 +44,7 @@
           position: 'absolute',
           padding: '5px',
           borderRadius: '5px',
+          boxShadow: '10px 10px 15px -8px rgba(0,0,0,0.75)',
           top: model.buttonTop,
           left: model.buttonLeft,
           color: model.buttonTextColor,
@@ -52,11 +54,7 @@
           height: model.buttonHeight,
           border: model.buttonBorder
         }"
-        @click="
-          () => {
-            $router.push({ path: model.buttonLink })
-          }
-        "
+        @click="() => $router.push({ path: model.buttonLink })"
       >
         {{ model.buttonText }}
       </button>
