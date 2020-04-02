@@ -39,28 +39,31 @@ export const componentConfig = {
     banner: {
       color: '#9eb20b',
       model: {
-        imageURL: '',
-        imageAlt: '',
-        height: '',
-        text: '',
-        textColor: '',
-        textSize: '',
-        textTop: '',
-        textLeft: '',
-        linkAnchor: '',
-        linkText: '',
-        linkColor: '',
-        linkSize: '',
-        linkTop: '',
-        linkLeft: '',
-        buttonText: '',
-        buttonLink: '',
-        buttonTextColor: '',
-        buttonHeight: '',
-        buttonColor: '',
-        buttonBorder: '',
-        buttonTop: '',
-        buttonLeft: ''
+        imageURL:
+          'https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg',
+        imageAlt: 'Default image, four women in dresses, black background',
+        height: '500px',
+        blur: '',
+        overlayColor: '0,0,0,0.5',
+        text: 'NEW SEASON',
+        textColor: 'white',
+        textSize: '40px',
+        textTop: '40%',
+        textLeft: '35%',
+        linkText: 'Start shopping now!',
+        linkURL: 'https://www.amazon.com/',
+        linkColor: 'white',
+        linkSize: '18px',
+        linkTop: '55%',
+        linkLeft: '38%',
+        buttonText: 'GO TO THE SHOP',
+        buttonLink: '/shop',
+        buttonTextColor: 'black',
+        buttonHeight: '35px',
+        buttonColor: 'white',
+        buttonBorder: '1px solid black',
+        buttonTop: '70%',
+        buttonLeft: '40%'
       },
       schema: {
         hasChildren: false,
@@ -79,6 +82,16 @@ export const componentConfig = {
             type: 'text',
             title: 'Banner height in pixels (e.g. 300px)',
             model: 'height'
+          },
+          {
+            type: 'text',
+            title: 'Background blur in pixels (e.g. 3px)',
+            model: 'blur'
+          },
+          {
+            type: 'text',
+            title: 'Background overlay RGBA color (e.g. 0,0,0,0.3)',
+            model: 'overlayColor'
           },
           {
             type: 'text',
@@ -108,7 +121,7 @@ export const componentConfig = {
           {
             type: 'text',
             title: 'Link text',
-            model: 'linkAnchor'
+            model: 'linkText'
           },
           {
             type: 'text',

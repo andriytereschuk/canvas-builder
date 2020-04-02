@@ -25,9 +25,6 @@
                 @model-updated="onFormUpdated"
               ></vue-form-generator>
             </article>
-            <!-- <article v-if="component.type === 'banner'" style="padding: 0px">
-              <BannerSettings @changeModel="updateFormModel(newModel)" />
-            </article> -->
 
             <article v-if="schema.hasChildren">
               <v-subheader>Items</v-subheader>
@@ -67,13 +64,12 @@ import { componentConfig } from '~/config/component.config'
 import { filtersMixin } from '~/mixins/filters.mixins'
 import { componentMixin } from '~/mixins/component.mixin'
 import Item from '~/components/Item'
-import BannerSettings from '~/components/BannerSettings'
 import Add from '~/components/Add'
 import ComponentsMenu from '~/components/ComponentsMenu'
 
 export default {
   layout: 'simple',
-  components: { Item, Add, ComponentsMenu, FieldArray, BannerSettings },
+  components: { Item, Add, ComponentsMenu, FieldArray },
   mixins: [filtersMixin, componentMixin],
   data: () => {
     return {
