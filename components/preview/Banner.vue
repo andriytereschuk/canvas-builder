@@ -1,62 +1,25 @@
 <template>
-  <div class="banner" :style="{ height: model.height }">
+  <div class="banner" :style="bannerStyle">
     <div
       class="background-image"
-      :style="{
-        background: `url(${model.imageURL}) no-repeat center center`,
-        filter: `blur(${model.blur})`
-      }"
+      :style="bgImageStyle"
       :role="model.imageAlt"
-    ></div>
-    <div
-      class="content"
-      :style="{
-        backgroundColor: `rgba(${model.overlayColor})`,
-        height: model.height
-      }"
-    >
-      <span
-        :style="{
-          position: 'absolute',
-          top: model.textTop,
-          left: model.textLeft,
-          color: model.textColor,
-          fontSize: model.textSize
-        }"
-      >
-        {{ model.text }}
+    />
+    <div class="content" :style="contentStyle">
+      <span class="text" :style="textStyle">
+        {{ model.text.content }}
       </span>
-      <a
-        :href="model.linkURL"
-        :style="{
-          position: 'absolute',
-          top: model.linkTop,
-          left: model.linkLeft,
-          color: model.linkColor,
-          fontSize: model.linkSize
-        }"
-      >
-        {{ model.linkText }}
+
+      <a class="link" :style="linkStyle" :href="model.link.url">
+        {{ model.link.text }}
       </a>
 
       <button
-        :style="{
-          position: 'absolute',
-          padding: '5px',
-          borderRadius: '5px',
-          boxShadow: '10px 10px 15px -8px rgba(0,0,0,0.75)',
-          top: model.buttonTop,
-          left: model.buttonLeft,
-          color: model.buttonTextColor,
-          fontSize: model.fontSize,
-          backgroundColor: model.buttonColor,
-          fontSize: model.buttonSize,
-          height: model.buttonHeight,
-          border: model.buttonBorder
-        }"
-        @click="() => $router.push({ path: model.buttonLink })"
+        class="button"
+        :style="buttonStyle"
+        @click="() => $router.push({ path: model.button.link })"
       >
-        {{ model.buttonText }}
+        {{ model.button.text }}
       </button>
     </div>
   </div>
@@ -68,6 +31,52 @@ export default {
     model: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    bannerStyle() {
+      return {
+        height: this.model.height
+      }
+    },
+    bgImageStyle() {
+      return {
+        background: `url(${this.model.imageURL}) no-repeat center center`,
+        filter: `blur(${this.model.blur})`
+      }
+    },
+    contentStyle() {
+      return {
+        backgroundColor: `rgba(${this.model.overlayColor})`,
+        height: this.model.height
+      }
+    },
+    textStyle() {
+      return {
+        top: this.model.text.top,
+        left: this.model.text.left,
+        color: this.model.text.color,
+        fontSize: this.model.text.size
+      }
+    },
+    linkStyle() {
+      return {
+        top: this.model.link.top,
+        left: this.model.link.left,
+        color: this.model.link.color,
+        fontSize: this.model.link.size
+      }
+    },
+    buttonStyle() {
+      return {
+        top: this.model.button.top,
+        left: this.model.button.left,
+        color: this.model.button.textColor,
+        backgroundColor: this.model.button.color,
+        fontSize: this.model.button.size,
+        height: this.model.button.height,
+        border: this.model.button.border
+      }
     }
   }
 }
@@ -93,5 +102,17 @@ export default {
   left: 0;
   width: 100%;
   z-index: 100;
+}
+
+.text,
+.link,
+.button {
+  position: absolute;
+}
+
+.button {
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 10px 10px 15px -8px rgba(0, 0, 0, 0.75);
 }
 </style>

@@ -45,25 +45,31 @@ export const componentConfig = {
         height: '500px',
         blur: '',
         overlayColor: '0,0,0,0.5',
-        text: 'NEW SEASON',
-        textColor: 'white',
-        textSize: '40px',
-        textTop: '40%',
-        textLeft: '35%',
-        linkText: 'Start shopping now!',
-        linkURL: 'https://www.amazon.com/',
-        linkColor: 'white',
-        linkSize: '18px',
-        linkTop: '55%',
-        linkLeft: '38%',
-        buttonText: 'GO TO THE SHOP',
-        buttonLink: '/shop',
-        buttonTextColor: 'black',
-        buttonHeight: '35px',
-        buttonColor: 'white',
-        buttonBorder: '1px solid black',
-        buttonTop: '70%',
-        buttonLeft: '40%'
+        text: {
+          content: 'NEW SEASON',
+          color: 'white',
+          size: '40px',
+          top: '40%',
+          left: '35%'
+        },
+        link: {
+          text: 'Start shopping now!',
+          url: 'https://www.amazon.com/',
+          color: 'white',
+          size: '18px',
+          top: '55%',
+          left: '38%'
+        },
+        button: {
+          text: 'GO TO THE SHOP',
+          link: '/shop',
+          textColor: 'black',
+          height: '35px',
+          color: 'white',
+          border: '1px solid black',
+          top: '70%',
+          left: '40%'
+        }
       },
       schema: {
         hasChildren: false,
@@ -94,99 +100,126 @@ export const componentConfig = {
             model: 'overlayColor'
           },
           {
-            type: 'text',
-            title: 'Simple text',
-            model: 'text'
+            type: 'object',
+            label: 'Text settings',
+            model: 'text',
+            schema: {
+              fields: [
+                {
+                  type: 'text',
+                  title: 'Simple text',
+                  model: 'content'
+                },
+                {
+                  type: 'text',
+                  title: 'Text color',
+                  model: 'color'
+                },
+                {
+                  type: 'text',
+                  title: 'Text size',
+                  model: 'size'
+                },
+                {
+                  type: 'text',
+                  title: 'Text: distance from top border (%)',
+                  model: 'top'
+                },
+                {
+                  type: 'text',
+                  title: 'Text: distance from left border (%)',
+                  model: 'left'
+                }
+              ]
+            }
           },
           {
-            type: 'text',
-            title: 'Text color',
-            model: 'textColor'
+            type: 'object',
+            label: 'Link settings',
+            model: 'link',
+            schema: {
+              fields: [
+                {
+                  type: 'text',
+                  title: 'Link text',
+                  model: 'text'
+                },
+                {
+                  type: 'text',
+                  title: 'Link URL',
+                  model: 'url'
+                },
+                {
+                  type: 'text',
+                  title: 'Link color',
+                  model: 'color'
+                },
+                {
+                  type: 'text',
+                  title: 'Link font size',
+                  model: 'size'
+                },
+                {
+                  type: 'text',
+                  title: 'Link: distance from top border (%)',
+                  model: 'top'
+                },
+                {
+                  type: 'text',
+                  title: 'Link: distance from left border (%)',
+                  model: 'left'
+                }
+              ]
+            }
           },
           {
-            type: 'text',
-            title: 'Text size',
-            model: 'textSize'
-          },
-          {
-            type: 'text',
-            title: 'Text: distance from top border (%)',
-            model: 'textTop'
-          },
-          {
-            type: 'text',
-            title: 'Text: distance from left border (%)',
-            model: 'textLeft'
-          },
-          {
-            type: 'text',
-            title: 'Link text',
-            model: 'linkText'
-          },
-          {
-            type: 'text',
-            title: 'Link URL',
-            model: 'linkURL'
-          },
-          {
-            type: 'text',
-            title: 'Link color',
-            model: 'linkColor'
-          },
-          {
-            type: 'text',
-            title: 'Link font size',
-            model: 'linkSize'
-          },
-          {
-            type: 'text',
-            title: 'Link: distance from top border (%)',
-            model: 'linkTop'
-          },
-          {
-            type: 'text',
-            title: 'Link: distance from left border (%)',
-            model: 'linkLeft'
-          },
-          {
-            type: 'text',
-            title: 'Button text',
-            model: 'buttonText'
-          },
-          {
-            type: 'text',
-            title: 'Button: redirection subpage (e.g. /home)',
-            model: 'buttonLink'
-          },
-          {
-            type: 'text',
-            title: 'Button text color',
-            model: 'buttonTextColor'
-          },
-          {
-            type: 'text',
-            title: 'Button height',
-            model: 'buttonHeight'
-          },
-          {
-            type: 'text',
-            title: 'Button background color',
-            model: 'buttonColor'
-          },
-          {
-            type: 'text',
-            title: 'Button border (e.g. 1px solid black)',
-            model: 'buttonBorder'
-          },
-          {
-            type: 'text',
-            title: 'Button: distance from top border (%)',
-            model: 'buttonTop'
-          },
-          {
-            type: 'text',
-            title: 'Button: distance from left border (%)',
-            model: 'buttonLeft'
+            type: 'object',
+            label: 'Button settings',
+            model: 'button',
+            schema: {
+              fields: [
+                {
+                  type: 'text',
+                  title: 'Button text',
+                  model: 'text'
+                },
+                {
+                  type: 'text',
+                  title: 'Button: redirection subpage (e.g. /home)',
+                  model: 'link'
+                },
+                {
+                  type: 'text',
+                  title: 'Button text color',
+                  model: 'textColor'
+                },
+                {
+                  type: 'text',
+                  title: 'Button height',
+                  model: 'height'
+                },
+                {
+                  type: 'text',
+                  title: 'Button background color',
+                  model: 'color'
+                },
+                {
+                  type: 'text',
+                  title: 'Button border (e.g. 1px solid black)',
+                  model: 'border'
+                },
+                {
+                  type: 'text',
+                  title: 'Button: distance from top border (%)',
+                  model: 'top'
+                },
+                {
+                  type: 'text',
+                  title: 'Button: distance from left border (%)',
+                  model: 'left'
+                }
+              ]
+            }
           }
         ]
       }
