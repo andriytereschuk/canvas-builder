@@ -11,7 +11,7 @@
             "zones": [
               {
                 "id": "zone-0-1585320043711",
-                "componentId": "cd5c4c0c0a0a1",
+                "componentId": "0812b5ca9cdcb",
                 "coords": {
                   "start": {
                     "x": 1,
@@ -96,30 +96,492 @@
       "parentId": null
     },
     {
-      "id": "cd5c4c0c0a0a1",
+      "id": "8cc150c51dc65",
       "type": "banner",
       "category": "banners",
       "model": {
         "imageURL": "https://images.unsplash.com/photo-1454117096348-e4abbeba002c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
-        "imageAlt": "",
+        "imageAlt": "Sample description",
         "height": "300px",
-        "textblock": [
+        "texts": [
           {
             "id": "",
-            "type": "",
+            "content": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "top": "",
+            "left": ""
+          }
+        ],
+        "links": [
+          {
+            "id": "",
+            "anchor": "",
+            "url": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "top": "",
+            "left": ""
+          }
+        ],
+        "buttons": [
+          {
+            "id": "",
             "content": "",
             "link": "",
             "fontSize": "",
             "fontFamily": "",
             "fontColor": "",
             "fontWeight": "",
-            "position": {
-              "top": "",
-              "left": ""
-            }
+            "background": "",
+            "border": "",
+            "top": "",
+            "left": ""
+          }
+        ]
+      },
+      "parentId": null
+    },
+    {
+      "id": "eeae01e63a92a",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "imageURL": "",
+        "imageAlt": "",
+        "height": "",
+        "texts": [
+          {
+            "id": "",
+            "content": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "top": "",
+            "left": ""
           }
         ],
-        "imageDescription": "A banner sample with grey background"
+        "links": [
+          {
+            "id": "",
+            "anchor": "",
+            "url": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "top": "",
+            "left": ""
+          }
+        ],
+        "buttons": [
+          {
+            "id": "",
+            "content": "",
+            "link": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "background": "",
+            "border": "",
+            "top": "",
+            "left": ""
+          }
+        ]
+      },
+      "parentId": null
+    },
+    {
+      "id": "3eb6ebfdbb78d",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "imageURL": "",
+        "imageAlt": "",
+        "height": "",
+        "texts": [
+          {
+            "id": "",
+            "content": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "top": "",
+            "left": "",
+            "label": "text",
+            "field": "text",
+            "template": "Simple text"
+          }
+        ],
+        "links": [
+          {
+            "id": "",
+            "anchor": "",
+            "url": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "top": "",
+            "left": "",
+            "label": "link",
+            "field": "link",
+            "template": "Simple link"
+          }
+        ],
+        "buttons": [
+          {
+            "id": "",
+            "content": "",
+            "link": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "background": "",
+            "border": "",
+            "top": "",
+            "left": "",
+            "label": "button",
+            "field": "button",
+            "template": "Simple button"
+          }
+        ]
+      },
+      "parentId": null
+    },
+    {
+      "id": "57daae4b70226",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "imageURL": "",
+        "imageAlt": "",
+        "height": "",
+        "texts": [
+          {
+            "id": "",
+            "content": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "top": "",
+            "left": "",
+            "label": "text",
+            "field": "text",
+            "template": "Simple text"
+          }
+        ],
+        "links": [
+          {
+            "id": "",
+            "anchor": "",
+            "url": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "top": "",
+            "left": "",
+            "label": "link",
+            "field": "link",
+            "template": "Simple link"
+          }
+        ],
+        "buttons": [
+          {
+            "id": "",
+            "content": "",
+            "link": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "background": "",
+            "border": "",
+            "top": "",
+            "left": "",
+            "label": "button",
+            "field": "button",
+            "template": "Simple button"
+          }
+        ]
+      },
+      "parentId": null
+    },
+    {
+      "id": "dcefe231b3a5a",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "imageURL": "",
+        "imageAlt": "",
+        "height": "",
+        "texts": [
+          {
+            "id": "",
+            "content": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "top": "",
+            "left": "",
+            "label": "text",
+            "field": "text",
+            "template": "Simple text"
+          }
+        ],
+        "links": [
+          {
+            "id": "",
+            "anchor": "",
+            "url": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "top": "",
+            "left": "",
+            "label": "link",
+            "field": "link",
+            "template": "Simple link"
+          }
+        ],
+        "buttons": [
+          {
+            "id": "",
+            "content": "",
+            "link": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "background": "",
+            "border": "",
+            "top": "",
+            "left": "",
+            "label": "button",
+            "field": "button",
+            "template": "Simple button"
+          }
+        ]
+      },
+      "parentId": null
+    },
+    {
+      "id": "a9707fe12976a",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "imageURL": "https://images.unsplash.com/photo-1454117096348-e4abbeba002c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
+        "imageAlt": "Sample description",
+        "height": "Buy now",
+        "texts": [
+          {
+            "id": "",
+            "content": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "top": "",
+            "left": "",
+            "label": "text",
+            "field": "text",
+            "template": "Simple text"
+          }
+        ],
+        "links": [
+          {
+            "id": "",
+            "anchor": "",
+            "url": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "top": "",
+            "left": "",
+            "label": "link",
+            "field": "link",
+            "template": "Simple link"
+          }
+        ],
+        "buttons": [
+          {
+            "id": "",
+            "content": "",
+            "link": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "background": "",
+            "border": "",
+            "top": "",
+            "left": "",
+            "label": "button",
+            "field": "button",
+            "template": "Simple button"
+          }
+        ]
+      },
+      "parentId": null
+    },
+    {
+      "id": "37d433d4bcc22",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "imageURL": "",
+        "imageAlt": "",
+        "height": "",
+        "texts": [
+          {
+            "id": "",
+            "content": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "top": "",
+            "left": "",
+            "label": "text",
+            "field": "text",
+            "template": "Simple text"
+          }
+        ],
+        "links": [
+          {
+            "id": "",
+            "anchor": "",
+            "url": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "top": "",
+            "left": "",
+            "label": "link",
+            "field": "link",
+            "template": "Simple link"
+          }
+        ],
+        "buttons": [
+          {
+            "id": "",
+            "content": "",
+            "link": "",
+            "fontSize": "",
+            "fontFamily": "",
+            "fontColor": "",
+            "fontWeight": "",
+            "background": "",
+            "border": "",
+            "top": "",
+            "left": "",
+            "label": "button",
+            "field": "button",
+            "template": "Simple button"
+          }
+        ]
+      },
+      "parentId": null
+    },
+    {
+      "id": "f7285aff79d87",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "imageURL": "https://clinicpsychology.com/wp-content/uploads/2015/08/23394-grey-blur-1680x1050-abstract-wallpaper.jpg",
+        "imageAlt": "Sample description",
+        "height": "400px",
+        "text": "Simple text",
+        "textTop": "10%",
+        "textLeft": "10%",
+        "buttonTop": "60%",
+        "buttonLeft": "60%",
+        "linkTop": "40%",
+        "linkLeft": "40%",
+        "textColor": "black",
+        "textSize": "16px",
+        "linkAnchor": "Simple link",
+        "linkURL": "https://google.com",
+        "linkColor": "orange",
+        "linkSize": "14px",
+        "buttonText": "Button",
+        "buttonFontColor": "red",
+        "buttonHeight": "30px",
+        "buttonColor": "white",
+        "buttonBorder": "1px solid black"
+      },
+      "parentId": null
+    },
+    {
+      "id": "f15aa303f0d44",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "imageURL": "",
+        "imageAlt": "",
+        "height": "400px",
+        "text": "Simple text",
+        "textColor": "black",
+        "textSize": "16px",
+        "textTop": "10%",
+        "textLeft": "10%",
+        "linkAnchor": "Simple link",
+        "linkText": "",
+        "linkColor": "orange",
+        "linkSize": "14px",
+        "linkTop": "40%",
+        "linkLeft": "40%",
+        "buttonText": "Button",
+        "buttonFontColor": "red",
+        "buttonHeight": "30px",
+        "buttonColor": "white",
+        "buttonBorder": "1px solid black",
+        "buttonTop": "60%",
+        "buttonLeft": "60%",
+        "linkURL": "https://google.com"
+      },
+      "parentId": null
+    },
+    {
+      "id": "0812b5ca9cdcb",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "imageURL": "",
+        "imageAlt": "",
+        "height": "",
+        "text": "",
+        "textColor": "",
+        "textSize": "",
+        "textTop": "",
+        "textLeft": "",
+        "linkAnchor": "",
+        "linkText": "",
+        "linkColor": "",
+        "linkSize": "",
+        "linkTop": "",
+        "linkLeft": "",
+        "buttonText": "",
+        "buttonTextColor": "",
+        "buttonHeight": "",
+        "buttonColor": "",
+        "buttonBorder": "",
+        "buttonTop": "",
+        "buttonLeft": ""
       },
       "parentId": null
     }

@@ -133,6 +133,7 @@ import {
   History
 } from 'tiptap-extensions'
 import Icon from '~/components/Icon'
+
 export default {
   components: {
     EditorContent,
@@ -160,16 +161,12 @@ export default {
           new Underline(),
           new History()
         ],
-        content: `
-          <h2>
-            Hiding Menu Bar
-          </h2>
-          <p>
-            Click into this text to see the menu. Click outside and the menu will disappear. It's like magic.
-          </p>
-        `
+        content: 'default text'
       })
     }
+  },
+  mounted() {
+    console.log(this.text)
   },
   beforeDestroy() {
     this.editor.destroy()

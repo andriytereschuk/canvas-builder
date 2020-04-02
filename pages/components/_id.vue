@@ -25,6 +25,9 @@
                 @model-updated="onFormUpdated"
               ></vue-form-generator>
             </article>
+            <!-- <article v-if="component.type === 'banner'" style="padding: 0px">
+              <BannerSettings @changeModel="updateFormModel(newModel)" />
+            </article> -->
 
             <article v-if="schema.hasChildren">
               <v-subheader>Items</v-subheader>
@@ -59,16 +62,18 @@
 
 <script>
 import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
+import { FieldArray } from 'vfg-field-array'
 import { componentConfig } from '~/config/component.config'
 import { filtersMixin } from '~/mixins/filters.mixins'
 import { componentMixin } from '~/mixins/component.mixin'
 import Item from '~/components/Item'
+import BannerSettings from '~/components/BannerSettings'
 import Add from '~/components/Add'
 import ComponentsMenu from '~/components/ComponentsMenu'
 
 export default {
   layout: 'simple',
-  components: { Item, Add, ComponentsMenu },
+  components: { Item, Add, ComponentsMenu, FieldArray, BannerSettings },
   mixins: [filtersMixin, componentMixin],
   data: () => {
     return {
@@ -135,15 +140,24 @@ export default {
       'saveModel'
     ]),
     save() {
+      console.log(this.component)
       this.saveComponent(this.component)
       this.getBack()
     },
     setupFormModel() {
       const model = JSON.parse(JSON.stringify(this.component.model))
+      console.log('model', model)
 
       delete model.items
 
       this.formModel = model
+    },
+    updateFormModel(newModel) {
+      const { texts, links, buttons } = newModel
+      this.formModel.texts = texts
+      this.formModel.links = links
+      this.formModel.buttons = buttons
+      console.log(this.formModel)
     },
     onFormUpdated() {
       this.saveModel({ component: this.component, model: this.formModel })
