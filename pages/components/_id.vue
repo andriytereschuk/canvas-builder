@@ -59,7 +59,6 @@
 
 <script>
 import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
-import { FieldArray } from 'vfg-field-array'
 import { componentConfig } from '~/config/component.config'
 import { filtersMixin } from '~/mixins/filters.mixins'
 import { componentMixin } from '~/mixins/component.mixin'
@@ -69,7 +68,7 @@ import ComponentsMenu from '~/components/ComponentsMenu'
 
 export default {
   layout: 'simple',
-  components: { Item, Add, ComponentsMenu, FieldArray },
+  components: { Item, Add, ComponentsMenu },
   mixins: [filtersMixin, componentMixin],
   data: () => {
     return {
@@ -136,13 +135,11 @@ export default {
       'saveModel'
     ]),
     save() {
-      console.log(this.component)
       this.saveComponent(this.component)
       this.getBack()
     },
     setupFormModel() {
       const model = JSON.parse(JSON.stringify(this.component.model))
-      console.log('model', model)
 
       delete model.items
 
@@ -153,7 +150,6 @@ export default {
       this.formModel.texts = texts
       this.formModel.links = links
       this.formModel.buttons = buttons
-      console.log(this.formModel)
     },
     onFormUpdated() {
       this.saveModel({ component: this.component, model: this.formModel })
