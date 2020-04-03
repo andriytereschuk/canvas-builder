@@ -3,7 +3,7 @@
     <div
       class="background-image"
       :style="bgImageStyle"
-      :role="model.imageAlt"
+      :role="model.image.description"
     />
     <div class="content" :style="contentStyle">
       <span class="text" :style="textStyle">
@@ -36,19 +36,19 @@ export default {
   computed: {
     bannerStyle() {
       return {
-        height: this.model.height
+        height: this.model.image.height
       }
     },
     bgImageStyle() {
       return {
-        background: `url(${this.model.imageURL}) no-repeat center center`,
-        filter: `blur(${this.model.blur})`
+        background: `url(${this.model.image.url}) no-repeat center center`,
+        filter: `blur(${this.model.image.blur})`
       }
     },
     contentStyle() {
       return {
-        backgroundColor: `rgba(${this.model.overlayColor})`,
-        height: this.model.height
+        backgroundColor: `rgba(${this.model.image.overlayColor})`,
+        height: this.model.image.height
       }
     },
     textStyle() {
