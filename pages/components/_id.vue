@@ -146,7 +146,6 @@ export default {
       this.formModel = model
     },
     onFormUpdated() {
-      console.log('this.formModel', this.formModel)
       this.saveModel({ component: this.component, model: this.formModel })
     },
     getBack() {
