@@ -990,6 +990,406 @@
         }
       },
       "parentId": null
+    },
+    {
+      "id": "d2c6478bb98fd",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "image": {
+          "url": "https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg",
+          "description": "Default image, four women in dresses, black background",
+          "height": "500px",
+          "blur": "",
+          "overlayColor": "0,0,0,0.5"
+        },
+        "text": {
+          "content": "NEW SEASON",
+          "color": "white",
+          "size": "40px",
+          "top": "40%",
+          "left": "35%"
+        },
+        "link": {
+          "text": "Start shopping now!",
+          "url": "https://www.amazon.com/",
+          "color": "white",
+          "size": "18px",
+          "top": "55%",
+          "left": "38%"
+        },
+        "button": {
+          "text": "GO TO THE SHOP",
+          "link": "/shop",
+          "textColor": "black",
+          "height": "35px",
+          "color": "white",
+          "border": "1px solid black",
+          "top": "70%",
+          "left": "40%"
+        }
+      },
+      "parentId": null
+    },
+    {
+      "id": "dcd5e3e06fc02",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "image": {
+          "url": "https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg",
+          "description": "Default image, four women in dresses, black background",
+          "height": "500px",
+          "blur": "",
+          "overlayColor": "0,0,0,0.5"
+        },
+        "text": {
+          "content": "NEW SEASON",
+          "color": "white",
+          "size": "40px",
+          "top": "40%",
+          "left": "35%"
+        },
+        "link": {
+          "text": "Start shopping now!",
+          "url": "https://www.amazon.com/",
+          "color": "white",
+          "size": "18px",
+          "top": "55%",
+          "left": "38%"
+        },
+        "button": {
+          "text": "GO TO THE SHOP",
+          "link": "/shop",
+          "textColor": "black",
+          "height": "35px",
+          "color": "white",
+          "border": "1px solid black",
+          "top": "70%",
+          "left": "40%"
+        }
+      },
+      "parentId": null
+    },
+    {
+      "id": "30018f61cdbe7",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "image": {
+          "url": "https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg",
+          "description": "Default image, four women in dresses, black background",
+          "height": "500px",
+          "blur": "",
+          "overlayColor": "0,0,0,0.5"
+        },
+        "text": {
+          "content": "NEW SEASON",
+          "color": "white",
+          "size": "40px",
+          "top": "40%",
+          "left": "35%"
+        },
+        "link": {
+          "text": "Start shopping now!",
+          "url": "https://www.amazon.com/",
+          "color": "white",
+          "size": "18px",
+          "top": "55%",
+          "left": "38%"
+        },
+        "button": {
+          "text": "GO TO THE SHOP",
+          "link": "/shop",
+          "textColor": "black",
+          "height": "35px",
+          "color": "white",
+          "border": "1px solid black",
+          "top": "70%",
+          "left": "40%"
+        }
+      },
+      "parentId": null
+    },
+    {
+      "id": "7eb02763b0751",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "image": {
+          "url": "https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg",
+          "description": "Default image, four women in dresses, black background",
+          "height": "500px",
+          "blur": "",
+          "overlayColor": "0,0,0,0.5"
+        },
+        "text": {
+          "content": "NEW SEASON",
+          "color": "white",
+          "size": "40px",
+          "top": "40%",
+          "left": "35%"
+        },
+        "link": {
+          "text": "Start shopping now!",
+          "url": "https://www.amazon.com/",
+          "color": "white",
+          "size": "18px",
+          "top": "55%",
+          "left": "38%"
+        },
+        "button": {
+          "text": "GO TO THE SHOP",
+          "link": "/shop",
+          "textColor": "black",
+          "height": "35px",
+          "color": "white",
+          "border": "1px solid black",
+          "top": "70%",
+          "left": "40%"
+        }
+      },
+      "parentId": null
+    },
+    {
+      "id": "b48f6454dad7e",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "image": {
+          "url": "https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg",
+          "description": "Default image, four women in dresses, black background",
+          "height": "500px",
+          "blur": "",
+          "overlayColor": "0,0,0,0.5"
+        },
+        "text": {
+          "content": "NEW SEASON",
+          "color": "white",
+          "size": "40px",
+          "top": "40%",
+          "left": "35%"
+        },
+        "link": {
+          "text": "Start shopping now!",
+          "url": "https://www.amazon.com/",
+          "color": "white",
+          "size": "18px",
+          "top": "55%",
+          "left": "38%"
+        },
+        "button": {
+          "text": "GO TO THE SHOP",
+          "link": "/shop",
+          "textColor": "black",
+          "height": "35px",
+          "color": "white",
+          "border": "1px solid black",
+          "top": "70%",
+          "left": "40%"
+        }
+      },
+      "parentId": null
+    },
+    {
+      "id": "57cd739e077bf",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "image": {
+          "url": "https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg",
+          "description": "Default image, four women in dresses, black background",
+          "height": "500px",
+          "blur": "",
+          "overlayColor": "0,0,0,0.5"
+        },
+        "text": {
+          "content": "NEW SEASON",
+          "color": "white",
+          "size": "40px",
+          "top": "40%",
+          "left": "35%"
+        },
+        "link": {
+          "text": "Start shopping now!",
+          "url": "https://www.amazon.com/",
+          "color": "white",
+          "size": "18px",
+          "top": "55%",
+          "left": "38%"
+        },
+        "button": {
+          "text": "GO TO THE SHOP",
+          "link": "/shop",
+          "textColor": "black",
+          "height": "35px",
+          "color": "white",
+          "border": "1px solid black",
+          "top": "70%",
+          "left": "40%"
+        }
+      },
+      "parentId": null
+    },
+    {
+      "id": "70ec0227f27da",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "image": {
+          "url": "https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg",
+          "description": "Default image, four women in dresses, black background",
+          "height": "500px",
+          "blur": "",
+          "overlayColor": "0,0,0,0.5"
+        },
+        "text": {
+          "content": "NEW SEASON",
+          "color": "white",
+          "size": "40px",
+          "top": "40%",
+          "left": "35%"
+        },
+        "link": {
+          "text": "Start shopping now!",
+          "url": "https://www.amazon.com/",
+          "color": "white",
+          "size": "18px",
+          "top": "55%",
+          "left": "38%"
+        },
+        "button": {
+          "text": "GO TO THE SHOP",
+          "link": "/shop",
+          "textColor": "black",
+          "height": "35px",
+          "color": "white",
+          "border": "1px solid black",
+          "top": "70%",
+          "left": "40%"
+        }
+      },
+      "parentId": null
+    },
+    {
+      "id": "13de165f4d9b4",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "image": {
+          "url": "https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg",
+          "description": "Default image, four women in dresses, black background",
+          "height": "500px",
+          "blur": "",
+          "overlayColor": "0,0,0,0.5"
+        },
+        "text": {
+          "content": "NEW SEASON",
+          "color": "white",
+          "size": "40px",
+          "top": "40%",
+          "left": "35%"
+        },
+        "link": {
+          "text": "Start shopping now!",
+          "url": "https://www.amazon.com/",
+          "color": "white",
+          "size": "18px",
+          "top": "55%",
+          "left": "38%"
+        },
+        "button": {
+          "text": "GO TO THE SHOP",
+          "link": "/shop",
+          "textColor": "black",
+          "height": "35px",
+          "color": "white",
+          "border": "1px solid black",
+          "top": "70%",
+          "left": "40%"
+        }
+      },
+      "parentId": null
+    },
+    {
+      "id": "8885855629ce9",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "image": {
+          "url": "https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg",
+          "description": "Default image, four women in dresses, black background",
+          "height": "500px",
+          "blur": "",
+          "overlayColor": "0,0,0,0.5"
+        },
+        "text": {
+          "content": "NEW SEASON",
+          "color": "white",
+          "size": "40px",
+          "top": "40%",
+          "left": "35%"
+        },
+        "link": {
+          "text": "Start shopping now!",
+          "url": "https://www.amazon.com/",
+          "color": "white",
+          "size": "18px",
+          "top": "55%",
+          "left": "38%"
+        },
+        "button": {
+          "text": "GO TO THE SHOP",
+          "link": "/shop",
+          "textColor": "black",
+          "height": "35px",
+          "color": "white",
+          "border": "1px solid black",
+          "top": "70%",
+          "left": "40%"
+        }
+      },
+      "parentId": null
+    },
+    {
+      "id": "1ae63c71fb32e",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "image": {
+          "url": "https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg",
+          "description": "Default image, four women in dresses, black background",
+          "height": "500px",
+          "blur": "",
+          "overlayColor": "0,0,0,0.5"
+        },
+        "text": {
+          "content": "NEW SEASON",
+          "color": "white",
+          "size": "40px",
+          "top": "40%",
+          "left": "35%"
+        },
+        "link": {
+          "text": "Start shopping now!",
+          "url": "https://www.amazon.com/",
+          "color": "white",
+          "size": "18px",
+          "top": "55%",
+          "left": "38%"
+        },
+        "button": {
+          "text": "GO TO THE SHOP",
+          "link": "/shop",
+          "textColor": "black",
+          "height": "35px",
+          "color": "white",
+          "border": "1px solid black",
+          "top": "70%",
+          "left": "40%"
+        }
+      },
+      "parentId": null
     }
   ]
 }

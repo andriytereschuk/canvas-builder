@@ -59,6 +59,7 @@
 
 <script>
 import { mapActions, mapMutations, mapState, mapGetters } from 'vuex'
+import forOwn from 'lodash.forown'
 import { componentConfig } from '~/config/component.config'
 import { filtersMixin } from '~/mixins/filters.mixins'
 import { componentMixin } from '~/mixins/component.mixin'
@@ -138,12 +139,35 @@ export default {
       this.saveComponent(this.component)
       this.getBack()
     },
+
     setupFormModel() {
-      const model = JSON.parse(JSON.stringify(this.component.model))
+      const newO = {}
+      forOwn(this.component.model, (v, k) => {
+        if (typeof v === 'object') {
+          forOwn(v, (vv, kk) => {
+            // console.log(newO[k], kk, k)
+            if (!newO[k]) newO[k] = {}
+            newO[k][kk] = vv
+          })
+        } else {
+          newO[k] = v
+        }
+      })
 
-      delete model.items
+      console.log(newO, 'Object with only own properties, now reactive')
 
-      this.formModel = model
+      // const model = JSON.parse(JSON.stringify(newO))
+      // console.log(
+      //   model,
+      //   'if you try to clone not reactive object it, it gets reactive'
+      // )
+      // delete model.items
+
+      this.formModel = newO
+      console.log(
+        newO,
+        'Object gets reactive if you set it as a value in data object'
+      )
     },
     onFormUpdated() {
       this.saveModel({ component: this.component, model: this.formModel })
