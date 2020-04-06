@@ -80,7 +80,6 @@ export const mutations = {
     })
   },
   saveModel(state, { component, model }) {
-    console.log(component, model)
     Object.assign(component.model, model)
   },
   addSubComponent(state, component) {

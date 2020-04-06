@@ -1390,6 +1390,70 @@
         }
       },
       "parentId": null
+    },
+    {
+      "id": "fd450420fb43d",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "imageURL": "https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg",
+        "imageAlt": "Default image, four women in dresses, black background",
+        "height": "500px",
+        "blur": "",
+        "overlayColor": "0,0,0,0.5",
+        "text": "NEW SEASON",
+        "textColor": "white",
+        "textSize": "40px",
+        "textTop": "40%",
+        "textLeft": "35%",
+        "linkText": "Start shopping now!",
+        "linkURL": "https://www.amazon.com/",
+        "linkColor": "white",
+        "linkSize": "18px",
+        "linkTop": "55%",
+        "linkLeft": "38%",
+        "buttonText": "GO TO THE SHOP",
+        "buttonLink": "/shop",
+        "buttonTextColor": "black",
+        "buttonHeight": "35px",
+        "buttonColor": "white",
+        "buttonBorder": "1px solid black",
+        "buttonTop": "70%",
+        "buttonLeft": "40%"
+      },
+      "parentId": null
+    },
+    {
+      "id": "1a113e76b8774",
+      "type": "banner",
+      "category": "banners",
+      "model": {
+        "imageURL": "https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg",
+        "imageDescription": "Default image, four women in dresses, black background",
+        "height": "500px",
+        "blur": "",
+        "overlayColor": "0,0,0,0.5",
+        "text": "NEW SEASON",
+        "textColor": "white",
+        "textSize": "40px",
+        "textTop": "40%",
+        "textLeft": "35%",
+        "linkText": "Start shopping now!",
+        "linkURL": "https://www.amazon.com/",
+        "linkColor": "white",
+        "linkSize": "18px",
+        "linkTop": "55%",
+        "linkLeft": "38%",
+        "buttonText": "GO TO THE SHOP",
+        "buttonLink": "/shop",
+        "buttonTextColor": "black",
+        "buttonHeight": "35px",
+        "buttonColor": "white",
+        "buttonBorder": "1px solid black",
+        "buttonTop": "70%",
+        "buttonLeft": "40%"
+      },
+      "parentId": null
     }
   ]
 }

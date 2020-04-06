@@ -39,39 +39,32 @@ export const componentConfig = {
     banner: {
       color: '#9eb20b',
       model: {
-        image: {
-          url:
-            'https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg',
-          description: 'Default image, four women in dresses, black background',
-          height: '500px',
-          blur: '',
-          overlayColor: '0,0,0,0.5'
-        },
-        text: {
-          content: 'NEW SEASON',
-          color: 'white',
-          size: '40px',
-          top: '40%',
-          left: '35%'
-        },
-        link: {
-          text: 'Start shopping now!',
-          url: 'https://www.amazon.com/',
-          color: 'white',
-          size: '18px',
-          top: '55%',
-          left: '38%'
-        },
-        button: {
-          text: 'GO TO THE SHOP',
-          link: '/shop',
-          textColor: 'black',
-          height: '35px',
-          color: 'white',
-          border: '1px solid black',
-          top: '70%',
-          left: '40%'
-        }
+        imageURL:
+          'https://3xlt1jijtde7vkf2ch4uoy7b-wpengine.netdna-ssl.com/wp-content/uploads/2018/10/CW-Website_1184x864-592x432.jpg',
+        imageDescription:
+          'Default image, four women in dresses, black background',
+        height: '500px',
+        blur: '',
+        overlayColor: '0,0,0,0.5',
+        text: 'NEW SEASON',
+        textColor: 'white',
+        textSize: '40px',
+        textTop: '40%',
+        textLeft: '35%',
+        linkText: 'Start shopping now!',
+        linkURL: 'https://www.amazon.com/',
+        linkColor: 'white',
+        linkSize: '18px',
+        linkTop: '55%',
+        linkLeft: '38%',
+        buttonText: 'GO TO THE SHOP',
+        buttonLink: '/shop',
+        buttonTextColor: 'black',
+        buttonHeight: '35px',
+        buttonColor: 'white',
+        buttonBorder: '1px solid black',
+        buttonTop: '70%',
+        buttonLeft: '40%'
       },
       schema: {
         hasChildren: false,
@@ -84,7 +77,7 @@ export const componentConfig = {
           {
             type: 'text',
             title: 'Image description for visually impaired people',
-            model: 'imageAlt'
+            model: 'imageDescription'
           },
           {
             type: 'text',
@@ -101,101 +94,100 @@ export const componentConfig = {
             title: 'Background overlay RGBA color (e.g. 0,0,0,0.3)',
             model: 'overlayColor'
           },
-
           {
             type: 'text',
             title: 'Simple text',
-            model: 'text.content'
+            model: 'text'
           },
           {
             type: 'text',
             title: 'Text color',
-            model: 'text.color'
+            model: 'textColor'
           },
           {
             type: 'text',
             title: 'Text size',
-            model: 'text.size'
+            model: 'textSize'
           },
           {
             type: 'text',
             title: 'Text: distance from top border (%)',
-            model: 'text.top'
+            model: 'textTop'
           },
           {
             type: 'text',
             title: 'Text: distance from left border (%)',
-            model: 'text.left'
+            model: 'textLeft'
           },
           {
             type: 'text',
             title: 'Link text',
-            model: 'link.text'
+            model: 'linkText'
           },
           {
             type: 'text',
             title: 'Link URL',
-            model: 'link.url'
+            model: 'linkURL'
           },
           {
             type: 'text',
             title: 'Link color',
-            model: 'link.color'
+            model: 'linkColor'
           },
           {
             type: 'text',
             title: 'Link font size',
-            model: 'link.size'
+            model: 'linkSize'
           },
           {
             type: 'text',
             title: 'Link: distance from top border (%)',
-            model: 'link.top'
+            model: 'linkTop'
           },
           {
             type: 'text',
             title: 'Link: distance from left border (%)',
-            model: 'link.left'
+            model: 'linkLeft'
           },
           {
             type: 'text',
             title: 'Button text',
-            model: 'button.text'
+            model: 'buttonText'
           },
           {
             type: 'text',
             title: 'Button: redirection subpage (e.g. /home)',
-            model: 'button.link'
+            model: 'buttonLink'
           },
           {
             type: 'text',
             title: 'Button text color',
-            model: 'button.textColor'
+            model: 'buttonTextColor'
           },
           {
             type: 'text',
             title: 'Button height',
-            model: 'button.height'
+            model: 'buttonHeight'
           },
           {
             type: 'text',
             title: 'Button background color',
-            model: 'button.color'
+            model: 'buttonColor'
           },
           {
             type: 'text',
             title: 'Button border (e.g. 1px solid black)',
-            model: 'button.border'
+            model: 'buttonBorder'
           },
           {
             type: 'text',
             title: 'Button: distance from top border (%)',
-            model: 'top'
+            model: 'buttonTop'
           },
           {
             type: 'text',
             title: 'Button: distance from left border (%)',
-            model: 'button.left'
+            model: 'buttonLeft'
           }
         ]
       }

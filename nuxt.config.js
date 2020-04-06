@@ -33,8 +33,7 @@ export default {
   plugins: [
     { src: '~/plugins/vue-number-input' },
     { src: '~/plugins/vue-form-generator' },
-    { src: '~/plugins/vue-json-viewer' },
-    { src: '~/plugins/vfg-field-object' }
+    { src: '~/plugins/vue-json-viewer' }
   ],
   /*
    ** Nuxt.js dev-modules

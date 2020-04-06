@@ -3,23 +3,23 @@
     <div
       class="background-image"
       :style="bgImageStyle"
-      :role="model.image.description"
+      :role="model.imageDescription"
     />
     <div class="content" :style="contentStyle">
       <span class="text" :style="textStyle">
-        {{ model.text.content }}
+        {{ model.text }}
       </span>
 
-      <a class="link" :style="linkStyle" :href="model.link.url">
-        {{ model.link.text }}
+      <a class="link" :style="linkStyle" :href="model.linkURL">
+        {{ model.linkText }}
       </a>
 
       <button
         class="button"
         :style="buttonStyle"
-        @click="() => $router.push({ path: model.button.link })"
+        @click="() => $router.push({ path: model.buttonLink })"
       >
-        {{ model.button.text }}
+        {{ model.buttonText }}
       </button>
     </div>
   </div>
@@ -36,46 +36,46 @@ export default {
   computed: {
     bannerStyle() {
       return {
-        height: this.model.image.height
+        height: this.model.height
       }
     },
     bgImageStyle() {
       return {
-        background: `url(${this.model.image.url}) no-repeat center center`,
-        filter: `blur(${this.model.image.blur})`
+        background: `url(${this.model.imageURL}) no-repeat center center`,
+        filter: `blur(${this.model.blur})`
       }
     },
     contentStyle() {
       return {
-        backgroundColor: `rgba(${this.model.image.overlayColor})`,
-        height: this.model.image.height
+        backgroundColor: `rgba(${this.model.overlayColor})`,
+        height: this.model.height
       }
     },
     textStyle() {
       return {
-        top: this.model.text.top,
-        left: this.model.text.left,
-        color: this.model.text.color,
-        fontSize: this.model.text.size
+        top: this.model.textTop,
+        left: this.model.textLeft,
+        color: this.model.textColor,
+        fontSize: this.model.textSize
       }
     },
     linkStyle() {
       return {
-        top: this.model.link.top,
-        left: this.model.link.left,
-        color: this.model.link.color,
-        fontSize: this.model.link.size
+        top: this.model.linkTop,
+        left: this.model.linkLeft,
+        color: this.model.linkColor,
+        fontSize: this.model.linkSize
       }
     },
     buttonStyle() {
       return {
-        top: this.model.button.top,
-        left: this.model.button.left,
-        color: this.model.button.textColor,
-        backgroundColor: this.model.button.color,
-        fontSize: this.model.button.size,
-        height: this.model.button.height,
-        border: this.model.button.border
+        top: this.model.buttonTop,
+        left: this.model.buttonLeft,
+        color: this.model.buttonTextColor,
+        backgroundColor: this.model.buttonColor,
+        fontSize: this.model.buttonSize,
+        height: this.model.buttonHeight,
+        border: this.model.buttonBorder
       }
     }
   }
