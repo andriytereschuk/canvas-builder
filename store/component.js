@@ -79,6 +79,9 @@ export const mutations = {
       return component.id === componentToSave.id ? componentToSave : component
     })
   },
+  saveModel(state, { component, model }) {
+    Object.assign(component.model, model)
+  },
   addSubComponent(state, component) {
     component.model.items.push({ componentId: null })
   },
